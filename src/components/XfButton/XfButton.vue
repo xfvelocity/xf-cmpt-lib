@@ -44,7 +44,7 @@ const buttonClass = computed<(string | Record<string, boolean>)[]>(() => {
 
   return [
     backgroundColor,
-    props.fontSize ? `xf-text-${props.fontSize}` : `xf-text-14 xf-text-20-lg`,
+    props.fontSize ? `xf-text-${props.fontSize}` : `xf-text-14 xf-text-18-lg`,
     `xf-text-colour-${props.textColour}`,
     { "button-box-shadow": props.boxShadow },
   ];
