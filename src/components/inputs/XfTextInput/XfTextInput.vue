@@ -27,6 +27,7 @@
 <script lang="ts" setup>
 import type { PropType } from "vue";
 
+// ** Base **
 defineProps({
   placeholder: {
     type: String,
@@ -60,6 +61,7 @@ defineProps({
 
 const emit = defineEmits(["update:modelValue"]);
 
+// ** Methods **
 const emitValue = (event: Event): void => {
   emit("update:modelValue", (event.target as HTMLInputElement).value);
 };

@@ -1,7 +1,7 @@
 <template>
-  <div class="xf-w-100">
+  <div>
     <textarea
-      class="xf-text-area xf-w-100 xf-p-2 xf-text-16"
+      class="xf-text-area xf-p-2 xf-text-16"
       :class="[`xf-bg-${background}`]"
       :value="modelValue"
       :placeholder="placeholder"
@@ -23,6 +23,7 @@
 <script lang="ts" setup>
 import type { PropType } from "vue";
 
+// ** Base **
 defineProps({
   placeholder: {
     type: String,
@@ -52,6 +53,7 @@ defineProps({
 
 const emit = defineEmits(["update:modelValue"]);
 
+// ** Methods **
 const emitValue = (event: Event): void => {
   emit("update:modelValue", (event.target as HTMLInputElement).value);
 };

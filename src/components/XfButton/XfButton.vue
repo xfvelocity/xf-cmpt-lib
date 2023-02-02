@@ -11,32 +11,25 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 
-const props = defineProps({
-  backgroundColour: {
-    type: String,
-    default: "black",
-  },
-  outlined: {
-    type: Boolean,
-    default: false,
-  },
-  textColour: {
-    type: String,
-    default: "white",
-  },
-  boxShadow: {
-    type: Boolean,
-    default: true,
-  },
-  fontSize: {
-    type: Number,
-    default: undefined,
-  },
-});
+// ** Base **
+const props = withDefaults(
+  defineProps<{
+    backgroundColour?: string;
+    outlined?: boolean;
+    textColour?: string;
+    boxShadow?: boolean;
+    fontSize?: number;
+  }>(),
+  {
+    backgroundColour: "black",
+    textColour: "white",
+    boxShadow: true,
+  }
+);
 
 defineEmits(["click"]);
 
-// Computed
+// ** Computed **
 const buttonClass = computed<(string | Record<string, boolean>)[]>(() => {
   const backgroundColor = props.outlined
     ? `xf-border-1 xf-border-colour-${props.backgroundColour}`

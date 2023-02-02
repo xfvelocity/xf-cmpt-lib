@@ -12,7 +12,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue()],
+  plugins: [vue({ reactivityTransform: true })],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
