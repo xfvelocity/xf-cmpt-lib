@@ -9,6 +9,8 @@ export default defineConfig({
     alias: {
       "~": r("."),
       "@": r("."),
+      "~/": r("./"),
+      "@/": r("./"),
     },
   },
   plugins: [vue()],

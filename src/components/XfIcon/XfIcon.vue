@@ -1,28 +1,20 @@
-<script lang="ts">
-import { defineComponent, h } from "vue";
+<template>
+  <inline-svg
+    :src="`/icons/${src}.svg`"
+    :fill="fill"
+    :height="size"
+    :width="size"
+  />
+</template>
+
+<script lang="ts" setup>
 import InlineSvg from "vue-inline-svg";
 
-export default defineComponent({
-  props: {
-    src: {
-      type: String,
-      default: "",
-    },
-    size: {
-      type: Number,
-    },
-  },
-  emits: ["click"],
-  setup(props, context) {
-    return () =>
-      h(InlineSvg, {
-        src: new URL(props.src, import.meta.url).href,
-        height: props.size,
-        width: props.size,
-        onClick: (event: Event) => context.emit("click", event),
-      });
-  },
-});
+defineProps<{
+  src: string;
+  fill?: number;
+  size?: number;
+}>();
 </script>
 
 <style lang="scss" scoped>

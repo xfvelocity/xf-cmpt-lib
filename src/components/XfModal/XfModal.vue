@@ -1,41 +1,36 @@
 <template>
-  <div
-    v-if="modelValue"
-    class="xf-modal xf-w-100 xf-h-100 xf-flex-center"
-    @click="closeModal"
-  >
+  <transition>
     <div
-      class="xf-modal-content xf-p-6 xf-m-4 xf-pb-12"
-      :class="`xf-bg-${backgroundColour} xf-text-colour-${textColour}`"
-      @click.stop=""
+      v-if="modelValue"
+      class="xf-modal xf-w-100 xf-h-100 xf-flex-center"
+      @click="closeModal"
     >
-      <xf-icon
-        class="xf-modal-content-close yd-cursor-pointer xf-text-right"
-        svg="/icons/close.svg"
-        @click.stop="closeModal"
-      />
+      <div
+        class="xf-modal-content xf-bg-white xf-p-6 xf-m-4 xf-pb-12"
+        @click.stop=""
+      >
+        <div class="xf-ml-auto xf-w-max-content">
+          <xf-icon
+            class="xf-cursor-pointer"
+            src="close"
+            :size="16"
+            @click.stop="closeModal"
+          />
+        </div>
 
-      <slot />
+        <slot />
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script lang="ts" setup>
+import XfIcon from "@/components/XfIcon/XfIcon.vue";
+
 // ** Base **
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: true,
-  },
-  backgroundColour: {
-    type: String,
-    default: "white",
-  },
-  textColour: {
-    type: String,
-    default: "black",
-  },
-});
+const props = defineProps<{
+  modelValue: boolean;
+}>();
 
 const emit = defineEmits(["update:modelValue"]);
 
@@ -56,6 +51,7 @@ const closeModal = (): void => {
   &-content {
     min-height: 300px;
     min-width: 300px;
+    border-radius: 10px;
   }
 }
 </style>
