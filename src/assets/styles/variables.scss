@@ -1,0 +1,56 @@
+$breakpoint-xs: 500px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 1024px;
+$breakpoint-lg: 1366px;
+$breakpoint-xl: 1440px;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: $breakpoint-xs,
+  md: $breakpoint-sm,
+  lg: $breakpoint-md,
+  xl: $breakpoint-lg,
+  xl2: $breakpoint-xl,
+);
+
+$xf-font-weights: (300, 400, 500, 600, 700, 800);
+$xf-text-sizes: (10, 12, 13, 14, 16, 18, 20, 24, 36);
+
+$xf-border-radius-px: (0, 3, 4, 5, 10, 15, 20, 40);
+$xf-border-radius-pc: (50);
+
+// Shadows
+$xf-box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+
+// Colours
+$xf-colours: (
+  "black": #000000,
+  "white": #ffffff,
+);
+
+// Spacing
+$xf-spacers: (
+  0: 0px,
+  1: 5px,
+  2: 10px,
+  3: 15px,
+  4: 20px,
+  5: 25px,
+  6: 30px,
+  7: 35px,
+  8: 40px,
+  9: 45px,
+  10: 50px,
+  11: 55px,
+  12: 60px,
+  13: 65px,
+  14: 70px,
+  15: 75px,
+);
+
+// Directions
+$xf-directions: ("left", "bottom", "right", "top");
+
+// Mixins
+@import "./mixins/utility.scss";
+@import "./mixins/media-queries.scss";

@@ -1,0 +1,41 @@
+// Center Mixin
+// use: @inlcude center; @include center(true, false); @include center(false, true)
+@mixin center($horizontal: true, $vertical: true) {
+  position: absolute;
+
+  @if ($horizontal and $vertical) {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  } @else if ($horizontal) {
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+  } @else if ($vertical) {
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+  }
+}
+
+@mixin sectionBase() {
+  content: '';
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  z-index: 0;
+}
+
+@mixin maxWidth() {
+  margin: 0 auto;
+  max-width: 334px;
+
+  @include md-up {
+    max-width: 904px;
+  }
+
+  @include lg-up {
+    max-width: 1200px;
+  }
+}

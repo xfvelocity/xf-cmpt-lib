@@ -1,0 +1,125 @@
+@mixin xs {
+  /*
+  On screens that are 499px wide or less
+  */
+  @media only screen and (max-width: ($breakpoint-xs - 1px)) {
+    @content;
+  }
+}
+
+@mixin sm {
+  /*
+  When the width is between 500px and 767px
+  */
+  @media screen and (min-width: $breakpoint-xs) and (max-width: ($breakpoint-sm - 1px)) {
+    @content;
+  }
+} // Small devices
+@mixin md {
+  /*
+  When the width is between 768px and 1023px
+  */
+  @media screen and (min-width: $breakpoint-sm) and (max-width: ($breakpoint-md - 1px)) {
+    @content;
+  }
+} // Medium devices
+@mixin lg {
+  /*
+  When the width is between 1024px and 1365px
+  */
+
+  @media only screen and (min-width: $breakpoint-md) and (max-width: ($breakpoint-lg - 1px)) {
+    @content;
+  }
+} // Tablet Portrait
+@mixin xl {
+  /*
+  On screens that are 1366px wide and 1439px
+  */
+
+  @media only screen and (min-width: $breakpoint-lg) and (max-width: ($breakpoint-xl - 1px)) {
+    @content;
+  }
+} // Tablet Landscape
+
+@mixin xl2 {
+  /*
+  On screens that are 1440px wide or above
+  */
+
+  @media only screen and (min-width: $breakpoint-xl) {
+    @content;
+  }
+} // Desktop
+
+@mixin xs-up {
+  /*
+  On screens that are 500px wide or above
+  */
+  @media only screen and (min-width: $breakpoint-xs) {
+    @content;
+  }
+}
+
+@mixin sm-up {
+  /*
+  On screens that are 768px wide or above
+  */
+  @media only screen and (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin md-up {
+  /*
+  On screens that are 1024px wide or above
+  */
+  @media only screen and (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin lg-up {
+  /*
+  On screens that are 1366px wide or above
+  */
+  @media only screen and (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin xs-down {
+  /*
+  On screens that are 499px wide or below
+  */
+  @media only screen and (max-width: ($breakpoint-xs - 1px)) {
+    @content;
+  }
+}
+
+@mixin sm-down {
+  /*
+  On screens that are 767px wide or below
+  */
+  @media only screen and (max-width: ($breakpoint-sm - 1px)) {
+    @content;
+  }
+}
+
+@mixin md-down {
+  /*
+  On screens that are 1023px wide or below
+  */
+  @media only screen and (max-width: ($breakpoint-md - 1px)) {
+    @content;
+  }
+}
+
+@mixin lg-down {
+  /*
+  On screens that are 1365px wide or below
+  */
+  @media only screen and (max-width: ($breakpoint-lg - 1px)) {
+    @content;
+  }
+}
