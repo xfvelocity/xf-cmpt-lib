@@ -10,9 +10,14 @@ body {
   line-height: 1.5;
   font-weight: 500;
   font-family: "Raleway", sans-serif;
-  color: map-get($xf-colours, "mid-text");
+  color: map-get($xf-colours, "black");
   font-size: 16px;
   overflow-x: hidden;
+}
+
+input,
+textarea {
+  font-family: "Raleway", sans-serif;
 }
 
 .xf-position {
