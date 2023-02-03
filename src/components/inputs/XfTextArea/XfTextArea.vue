@@ -11,7 +11,7 @@
     />
 
     <span
-      v-if="errorMessages.length"
+      v-if="errorMessages?.length"
       class="xf-text-14 xf-fw-600 xf-text-colour-red"
       data-test-id="xf-text-area-error"
     >
@@ -21,35 +21,22 @@
 </template>
 
 <script lang="ts" setup>
-import type { PropType } from "vue";
-
 // ** Base **
-defineProps({
-  placeholder: {
-    type: String,
-    default: "",
-  },
-  modelValue: {
-    type: String,
-    default: "",
-  },
-  background: {
-    type: String,
-    default: "white",
-  },
-  rows: {
-    type: Number,
-    default: 5,
-  },
-  type: {
-    type: String,
-    default: "",
-  },
-  errorMessages: {
-    type: Array as PropType<string[]>,
-    default: () => [],
-  },
-});
+withDefaults(
+  defineProps<{
+    placeholder?: string;
+    modelValue: string;
+    background?: string;
+    rows?: number;
+    type?: string;
+    errorMessages?: string[];
+  }>(),
+  {
+    background: "white",
+    rows: 5,
+    type: "text",
+  }
+);
 
 const emit = defineEmits(["update:modelValue"]);
 

@@ -10,6 +10,7 @@
 <script lang="ts" setup>
 import InlineSvg from "vue-inline-svg";
 
+// ** Base **
 defineProps<{
   src: string;
   fill?: number;
