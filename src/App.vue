@@ -5,6 +5,7 @@
     <xf-text-area placeholder="Your name" />
     <xf-icon src="close" :size="20" @click="isModalOpen = true" />
     <xf-modal v-model="isModalOpen"> test </xf-modal>
+    <xf-banner>About me</xf-banner>
   </div>
 </template>
 
@@ -16,8 +17,7 @@ import XfTextInput from "./components/inputs/XfTextInput/XfTextInput.vue";
 import XfTextArea from "./components/inputs/XfTextArea/XfTextArea.vue";
 import XfIcon from "./components/XfIcon/XfIcon.vue";
 import XfModal from "./components/XfModal/XfModal.vue";
+import XfBanner from "./components/XfBanner/XfBanner.vue";
 
-const isModalOpen = ref<boolean>(true);
+const isModalOpen = ref<boolean>(false);
 </script>
-
-<style lang="scss" scoped></style>
