@@ -6,7 +6,11 @@ describe("XfTextInput.vue", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(XfTextInput);
+    wrapper = mount(XfTextInput, {
+      props: {
+        modelValue: "",
+      },
+    });
   });
 
   it("is mounted", () => {

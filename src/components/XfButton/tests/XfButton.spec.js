@@ -18,8 +18,6 @@ describe("XfButton", () => {
       it("is outlined", async () => {
         await wrapper.setProps({ background: "black", outlined: true });
 
-        console.log(wrapper.vm.buttonClass);
-
         expect(wrapper.vm.buttonClass).toContain(
           "xf-border-1 xf-border-colour-black"
         );

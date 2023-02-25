@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import XfIcon from "@/components/XfIcon/XfIcon.vue";
+import XfIcon from "../XfIcon/XfIcon.vue";
 
 // ** Base **
 const props = defineProps<{
