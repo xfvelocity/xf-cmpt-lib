@@ -6,7 +6,7 @@ import {
   XfModal,
   XfTextArea,
   XfTextInput,
-} from "@/components";
+} from "./index";
 
 export default {
   install: (app: App) => {
