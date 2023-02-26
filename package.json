@@ -1,7 +1,7 @@
 {
   "name": "xf-cmpt-lib",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.4",
   "type": "module",
   "files": [
     "dist"
@@ -21,7 +21,7 @@
   "types": "./dist/main.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
     "test:unit:coverage": "vitest --coverage",
