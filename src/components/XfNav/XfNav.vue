@@ -40,7 +40,7 @@ withDefaults(
 );
 
 // ** Data **
-const isNavDrawerOpen = ref<boolean>(true);
+const isNavDrawerOpen = ref<boolean>(false);
 const navRef = ref<HTMLElement>();
 const navbarHeight = ref<number>(0);
 

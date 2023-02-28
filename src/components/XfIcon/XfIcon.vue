@@ -1,10 +1,5 @@
 <template>
-  <inline-svg
-    :src="`/icons/${src}.svg`"
-    :fill="fill"
-    :height="size"
-    :width="size"
-  />
+  <inline-svg :src="src" :fill="fill" :height="size" :width="size" />
 </template>
 
 <script lang="ts" setup>
