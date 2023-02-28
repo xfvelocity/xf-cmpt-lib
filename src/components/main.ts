@@ -6,6 +6,7 @@ import {
   XfModal,
   XfTextArea,
   XfTextInput,
+  XfNav,
 } from "./index";
 
 export default {
@@ -16,7 +17,8 @@ export default {
     app.component("XfModal", XfModal);
     app.component("XfTextArea", XfTextArea);
     app.component("XfTextInput", XfTextInput);
+    app.component("XfNav", XfNav);
   },
 };
 
-export { XfBanner, XfButton, XfIcon, XfModal, XfTextArea, XfTextInput };
+export { XfBanner, XfButton, XfIcon, XfModal, XfTextArea, XfTextInput, XfNav };
