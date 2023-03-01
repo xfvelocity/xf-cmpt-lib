@@ -18,24 +18,3 @@
     transform: translate(0, -50%);
   }
 }
-
-@mixin sectionBase() {
-  content: '';
-  width: 100%;
-  position: absolute;
-  height: 100%;
-  z-index: 0;
-}
-
-@mixin maxWidth() {
-  margin: 0 auto;
-  max-width: 334px;
-
-  @include md-up {
-    max-width: 904px;
-  }
-
-  @include lg-up {
-    max-width: 1200px;
-  }
-}

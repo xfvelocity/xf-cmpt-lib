@@ -130,33 +130,8 @@ textarea {
     width: 100%;
   }
 
-  &-90 {
-    width: 90%;
-  }
-
-  &-80 {
-    width: 80%;
-  }
-
   &-max-content {
     width: max-content;
-  }
-}
-
-/* max-width % in increments of 10 at each break point */
-@for $i from 1 through 100 {
-  @if $i % 10 == 0 {
-    .xf-max-w-#{$i} {
-      max-width: #{$i}#{"%"};
-    }
-
-    @each $name, $breakpoint in $grid-breakpoints {
-      @media (min-width: $breakpoint) {
-        .xf-max-w-#{$name}-#{$i} {
-          max-width: #{$i}#{"%"} !important;
-        }
-      }
-    }
   }
 }
 
@@ -176,26 +151,6 @@ textarea {
   }
 }
 
-@each $radius in $xf-border-radius-px {
-  .xf-radius-px-#{$radius} {
-    border-radius: #{$radius}px;
-  }
-
-  @each $name, $breakpoint in $grid-breakpoints {
-    @media (min-width: $breakpoint) {
-      .xf-radius-px-#{$name}-#{$radius} {
-        border-radius: #{$radius}px;
-      }
-    }
-  }
-}
-
-@each $radius in $xf-border-radius-pc {
-  .xf-radius-pc-#{$radius} {
-    border-radius: #{$radius}#{"%"};
-  }
-}
-
 /* Positioning utility classes */
 .xf-position {
   &-absolute {
@@ -211,33 +166,9 @@ textarea {
   }
 }
 
-// border-directions
-@each $name, $colour in $xf-colours {
-  .xf-border-colour-#{$name} {
-    border-color: $colour !important;
-  }
-
-  @each $dir in $xf-directions {
-    .xf-border-#{$dir}-#{$name} {
-      border-#{$dir}: solid $colour !important;
-    }
-  }
-}
-
 @for $i from 1 through 10 {
   .xf-z-#{$i} {
     z-index: $i;
-  }
-}
-
-/* whitespace utility class */
-.xf-ws {
-  &-nowrap {
-    white-space: nowrap;
-  }
-
-  &-break {
-    white-space: break-spaces;
   }
 }
 
@@ -251,20 +182,10 @@ textarea {
     border: none !important;
   }
 
-  &-width {
-    &-1 {
-      border-width: 1px !important;
+  @each $name, $colour in $xf-colours {
+    &-#{$name} {
+      border: 2px solid $colour !important;
     }
-
-    &-2 {
-      border-width: 2px !important;
-    }
-  }
-}
-
-.xf-list {
-  &-circle {
-    list-style-type: circle;
   }
 }
 

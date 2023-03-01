@@ -1,6 +1,6 @@
 <template>
   <button
-    class="xf-button xf-fw-700 xf-w-max-content xf-cursor-pointer xf-px-2 xf-py-1"
+    class="xf-button xf-fw-700 xf-w-max-content xf-cursor-pointer xf-px-6 xf-py-1"
     :class="buttonClass"
     @click="$emit('click')"
   >
@@ -32,7 +32,7 @@ defineEmits(["click"]);
 // ** Computed **
 const buttonClass = computed<(string | Record<string, boolean>)[]>(() => {
   const backgroundColor = props.outlined
-    ? `xf-border-1 xf-border-colour-${props.backgroundColour}`
+    ? `xf-bg-none xf-border-${props.backgroundColour}`
     : `xf-bg-${props.backgroundColour}`;
 
   return [

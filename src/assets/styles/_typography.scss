@@ -22,14 +22,11 @@
   }
 }
 
-@each $prop,
-  $abbrev
-    in (
-      color: xf-text-colour-,
-      background-color: xf-bg-,
-      border-color: xf-border-
-    )
-{
+.xf-bg-none {
+  background: none;
+}
+
+@each $prop, $abbrev in (color: xf-text-colour-, background-color: xf-bg-) {
   @each $name, $colour in $xf-colours {
     .#{$abbrev}#{$name} {
       #{$prop}: #{$colour} !important;
