@@ -1,5 +1,10 @@
 <template>
-  <inline-svg :src="src" :fill="fill" :height="size" :width="size" />
+  <inline-svg
+    :class="`xf-icon-colour-${fill}`"
+    :src="src"
+    :height="size"
+    :width="size"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -8,26 +13,17 @@ import InlineSvg from "vue-inline-svg";
 // ** Base **
 defineProps<{
   src: string;
-  fill?: number;
+  fill?: string;
   size?: number;
 }>();
 </script>
 
 <style lang="scss" scoped>
 @each $name, $colour in $xf-colours {
-  .yd-icon-colour {
-    &-stroke-#{$name} {
-      :deep(path),
-      :deep(rect) {
-        stroke: #{$colour} !important;
-      }
-    }
-
-    &-#{$name} {
-      :deep(path),
-      :deep(rect) {
-        fill: #{$colour} !important;
-      }
+  .xf-icon-colour-#{$name} {
+    :deep(path),
+    :deep(rect) {
+      fill: #{$colour} !important;
     }
   }
 }
