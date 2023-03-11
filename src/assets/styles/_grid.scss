@@ -58,8 +58,6 @@ $xf-grid-alignments: (center, start, end);
     gap: map-get($xf-spacers, 1) map-get($xf-spacers, 2);
     width: 100%;
 
-    @include maxWidth;
-
     @include md-up {
       gap: map-get($xf-spacers, 1) map-get($xf-spacers, 6);
     }
