@@ -1,6 +1,6 @@
 <template>
   <inline-svg
-    :class="`xf-icon-colour-${fill}`"
+    :class="{ [`xf-icon-colour-${fill}`]: fill }"
     :src="src"
     :height="size"
     :width="size"

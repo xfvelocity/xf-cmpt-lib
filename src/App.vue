@@ -1,10 +1,6 @@
-<template>
-  <XfButton text-colour="black" outlined> Test </XfButton>
-</template>
+<template></template>
 
-<script lang="ts" setup>
-import XfButton from "@/components/XfButton/XfButton.vue";
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss">
 @import "@/assets/styles/index.scss";
