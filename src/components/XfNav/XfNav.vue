@@ -1,16 +1,14 @@
 <template>
   <nav ref="navRef" class="xf-nav xf-p-3" :class="`xf-bg-${navBackground}`">
-    <div class="xf-nav-content" :class="contentClass">
-      <slot />
+    <slot />
 
-      <div
-        v-if="menuButton"
-        class="xf-nav-btn"
-        :class="{ 'xf-nav-btn-open': isNavDrawerOpen }"
-        @click="isNavDrawerOpen = !isNavDrawerOpen"
-      >
-        <span v-for="i in 4" :key="i" />
-      </div>
+    <div
+      v-if="menuButton"
+      class="xf-nav-btn"
+      :class="{ 'xf-nav-btn-open': isNavDrawerOpen }"
+      @click="isNavDrawerOpen = !isNavDrawerOpen"
+    >
+      <span v-for="i in 4" :key="i" />
     </div>
   </nav>
 
@@ -33,7 +31,6 @@ withDefaults(
     menuButton?: boolean;
     navBackground?: string;
     navDrawerBackground?: string;
-    contentClass?: string;
   }>(),
   {
     menuButton: true,
