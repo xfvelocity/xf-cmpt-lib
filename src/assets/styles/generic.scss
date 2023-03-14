@@ -20,6 +20,18 @@ textarea {
   font-family: "Raleway", sans-serif;
 }
 
+.xf-center {
+  @include center(true, true);
+
+  &-horizontal {
+    @include center(true, false);
+  }
+
+  &-vertical {
+    @include center(false, true);
+  }
+}
+
 .xf-position {
   &-fixed {
     position: fixed;

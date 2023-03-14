@@ -1,14 +1,16 @@
 <template>
   <nav ref="navRef" class="xf-nav xf-p-3" :class="`xf-bg-${navBackground}`">
-    <slot />
+    <div class="xf-nav-content" :class="contentClass">
+      <slot />
 
-    <div
-      v-if="menuButton"
-      class="xf-nav-btn"
-      :class="{ 'xf-nav-btn-open': isNavDrawerOpen }"
-      @click="isNavDrawerOpen = !isNavDrawerOpen"
-    >
-      <span v-for="i in 4" :key="i" />
+      <div
+        v-if="menuButton"
+        class="xf-nav-btn"
+        :class="{ 'xf-nav-btn-open': isNavDrawerOpen }"
+        @click="isNavDrawerOpen = !isNavDrawerOpen"
+      >
+        <span v-for="i in 4" :key="i" />
+      </div>
     </div>
   </nav>
 
@@ -31,6 +33,7 @@ withDefaults(
     menuButton?: boolean;
     navBackground?: string;
     navDrawerBackground?: string;
+    contentClass?: string;
   }>(),
   {
     menuButton: true,
@@ -53,10 +56,13 @@ onMounted(() => {
 <style lang="scss" scoped>
 .xf-nav {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.12);
-  display: flex;
-  align-items: center;
   z-index: 99;
-  position: relative;
+
+  &-content {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
 
   &-drawer {
     position: absolute;
