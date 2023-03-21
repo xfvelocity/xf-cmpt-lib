@@ -16,15 +16,13 @@ describe("XfButton", () => {
   describe("buttonClass", () => {
     describe("outlined", () => {
       it("is outlined", async () => {
-        await wrapper.setProps({ background: "black", outlined: true });
+        await wrapper.setProps({ backgroundColour: "black", outlined: true });
 
-        expect(wrapper.vm.buttonClass).toContain(
-          "xf-border-1 xf-border-colour-black"
-        );
+        expect(wrapper.vm.buttonClass).toContain("xf-bg-none xf-border-black");
       });
 
       it("is filled", async () => {
-        await wrapper.setProps({ background: "black", outlined: false });
+        await wrapper.setProps({ backgroundColour: "black", outlined: false });
 
         expect(wrapper.vm.buttonClass).toContain("xf-bg-black");
       });
