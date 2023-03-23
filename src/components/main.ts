@@ -7,6 +7,8 @@ import {
   XfTextArea,
   XfTextInput,
   XfNav,
+  XfSelect,
+  XfLoading,
 } from "./index";
 
 export default {
@@ -18,7 +20,19 @@ export default {
     app.component("XfTextArea", XfTextArea);
     app.component("XfTextInput", XfTextInput);
     app.component("XfNav", XfNav);
+    app.component("XfSelect", XfSelect);
+    app.component("XfLoading", XfLoading);
   },
 };
 
-export { XfBanner, XfButton, XfIcon, XfModal, XfTextArea, XfTextInput, XfNav };
+export {
+  XfBanner,
+  XfButton,
+  XfIcon,
+  XfModal,
+  XfTextArea,
+  XfTextInput,
+  XfNav,
+  XfSelect,
+  XfLoading,
+};

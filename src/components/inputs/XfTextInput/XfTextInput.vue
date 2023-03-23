@@ -25,6 +25,14 @@
       @focus="isActive = true"
       @blur="isActive = false"
     />
+
+    <xf-icon
+      v-if="appendIcon"
+      class="xf-mt-1 xf-cursor-pointer"
+      :src="appendIcon"
+      :size="20"
+      @click="$emit('click:append')"
+    />
   </div>
 
   <span
@@ -39,6 +47,8 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
+import XfIcon from "@/components/XfIcon/XfIcon.vue";
+
 // ** Base **
 withDefaults(
   defineProps<{
@@ -48,6 +58,7 @@ withDefaults(
     type?: string;
     errorMessages?: string[];
     textColour?: string;
+    appendIcon?: string;
   }>(),
   {
     type: "text",
@@ -56,7 +67,7 @@ withDefaults(
 );
 
 // ** Emits **
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "click:append"]);
 
 // ** Data **
 const isActive = ref<boolean>(false);
@@ -70,5 +81,6 @@ const emitValue = (event: Event): void => {
 <style lang="scss" scoped>
 .xf-text-input {
   border-bottom: 1px solid;
+  display: flex;
 }
 </style>

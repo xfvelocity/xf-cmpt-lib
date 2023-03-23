@@ -1,10 +1,13 @@
+$translateY: 35px;
+
 .xf-input {
   position: relative;
+  margin-top: calc($translateY - 10px);
 
   label {
     position: absolute;
     left: 9px;
-    bottom: 3px;
+    bottom: 4px;
     transition: all 0.3s ease;
   }
 
@@ -26,7 +29,7 @@
 
     label {
       transform-origin: left;
-      transform: scale(0.75) translateY(-35px);
+      transform: scale(0.75) translateY(-$translateY);
     }
   }
 }

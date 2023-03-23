@@ -35,7 +35,7 @@
         :class="{ 'xf-select-arrow-active': isSelectActive }"
         :height="12"
         :width="8"
-        :src="getImageUrl('icons/arrow-down.svg')"
+        src="icons/chevron-down.svg"
         @click.stop="toggleSelect(!isSelectActive)"
       />
     </div>
@@ -64,7 +64,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, watch } from "vue";
 import { SelectOption } from "@/types/app.types";
-import { getImageUrl, debounce } from "@/composables/generic";
+import { debounce } from "@/composables/generic";
 import { onClickOutside } from "@vueuse/core";
 
 import XfIcon from "@/components/XfIcon/XfIcon.vue";
