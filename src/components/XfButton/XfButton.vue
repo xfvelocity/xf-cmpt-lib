@@ -1,6 +1,6 @@
 <template>
   <button
-    class="xf-button xf-fw-700 xf-w-max-content xf-cursor-pointer xf-px-6 xf-py-1"
+    class="xf-button xf-fw-700 xf-cursor-pointer xf-px-6 xf-py-1"
     :class="buttonClass"
     @click="$emit('click')"
   >
@@ -31,14 +31,11 @@ defineEmits(["click"]);
 
 // ** Computed **
 const buttonClass = computed<(string | Record<string, boolean>)[]>(() => {
-  const backgroundColor = props.outlined
-    ? `xf-bg-none xf-border-${props.backgroundColour}`
-    : `xf-bg-${props.backgroundColour}`;
-
   return [
-    backgroundColor,
-    props.fontSize ? `xf-text-${props.fontSize}` : `xf-text-14 xf-text-18-lg`,
-    `xf-text-colour-${props.textColour}`,
+    props.outlined
+      ? `xf-bg-none xf-border-${props.backgroundColour}`
+      : `xf-bg-${props.backgroundColour}`,
+    `xf-text-colour-${props.textColour} xf-text-${props.fontSize || 14}`,
     { "button-box-shadow": props.boxShadow },
   ];
 });
@@ -49,6 +46,7 @@ const buttonClass = computed<(string | Record<string, boolean>)[]>(() => {
   border-radius: map-get($xf-spacers, 1);
   border: none;
   transition: 0.2s ease-in-out;
+  width: max-content;
 
   &-box-shadow {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);

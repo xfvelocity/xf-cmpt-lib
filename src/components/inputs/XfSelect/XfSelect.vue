@@ -8,23 +8,29 @@
   >
     <div
       class="xf-select-toggle xf-input"
-      :class="{
-        'xf-input-populated': !!modelValue || autocompleteSearch,
-        'xf-input-active': isSelectActive,
-      }"
+      :class="[
+        `xf-border-colour-${colour}`,
+        {
+          'xf-input-populated': !!modelValue || autocompleteSearch,
+          'xf-input-active': isSelectActive,
+        },
+      ]"
       @click="toggleSelect(true)"
     >
-      <label class="xf-text-16">{{ label }}</label>
+      <label :class="`xf-text-colour-${colour}`">
+        {{ label }}
+      </label>
       <input
         v-if="autocomplete"
         class="xf-select-input xf-text-16"
+        :class="`xf-text-colour-${colour}`"
         v-model="autocompleteSearch"
         ref="autocompleteInput"
         :tabindex="autocomplete ? '0' : ''"
         @input="autocompleteChange"
         @focus="toggleSelect(true)"
       />
-      <span v-else class="xf-text-16">
+      <span v-else>
         {{ selected }}
       </span>
 
@@ -33,8 +39,8 @@
       <xf-icon
         class="xf-mb-1 xf-mr-1 xf-select-arrow"
         :class="{ 'xf-select-arrow-active': isSelectActive }"
-        :height="12"
-        :width="8"
+        :size="14"
+        :fill="colour"
         src="icons/chevron-down.svg"
         @click.stop="toggleSelect(!isSelectActive)"
       />
@@ -81,10 +87,12 @@ const props = withDefaults(
     freeText?: boolean;
     outsideRequest?: Function;
     position?: string;
+    colour?: string;
   }>(),
   {
     valueOnly: true,
     position: "bottom",
+    colour: "black",
   }
 );
 
@@ -233,7 +241,6 @@ watch(
     padding: map-get($xf-spacers, 1) 0;
     border-bottom: 1px solid map-get($xf-colours, "black");
     position: relative;
-    height: 60px;
     color: map-get($xf-colours, "black");
   }
 

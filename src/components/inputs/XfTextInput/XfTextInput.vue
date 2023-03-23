@@ -1,23 +1,18 @@
 <template>
   <div
     class="xf-text-input xf-input"
-    :class="{
-      'xf-input-populated': !!modelValue,
-      'xf-input-active': isActive,
-    }"
+    :class="[
+      `xf-border-colour-${colour}`,
+      {
+        'xf-input-populated': !!modelValue,
+        'xf-input-active': isActive,
+      },
+    ]"
   >
-    <label
-      v-if="label"
-      class="xf-fw-400"
-      :class="`xf-text-${textColour}`"
-      :for="name"
-    >
-      {{ label }}
-    </label>
     <input
       :value="modelValue"
       class="xf-text-input-input xf-px-2 xf-py-1 xf-text-16"
-      :class="[`xf-border-colour-${textColour} xf-text-${textColour}`]"
+      :class="[` xf-text-colour-${colour}`]"
       :name="name"
       :type="type"
       data-test-id="xf-text-input-input"
@@ -26,11 +21,16 @@
       @blur="isActive = false"
     />
 
+    <label v-if="label" :class="`xf-text-colour-${colour}`" :for="name">
+      {{ label }}
+    </label>
+
     <xf-icon
       v-if="appendIcon"
-      class="xf-mt-1 xf-cursor-pointer"
+      class="xf-mt-2 xf-mr-1 xf-cursor-pointer"
       :src="appendIcon"
-      :size="20"
+      :size="14"
+      :fill="colour"
       @click="$emit('click:append')"
     />
   </div>
@@ -57,12 +57,12 @@ withDefaults(
     name?: string;
     type?: string;
     errorMessages?: string[];
-    textColour?: string;
+    colour?: string;
     appendIcon?: string;
   }>(),
   {
     type: "text",
-    textColour: "black",
+    colour: "black",
   }
 );
 
