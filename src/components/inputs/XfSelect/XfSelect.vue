@@ -7,10 +7,10 @@
     @focus="toggleSelect(true)"
   >
     <div
-      class="xf-select-toggle"
+      class="xf-select-toggle xf-input"
       :class="{
-        'xf-select-populated': !!modelValue || autocompleteSearch,
-        'xf-select-active': isSelectActive,
+        'xf-input-populated': !!modelValue || autocompleteSearch,
+        'xf-input-active': isSelectActive,
       }"
       @click="toggleSelect(true)"
     >
@@ -227,17 +227,6 @@ watch(
 
 <style lang="scss" scoped>
 .xf-select {
-  position: relative;
-
-  label {
-    position: absolute;
-    left: 0;
-    bottom: 3px;
-    text-transform: uppercase;
-    color: map-get($xf-colours, "black");
-    transition: all 0.4s ease;
-  }
-
   &-toggle {
     display: flex;
     align-items: flex-end;
@@ -258,15 +247,8 @@ watch(
   }
 
   &-input {
-    background: transparent;
-    width: 100%;
-    border: 0;
     margin-right: map-get($xf-spacers, 1);
     margin-left: -2px;
-
-    &:focus {
-      outline: none;
-    }
   }
 
   &-items {
@@ -300,18 +282,6 @@ watch(
 
     &-active {
       transform: rotate(180deg);
-    }
-  }
-
-  &-active {
-    border-bottom: 2px solid map-get($xf-colours, "black");
-  }
-
-  &-active,
-  &-populated {
-    label {
-      transform-origin: left;
-      transform: scale(0.75) translateY(-35px);
     }
   }
 }

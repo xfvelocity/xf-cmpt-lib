@@ -198,6 +198,10 @@ textarea {
     &-#{$name} {
       border: 2px solid $colour !important;
     }
+
+    &-colour-#{$name} {
+      border-color: $colour !important;
+    }
   }
 }
 
