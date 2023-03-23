@@ -78,6 +78,7 @@ const props = withDefaults(
     options: SelectOption[];
     valueOnly?: boolean;
     autocomplete?: boolean;
+    freeText?: boolean;
     outsideRequest?: Function;
     position?: string;
   }>(),
@@ -87,6 +88,7 @@ const props = withDefaults(
   }
 );
 
+// ** Emits **
 const emits = defineEmits(["update:modelValue", "searchTerm", "select:toggle"]);
 
 // ** Data **
@@ -133,7 +135,7 @@ const setOptions = async (): Promise<void> => {
 const autocompleteChange = debounce(setOptions, 400);
 
 const optionSelected = (option: SelectOption): void => {
-  if (option.text !== selected.value) {
+  if (option.text !== selected.value && isSelectActive.value) {
     emits("update:modelValue", props.valueOnly ? option.value : option);
     toggleSelect(false);
   }
@@ -153,7 +155,9 @@ const toggleSelect = (val: boolean): void => {
       autocompleteInput.value.focus();
     }
 
-    if (!val && autocompleteSearch.value && !selectedMatchesSearch) {
+    if (props.freeText) {
+      noResults.value = false;
+    } else if (!val && autocompleteSearch.value && !selectedMatchesSearch) {
       autocompleteSearch.value = "";
       noResults.value = false;
     }
@@ -162,7 +166,14 @@ const toggleSelect = (val: boolean): void => {
 
 onClickOutside(selectElement, () => {
   if (isSelectActive.value) {
-    toggleSelect(false);
+    if (props.freeText) {
+      optionSelected({
+        text: autocompleteSearch.value,
+        value: autocompleteSearch.value,
+      });
+    } else {
+      toggleSelect(false);
+    }
   }
 });
 
@@ -177,10 +188,13 @@ onMounted(() => {
 watch(
   () => props.modelValue,
   async (value) => {
+    let val = "";
+
     // When passing a value to the autocomplete, if there are no options shown then run the search the set them
     if (
       props.autocomplete &&
       props.outsideRequest &&
+      !props.freeText &&
       !showOptions.value.length
     ) {
       autocompleteSearch.value = (value as number)?.toString();
@@ -193,16 +207,19 @@ watch(
       const matchingOption: SelectOption | undefined = showOptions.value.find(
         (option) => option.value == value
       );
-      const val: string = matchingOption ? matchingOption.text : "";
 
-      selected.value = val;
-      autocompleteSearch.value = val;
+      val = matchingOption ? matchingOption.text : "";
     } else {
-      const val: string = (value as SelectOption).text || "";
-
-      selected.value = val;
-      autocompleteSearch.value = val;
+      val = (value as SelectOption).text || "";
     }
+
+    // If theres no matching option and is free text, use raw value
+    selected.value = val ? val : props.freeText ? value : "";
+    autocompleteSearch.value = val
+      ? val
+      : props.freeText
+      ? (value as number).toString()
+      : "";
   },
   { immediate: true }
 );
