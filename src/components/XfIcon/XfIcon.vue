@@ -11,11 +11,16 @@
 import InlineSvg from "vue-inline-svg";
 
 // ** Base **
-defineProps<{
-  src: string;
-  fill?: string;
-  size?: number;
-}>();
+withDefaults(
+  defineProps<{
+    src: string;
+    fill?: string;
+    size?: number;
+  }>(),
+  {
+    size: 16,
+  }
+);
 </script>
 
 <style lang="scss" scoped>

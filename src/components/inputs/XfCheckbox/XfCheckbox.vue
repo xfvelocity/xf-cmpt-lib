@@ -6,7 +6,7 @@
       :value="modelValue"
       @change="$emit('update:modelValue', !modelValue)"
     />
-    <label class="xf-ml-1" :for="name">
+    <label class="xf-ml-2" :for="name">
       {{ label }}
     </label>
   </div>
@@ -26,6 +26,7 @@ defineEmits(["update:modelValue"]);
 
 <style lang="scss" scoped>
 input[type="checkbox"] {
-  transform: scale(1.2);
+  background: transparent;
+  transform: scale(1.4);
 }
 </style>

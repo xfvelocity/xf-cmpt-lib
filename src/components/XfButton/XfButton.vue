@@ -1,15 +1,19 @@
 <template>
   <button
-    class="xf-button xf-fw-700 xf-cursor-pointer xf-px-6 xf-py-1"
+    class="xf-button xf-fw-700 xf-px-6 xf-py-1"
     :class="buttonClass"
     @click="$emit('click')"
   >
     <slot />
+
+    <xf-icon class="xf-ml-2" :src="icon" :fill="textColour" :size="iconSize" />
   </button>
 </template>
 
 <script lang="ts" setup>
 import { computed } from "vue";
+
+import XfIcon from "@/components/XfIcon/XfIcon.vue";
 
 // ** Base **
 const props = withDefaults(
@@ -19,11 +23,14 @@ const props = withDefaults(
     textColour?: string;
     boxShadow?: boolean;
     fontSize?: number;
+    icon?: string;
+    iconSize?: number;
   }>(),
   {
     backgroundColour: "black",
     textColour: "white",
     boxShadow: true,
+    iconSize: 14,
   }
 );
 
@@ -43,10 +50,13 @@ const buttonClass = computed<(string | Record<string, boolean>)[]>(() => {
 
 <style lang="scss" scoped>
 .xf-button {
+  display: flex;
+  align-items: center;
   border-radius: map-get($xf-spacers, 1);
   border: none;
   transition: 0.2s ease-in-out;
   width: max-content;
+  cursor: pointer;
 
   &-box-shadow {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
