@@ -9,6 +9,7 @@ import { default as XfBanner } from "./XfBanner/XfBanner.vue";
 import { default as XfNav } from "./XfNav/XfNav.vue";
 import { default as XfSelect } from "./inputs/XfSelect/XfSelect.vue";
 import { default as XfLoading } from "./XfLoading/XfLoading.vue";
+import { default as XfCheckbox } from "./inputs/XfCheckbox/XfCheckbox.vue";
 
 export {
   XfBanner,
@@ -20,4 +21,5 @@ export {
   XfNav,
   XfSelect,
   XfLoading,
+  XfCheckbox,
 };

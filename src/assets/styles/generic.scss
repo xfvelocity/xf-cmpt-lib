@@ -205,6 +205,12 @@ textarea {
   }
 }
 
+.xf-disabled {
+  opacity: 0.5;
+  user-select: none;
+  cursor: default;
+}
+
 .xf-hover:hover {
   opacity: 0.7;
 }

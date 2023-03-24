@@ -9,6 +9,7 @@ import {
   XfNav,
   XfSelect,
   XfLoading,
+  XfCheckbox,
 } from "./index";
 
 export default {
@@ -22,6 +23,7 @@ export default {
     app.component("XfNav", XfNav);
     app.component("XfSelect", XfSelect);
     app.component("XfLoading", XfLoading);
+    app.component("XfCheckbox", XfCheckbox);
   },
 };
 

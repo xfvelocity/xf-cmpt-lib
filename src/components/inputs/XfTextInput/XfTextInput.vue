@@ -6,6 +6,7 @@
       {
         'xf-input-populated': !!modelValue,
         'xf-input-active': isActive,
+        'xf-disabled': disabled,
       },
     ]"
   >
@@ -15,10 +16,12 @@
       :class="[` xf-text-colour-${colour}`]"
       :name="name"
       :type="type"
+      :disabled="disabled"
       data-test-id="xf-text-input-input"
       @input="emitValue"
       @focus="isActive = true"
       @blur="isActive = false"
+      @keydown.enter="disabled ? '' : $emit('keydown.enter')"
     />
 
     <label v-if="label" :class="`xf-text-colour-${colour}`" :for="name">
@@ -28,10 +31,11 @@
     <xf-icon
       v-if="appendIcon"
       class="xf-mt-2 xf-mr-1 xf-cursor-pointer"
+      :class="disabled ? 'xf-cursor-default' : 'xf-cursor-pointer'"
       :src="appendIcon"
-      :size="14"
+      :size="16"
       :fill="colour"
-      @click="$emit('click:append')"
+      @click="disabled ? '' : $emit('click:append')"
     />
   </div>
 
@@ -59,6 +63,7 @@ withDefaults(
     errorMessages?: string[];
     colour?: string;
     appendIcon?: string;
+    disabled?: boolean;
   }>(),
   {
     type: "text",

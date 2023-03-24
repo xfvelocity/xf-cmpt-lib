@@ -1,0 +1,31 @@
+<template>
+  <div class="xf-flex xf-flex-align-items-center">
+    <input
+      :name="name"
+      type="checkbox"
+      :value="modelValue"
+      @change="$emit('update:modelValue', !modelValue)"
+    />
+    <label class="xf-ml-1" :for="name">
+      {{ label }}
+    </label>
+  </div>
+</template>
+
+<script lang="ts" setup>
+// ** Props **
+defineProps<{
+  modelValue: boolean;
+  name?: string;
+  label: string;
+}>();
+
+// ** Emits **
+defineEmits(["update:modelValue"]);
+</script>
+
+<style lang="scss" scoped>
+input[type="checkbox"] {
+  transform: scale(1.2);
+}
+</style>
