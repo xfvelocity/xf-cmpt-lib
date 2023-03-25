@@ -1,31 +1,33 @@
 <template>
-  <nav ref="navRef" class="xf-nav xf-p-3" :class="`xf-bg-${navBackground}`">
-    <slot />
+  <div>
+    <nav ref="navRef" class="xf-nav xf-p-3" :class="`xf-bg-${navBackground}`">
+      <slot />
+
+      <div
+        v-if="menuButton"
+        class="xf-nav-btn"
+        :class="{ 'xf-nav-btn-open': isNavDrawerOpen }"
+        @click="isNavDrawerOpen = !isNavDrawerOpen"
+      >
+        <span v-for="i in 4" :key="i" />
+      </div>
+    </nav>
 
     <div
-      v-if="menuButton"
-      class="xf-nav-btn"
-      :class="{ 'xf-nav-btn-open': isNavDrawerOpen }"
-      @click="isNavDrawerOpen = !isNavDrawerOpen"
+      v-if="isNavDrawerOpen"
+      class="xf-nav-drawer"
+      :class="`xf-bg-${navDrawerBackground}`"
+      :style="`top: ${navbarHeight}px`"
     >
-      <span v-for="i in 4" :key="i" />
+      <slot name="drawer" />
     </div>
-  </nav>
-
-  <div
-    v-if="isNavDrawerOpen"
-    class="xf-nav-drawer"
-    :class="`xf-bg-${navDrawerBackground}`"
-    :style="`top: ${navbarHeight}px`"
-  >
-    <slot name="drawer" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 
-// ** Base **
+// ** Props **
 withDefaults(
   defineProps<{
     menuButton?: boolean;
@@ -44,7 +46,7 @@ const isNavDrawerOpen = ref<boolean>(false);
 const navRef = ref<HTMLElement>();
 const navbarHeight = ref<number>(0);
 
-// ** Methods **
+// ** Lifecycle **
 onMounted(() => {
   navbarHeight.value = navRef.value.clientHeight;
 });

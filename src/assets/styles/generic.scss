@@ -70,6 +70,10 @@ textarea {
     text-transform: uppercase;
   }
 
+  &-capitalize {
+    text-transform: capitalize;
+  }
+
   &-ellipsis {
     overflow: hidden;
     white-space: nowrap;

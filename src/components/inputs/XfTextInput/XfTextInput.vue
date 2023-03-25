@@ -1,51 +1,53 @@
 <template>
-  <div
-    class="xf-text-input xf-input"
-    :class="[
-      `xf-border-colour-${colour}`,
-      {
-        'xf-input-populated': !!modelValue,
-        'xf-input-active': isActive,
-        'xf-disabled': disabled,
-      },
-    ]"
-  >
-    <input
-      :value="modelValue"
-      class="xf-text-input-input xf-px-2 xf-py-1 xf-text-16"
-      :class="[` xf-text-colour-${colour}`]"
-      :name="name"
-      :type="type"
-      :disabled="disabled"
-      data-test-id="xf-text-input-input"
-      @input="emitValue"
-      @focus="isActive = true"
-      @blur="isActive = false"
-      @keydown.enter="disabled ? '' : $emit('keydown.enter')"
-    />
+  <div>
+    <div
+      class="xf-text-input xf-input"
+      :class="[
+        `xf-border-colour-${colour}`,
+        {
+          'xf-input-populated': !!modelValue,
+          'xf-input-active': isActive,
+          'xf-disabled': disabled,
+        },
+      ]"
+    >
+      <input
+        :value="modelValue"
+        class="xf-text-input-input xf-px-2 xf-py-1 xf-text-16"
+        :class="[` xf-text-colour-${colour}`]"
+        :name="name"
+        :type="type"
+        :disabled="disabled"
+        data-test-id="xf-text-input-input"
+        @input="emitValue"
+        @focus="isActive = true"
+        @blur="isActive = false"
+        @keydown.enter="disabled ? '' : $emit('keydown.enter')"
+      />
 
-    <label v-if="label" :class="`xf-text-colour-${colour}`" :for="name">
-      {{ label }}
-    </label>
+      <label v-if="label" :class="`xf-text-colour-${colour}`" :for="name">
+        {{ label }}
+      </label>
 
-    <xf-icon
-      v-if="appendIcon"
-      class="xf-mt-2 xf-mr-1 xf-cursor-pointer"
-      :class="disabled ? 'xf-cursor-default' : 'xf-cursor-pointer'"
-      :src="appendIcon"
-      :size="16"
-      :fill="colour"
-      @click="disabled ? '' : $emit('click:append')"
-    />
+      <xf-icon
+        v-if="appendIcon"
+        class="xf-mt-2 xf-mr-1 xf-cursor-pointer"
+        :class="disabled ? 'xf-cursor-default' : 'xf-cursor-pointer'"
+        :src="appendIcon"
+        :size="16"
+        :fill="colour"
+        @click="disabled ? '' : $emit('click:append')"
+      />
+    </div>
+
+    <span
+      v-if="errorMessages?.length"
+      class="xf-text-14 xf-fw-600 xf-text-colour-red"
+      data-test-id="xf-text-input-error"
+    >
+      {{ errorMessages[0] }}
+    </span>
   </div>
-
-  <span
-    v-if="errorMessages?.length"
-    class="xf-text-14 xf-fw-600 xf-text-colour-red"
-    data-test-id="xf-text-input-error"
-  >
-    {{ errorMessages[0] }}
-  </span>
 </template>
 
 <script lang="ts" setup>

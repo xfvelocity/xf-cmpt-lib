@@ -12,7 +12,7 @@
         <div class="xf-ml-auto xf-w-max-content">
           <xf-icon
             class="xf-cursor-pointer"
-            src="close"
+            src="icons/close.svg"
             :size="16"
             @click.stop="closeModal"
           />
@@ -27,11 +27,12 @@
 <script lang="ts" setup>
 import XfIcon from "../XfIcon/XfIcon.vue";
 
-// ** Base **
+// ** Props **
 const props = defineProps<{
   modelValue: boolean;
 }>();
 
+// ** Emits **
 const emit = defineEmits(["update:modelValue"]);
 
 // ** Methods **
