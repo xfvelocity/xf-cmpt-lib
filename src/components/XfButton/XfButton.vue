@@ -6,7 +6,13 @@
   >
     <slot />
 
-    <xf-icon class="xf-ml-2" :src="icon" :fill="textColour" :size="iconSize" />
+    <xf-icon
+      v-if="icon"
+      class="xf-ml-2"
+      :src="icon"
+      :fill="textColour"
+      :size="iconSize"
+    />
   </button>
 </template>
 

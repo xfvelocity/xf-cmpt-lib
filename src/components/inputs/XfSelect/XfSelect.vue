@@ -9,7 +9,7 @@
     <div
       class="xf-select-toggle xf-input"
       :class="[
-        `xf-border-colour-${colour}`,
+        `xf-border-colour-${colour} xf-text-colour-${colour}`,
         {
           'xf-input-populated': !!modelValue || autocompleteSearch,
           'xf-input-active': isSelectActive,

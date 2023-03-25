@@ -20,8 +20,8 @@
         :disabled="disabled"
         data-test-id="xf-text-input-input"
         @input="emitValue"
-        @focus="isActive = true"
-        @blur="isActive = false"
+        @focus="onFocus"
+        @blur="onBlur"
         @keydown.enter="disabled ? '' : $emit('keydown.enter')"
       />
 
@@ -59,7 +59,7 @@ import XfIcon from "@/components/XfIcon/XfIcon.vue";
 withDefaults(
   defineProps<{
     label: string;
-    modelValue: string;
+    modelValue: string | number | null;
     name?: string;
     type?: string;
     errorMessages?: string[];
@@ -74,12 +74,27 @@ withDefaults(
 );
 
 // ** Emits **
-const emit = defineEmits(["update:modelValue", "click:append"]);
+const emit = defineEmits([
+  "update:modelValue",
+  "click:append",
+  "focus",
+  "blur",
+]);
 
 // ** Data **
 const isActive = ref<boolean>(false);
 
 // ** Methods **
+const onFocus = (event: FocusEvent): void => {
+  emit("focus", event);
+  isActive.value = true;
+};
+
+const onBlur = (event: FocusEvent): void => {
+  emit("blur", event);
+  isActive.value = false;
+};
+
 const emitValue = (event: Event): void => {
   emit("update:modelValue", (event.target as HTMLInputElement).value);
 };
