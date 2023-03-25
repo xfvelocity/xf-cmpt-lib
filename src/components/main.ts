@@ -11,6 +11,7 @@ import {
   XfLoading,
   XfCheckbox,
   XfMenu,
+  XfSnackbar,
 } from "./index";
 
 export default {
@@ -26,6 +27,7 @@ export default {
     app.component("XfLoading", XfLoading);
     app.component("XfCheckbox", XfCheckbox);
     app.component("XfMenu", XfMenu);
+    app.component("XfSnackbar", XfSnackbar);
   },
 };
 
@@ -41,4 +43,5 @@ export {
   XfLoading,
   XfMenu,
   XfCheckbox,
+  XfSnackbar,
 };

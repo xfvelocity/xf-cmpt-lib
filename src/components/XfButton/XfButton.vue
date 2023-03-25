@@ -1,6 +1,6 @@
 <template>
   <button
-    class="xf-button xf-fw-700 xf-px-6 xf-py-1"
+    class="xf-button xf-flex-center xf-fw-700 xf-px-6 xf-py-1"
     :class="buttonClass"
     @click="$emit('click')"
   >
@@ -56,8 +56,6 @@ const buttonClass = computed<(string | Record<string, boolean>)[]>(() => {
 
 <style lang="scss" scoped>
 .xf-button {
-  display: flex;
-  align-items: center;
   border-radius: map-get($xf-spacers, 1);
   border: none;
   transition: 0.2s ease-in-out;

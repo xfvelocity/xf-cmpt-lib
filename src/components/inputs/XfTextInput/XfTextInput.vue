@@ -34,7 +34,6 @@
         class="xf-mt-2 xf-mr-1 xf-cursor-pointer"
         :class="disabled ? 'xf-cursor-default' : 'xf-cursor-pointer'"
         :src="appendIcon"
-        :size="16"
         :fill="colour"
         @click="disabled ? '' : $emit('click:append')"
       />

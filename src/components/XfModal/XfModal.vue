@@ -6,15 +6,15 @@
       @click="closeModal"
     >
       <div
-        class="xf-modal-content xf-bg-white xf-p-6 xf-m-4 xf-pb-12"
+        class="xf-modal-content xf-bg-white xf-p-4"
+        :style="`max-width: ${maxWidth}px; max-height: ${minHeight}px`"
         @click.stop=""
       >
         <div class="xf-ml-auto xf-w-max-content">
           <xf-icon
             class="xf-cursor-pointer"
             src="icons/close.svg"
-            :size="16"
-            @click.stop="closeModal"
+            @click="closeModal"
           />
         </div>
 
@@ -28,16 +28,27 @@
 import XfIcon from "../XfIcon/XfIcon.vue";
 
 // ** Props **
-const props = defineProps<{
-  modelValue: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    modelValue: boolean;
+    persistent?: boolean;
+    maxWidth?: number;
+    minHeight?: number;
+  }>(),
+  {
+    maxWidth: 350,
+    minHeight: 300,
+  }
+);
 
 // ** Emits **
 const emit = defineEmits(["update:modelValue"]);
 
 // ** Methods **
 const closeModal = (): void => {
-  emit("update:modelValue", !props.modelValue);
+  if (!props.persistent) {
+    emit("update:modelValue", !props.modelValue);
+  }
 };
 </script>
 
@@ -50,8 +61,7 @@ const closeModal = (): void => {
   background: rgba(0, 0, 0, 0.6);
 
   &-content {
-    min-height: 300px;
-    min-width: 300px;
+    width: 90%;
     border-radius: 10px;
   }
 }
