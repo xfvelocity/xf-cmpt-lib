@@ -1,6 +1,10 @@
 <template>
   <div class="xf-menu">
-    <span class="xf-cursor-pointer" @click="activateMenu">
+    <span
+      v-if="$slots.activator"
+      class="xf-cursor-pointer"
+      @click="activateMenu"
+    >
       <slot name="activator" />
     </span>
 
@@ -26,13 +30,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs, watch } from "vue";
+import { ref, toRefs, watch, onMounted } from "vue";
 import { MenuPositions } from "@/types/app.types";
 
 // ** Props **
 const props = withDefaults(
   defineProps<{
     modelValue?: boolean;
+    activator?: string;
     width?: number;
     position?: MenuPositions;
   }>(),
@@ -68,6 +73,15 @@ const toggleMenu = (): void => {
   emit("update:modelValue", isOpen.value);
 };
 
+// ** Lifecycle **
+onMounted(() => {
+  if (props.activator) {
+    document
+      .querySelector(props.activator)
+      .addEventListener("click", activateMenu);
+  }
+});
+
 // ** Watchers **
 watch(
   () => props.modelValue,
@@ -87,6 +101,7 @@ watch(
     top: 0;
     left: 0;
     opacity: 0;
+    z-index: 99;
   }
 
   &-show {
