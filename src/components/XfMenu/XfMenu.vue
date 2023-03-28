@@ -22,6 +22,7 @@
           bottom: position.bottom,
           width: `${width}px`,
         }"
+        @click.stop=""
       >
         <slot />
       </div>
