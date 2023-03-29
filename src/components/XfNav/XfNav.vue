@@ -21,6 +21,7 @@
     <xf-menu
       v-if="$slots.menu"
       v-model="isNavDrawerOpen"
+      :background-colour="menuBackgroundColour"
       activator="#nav-menu-btn"
     >
       <slot name="menu" />
@@ -47,6 +48,7 @@ withDefaults(
   defineProps<{
     menuButtonColour?: string;
     menuButton?: boolean;
+    menuBackgroundColour?: string;
     backgroundColour?: string;
     drawerBackgroundColour?: string;
   }>(),
@@ -62,8 +64,6 @@ withDefaults(
 const isNavDrawerOpen = ref<boolean>(false);
 const navRef = ref<HTMLElement>();
 const navbarHeight = ref<number>(0);
-const menuButtonRef = ref<HTMLDivElement>();
-const menuPosition = ref<any>({});
 
 // ** Methods **
 const menuButtonClick = (isDrawer: boolean): void => {
@@ -98,7 +98,7 @@ onMounted(() => {
   // Menu button
   &-btn {
     width: 25px;
-    height: 15px;
+    height: 20px;
     position: relative;
     transform: rotate(0deg);
     transition: 0.5s ease-in-out;
