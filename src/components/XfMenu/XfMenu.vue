@@ -48,10 +48,7 @@ const props = withDefaults(
   }>(),
   {
     backgroundColour: "white",
-    position: () => ({
-      top: "0px",
-      left: "0px",
-    }),
+    position: () => ({}),
   }
 );
 
