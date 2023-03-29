@@ -15,6 +15,8 @@
     >
       <div
         class="xf-menu-modal-content"
+        ref="contentRef"
+        :class="{ [`xf-bg-${backgroundColour}`]: backgroundColour }"
         :style="{
           top: position.top,
           left: position.left,
@@ -39,11 +41,17 @@ const props = withDefaults(
   defineProps<{
     modelValue?: boolean;
     activator?: string;
+    backgroundColour?: string;
     width?: number;
     position?: MenuPositions;
+    centerAlign?: boolean;
   }>(),
   {
-    position: () => ({}),
+    backgroundColour: "white",
+    position: () => ({
+      top: "0px",
+      left: "0px",
+    }),
   }
 );
 
@@ -52,18 +60,31 @@ const emit = defineEmits(["update:modelValue"]);
 
 // ** Data **
 const { position } = toRefs(props);
-const isOpen = ref<boolean>();
+const contentRef = ref<HTMLDivElement>();
+const isOpen = ref<boolean>(false);
 
 // ** Methods **
 const activateMenu = (event: MouseEvent): void => {
   const navbar: HTMLElement | null =
     document.querySelector(".xf-navigation-bar");
 
-  // Get the click position and subract the height of the navbar to position the menu correctly
   position.value.top = `${
-    (navbar ? event.clientY - navbar.offsetHeight : event.clientY) + 10
+    (navbar ? event.clientY - navbar.offsetHeight : event.clientY) + 15
   }px`;
-  position.value.left = `${event.clientX - 5}px`;
+
+  const isTouchingRightSide: boolean =
+    event.clientX + (contentRef.value?.clientWidth || 0) >=
+    window.innerWidth - 10;
+
+  if (props.centerAlign) {
+    position.value.left = `${
+      event.clientX - contentRef.value?.clientWidth / 2
+    }px`;
+  } else if (isTouchingRightSide) {
+    position.value.right = `${window.innerWidth - event.clientX - 10}px`;
+  } else {
+    position.value.left = `${event.clientX - 5}px`;
+  }
 
   toggleMenu();
 };
@@ -96,24 +117,24 @@ watch(
 .xf-menu-modal {
   &-backdrop {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: visibility 0s linear 0.5s, opacity 0.5s 0s, transform 0.5s;
     visibility: hidden;
     top: 0;
     left: 0;
     opacity: 0;
-    z-index: 99;
+    z-index: 50;
   }
 
   &-show {
     opacity: 1;
     visibility: visible;
-    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+    transition: visibility 0s linear 0s, opacity 0.5s 0s, transform 0.5s;
   }
 
   &-content {
     position: absolute;
-    z-index: 50;
+    z-index: 51;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
   }
 }
