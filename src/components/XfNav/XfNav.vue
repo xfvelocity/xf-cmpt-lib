@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'xf-nav-open': isNavDrawerOpen }">
     <nav
       ref="navRef"
       class="xf-nav xf-p-3"
@@ -27,14 +27,16 @@
       <slot name="menu" />
     </xf-menu>
 
-    <div
-      v-if="isNavDrawerOpen && $slots.drawer"
-      class="xf-nav-drawer"
-      :class="`xf-bg-${drawerBackgroundColour}`"
-      :style="`top: ${navbarHeight}px`"
-    >
-      <slot name="drawer" />
-    </div>
+    <transition name="slide-left">
+      <div
+        v-if="isNavDrawerOpen && $slots.drawer"
+        class="xf-nav-drawer"
+        :class="`xf-bg-${drawerBackgroundColour}`"
+        :style="`top: ${navbarHeight}px`"
+      >
+        <slot name="drawer" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -86,7 +88,14 @@ onMounted(() => {
   align-items: center;
   position: relative;
 
+  &-open {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
   &-drawer {
+    overflow: hidden;
     position: absolute;
     top: 0;
     left: 0;
