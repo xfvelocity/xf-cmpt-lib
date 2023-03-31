@@ -2,7 +2,6 @@ $translateY: 35px;
 
 .xf-input {
   position: relative;
-  margin-top: calc($translateY - 5px);
 
   label {
     position: absolute;
@@ -23,6 +22,22 @@ $translateY: 35px;
 
     &:focus {
       outline: none;
+    }
+  }
+
+  &-border {
+    margin-top: calc($translateY - 5px);
+    border-bottom: 1px solid;
+  }
+
+  &-outlined {
+    border: 1px solid;
+    border-radius: 5px;
+    margin-top: calc($translateY - 20px);
+
+    label {
+      bottom: 7px;
+      padding: 2px 5px;
     }
   }
 

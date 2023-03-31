@@ -1,10 +1,10 @@
 <template>
   <div>
     <div
-      class="xf-text-input xf-input"
+      class="xf-input xf-flex"
       :class="[
         `xf-border-colour-${colour}`,
-        outlined ? 'xf-text-input-outlined' : 'xf-text-input-border',
+        outlined ? 'xf-input-outlined' : 'xf-input-border',
         {
           'xf-input-populated': !!modelValue,
           'xf-input-active': isActive,
@@ -14,7 +14,7 @@
     >
       <input
         :value="modelValue"
-        class="xf-text-input-input xf-px-2 xf-py-1 xf-text-16"
+        class="xf-px-2 xf-py-1 xf-text-16"
         :class="[` xf-text-colour-${colour}`]"
         :name="name"
         :type="type"
@@ -113,21 +113,7 @@ const emitValue = (event: Event): void => {
 </script>
 
 <style lang="scss" scoped>
-.xf-text-input {
-  display: flex;
-
-  &-border {
-    border-bottom: 1px solid;
-  }
-
-  &-outlined {
-    border: 1px solid;
-    border-radius: 5px;
-    height: 45px;
-
-    label {
-      padding: 2px 5px;
-    }
-  }
+.xf-input-outlined {
+  height: 45px;
 }
 </style>

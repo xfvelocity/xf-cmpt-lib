@@ -1,10 +1,10 @@
 <template>
   <div>
     <div
-      class="xf-text-area xf-input"
+      class="xf-flex xf-input"
       :class="[
         `xf-border-colour-${colour}`,
-        outlined ? 'xf-text-area-outlined' : 'xf-text-area-border',
+        outlined ? 'xf-input-outlined' : 'xf-input-border',
         {
           'xf-input-populated': !!modelValue,
           'xf-input-active': isActive,
@@ -13,7 +13,7 @@
       ]"
     >
       <textarea
-        class="xf-text-area xf-px-2 yd-py-1 xf-text-16 yd-w-100"
+        class="xf-px-2 yd-py-1 xf-text-16 yd-w-100 xf-z-2"
         :class="[`xf-text-colour-${colour}`]"
         :value="modelValue"
         :rows="rows"
@@ -50,8 +50,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 
-import XfIcon from "@/components/XfIcon/XfIcon.vue";
-
 // ** Base **
 withDefaults(
   defineProps<{
@@ -76,12 +74,7 @@ withDefaults(
 );
 
 // ** Emits **
-const emit = defineEmits([
-  "update:modelValue",
-  "click:append",
-  "focus",
-  "blur",
-]);
+const emit = defineEmits(["update:modelValue", "focus", "blur"]);
 
 // ** Data **
 const isActive = ref<boolean>(false);
@@ -103,40 +96,22 @@ const emitValue = (event: Event): void => {
 </script>
 
 <style lang="scss" scoped>
-.xf-text-area {
-  display: flex;
+textarea {
+  border: none;
+  overflow: auto;
+  outline: none;
+  width: 100%;
+  border-radius: 0;
+  background-color: transparent;
 
-  textarea {
-    border: none;
-    overflow: auto;
-    outline: none;
-    width: 100%;
-    border-radius: 0;
-    background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+  resize: none;
+}
 
-    resize: none;
-  }
-
-  label {
-    top: 7px;
-  }
-
-  &-border {
-    border-bottom: 1px solid;
-  }
-
-  &-outlined {
-    border: 1px solid;
-    border-radius: 5px;
-    min-height: 45px;
-
-    label {
-      padding: 2px 5px;
-    }
-  }
+label {
+  top: 7px;
 }
 </style>
