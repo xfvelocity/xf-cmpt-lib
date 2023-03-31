@@ -32,7 +32,7 @@
         v-if="isNavDrawerOpen && $slots.drawer"
         class="xf-nav-drawer"
         :class="`xf-bg-${drawerBackgroundColour}`"
-        :style="`top: ${navbarHeight}px`"
+        :style="`--height: ${navbarHeight}px; top: ${navbarHeight}px`"
       >
         <slot name="drawer" />
       </div>
@@ -92,6 +92,7 @@ onMounted(() => {
     position: fixed;
     width: 100%;
     height: 100%;
+    z-index: 50;
   }
 
   &-drawer {
@@ -100,7 +101,7 @@ onMounted(() => {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% - var(--height));
     z-index: 49;
   }
 

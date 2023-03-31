@@ -4,6 +4,7 @@
       class="xf-text-input xf-input"
       :class="[
         `xf-border-colour-${colour}`,
+        outlined ? 'xf-text-input-outlined' : 'xf-text-input-border',
         {
           'xf-input-populated': !!modelValue,
           'xf-input-active': isActive,
@@ -18,6 +19,7 @@
         :name="name"
         :type="type"
         :disabled="disabled"
+        :autocomplete="autocomplete"
         data-test-id="xf-text-input-input"
         @input="emitValue"
         @focus="onFocus"
@@ -25,7 +27,14 @@
         @keydown.enter="disabled ? '' : $emit('keydown.enter')"
       />
 
-      <label v-if="label" :class="`xf-text-colour-${colour}`" :for="name">
+      <label
+        v-if="label"
+        :class="[
+          `xf-text-colour-${colour}`,
+          { [`xf-bg-${outlineBackground}`]: outlined },
+        ]"
+        :for="name"
+      >
         {{ label }}
       </label>
 
@@ -65,10 +74,14 @@ withDefaults(
     colour?: string;
     appendIcon?: string;
     disabled?: boolean;
+    outlined?: boolean;
+    outlineBackground?: string;
+    autocomplete?: string;
   }>(),
   {
     type: "text",
     colour: "black",
+    outlineBackground: "white",
   }
 );
 
@@ -101,7 +114,20 @@ const emitValue = (event: Event): void => {
 
 <style lang="scss" scoped>
 .xf-text-input {
-  border-bottom: 1px solid;
   display: flex;
+
+  &-border {
+    border-bottom: 1px solid;
+  }
+
+  &-outlined {
+    border: 1px solid;
+    border-radius: 5px;
+    height: 45px;
+
+    label {
+      padding: 2px 5px;
+    }
+  }
 }
 </style>
