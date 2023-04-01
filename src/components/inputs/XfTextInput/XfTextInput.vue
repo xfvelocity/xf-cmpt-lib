@@ -14,8 +14,8 @@
     >
       <input
         :value="modelValue"
-        class="xf-px-2 xf-py-1 xf-text-16"
-        :class="[` xf-text-colour-${colour}`]"
+        class="xf-px-2 xf-py-1"
+        :class="[` xf-text-colour-${colour} xf-text-${fontSize}`]"
         :name="name"
         :type="type"
         :disabled="disabled"
@@ -30,7 +30,7 @@
       <label
         v-if="label"
         :class="[
-          `xf-text-colour-${colour}`,
+          `xf-text-colour-${colour} xf-text-${fontSize}`,
           { [`xf-bg-${outlineBackground}`]: outlined },
         ]"
         :for="name"
@@ -40,7 +40,7 @@
 
       <xf-icon
         v-if="appendIcon"
-        class="xf-mt-2 xf-mr-1 xf-cursor-pointer"
+        class="xf-mt-2 xf-mr-1"
         :class="disabled ? 'xf-cursor-default' : 'xf-cursor-pointer'"
         :src="appendIcon"
         :fill="colour"
@@ -77,8 +77,10 @@ withDefaults(
     outlined?: boolean;
     outlineBackground?: string;
     autocomplete?: string;
+    fontSize?: number;
   }>(),
   {
+    fontSize: 14,
     type: "text",
     colour: "black",
     outlineBackground: "white",

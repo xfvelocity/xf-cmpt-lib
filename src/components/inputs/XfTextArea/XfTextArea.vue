@@ -13,8 +13,8 @@
       ]"
     >
       <textarea
-        class="xf-px-2 yd-py-1 xf-text-16 yd-w-100 xf-z-2"
-        :class="[`xf-text-colour-${colour}`]"
+        class="xf-px-2 yd-py-1 yd-w-100 xf-z-2"
+        :class="[`xf-text-colour-${colour} xf-text-${fontSize}`]"
         :value="modelValue"
         :rows="rows"
         :autocomplete="autocomplete"
@@ -28,7 +28,7 @@
       <label
         v-if="label"
         :class="[
-          `xf-text-colour-${colour}`,
+          `xf-text-colour-${colour} xf-text-${fontSize}`,
           { [`xf-bg-${outlineBackground}`]: outlined },
         ]"
         :for="name"
@@ -64,8 +64,10 @@ withDefaults(
     outlined?: boolean;
     outlineBackground?: string;
     autocomplete?: string;
+    fontSize?: number;
   }>(),
   {
+    fontSize: 14,
     rows: 3,
     type: "text",
     colour: "black",
@@ -103,6 +105,7 @@ textarea {
   width: 100%;
   border-radius: 0;
   background-color: transparent;
+  padding-top: 5px;
 
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
