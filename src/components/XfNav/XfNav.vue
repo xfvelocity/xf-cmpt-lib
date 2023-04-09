@@ -27,20 +27,23 @@
       <slot name="menu" />
     </xf-menu>
 
-    <transition name="slide-left">
+    <transition name="fade">
       <div
         v-if="isNavDrawerOpen && $slots.drawer"
         class="xf-nav-drawer-overlay"
+      />
+    </transition>
+
+    <transition name="slide-left">
+      <div
+        v-if="isNavDrawerOpen && $slots.drawer"
+        class="xf-nav-drawer-content"
+        :class="`xf-bg-${drawerBackgroundColour}`"
+        :style="[
+          `--height: ${navbarHeight}px; top: ${navbarHeight}px; width: ${drawerWidth}`,
+        ]"
       >
-        <div
-          class="xf-nav-drawer-content"
-          :class="`xf-bg-${drawerBackgroundColour}`"
-          :style="[
-            `--height: ${navbarHeight}px; top: ${navbarHeight}px; width: ${drawerWidth}`,
-          ]"
-        >
-          <slot name="drawer" />
-        </div>
+        <slot name="drawer" />
       </div>
     </transition>
   </div>
@@ -71,6 +74,8 @@ const props = withDefaults(
   }
 );
 
+const emit = defineEmits(["update:modelValue"]);
+
 // ** Data **
 const isNavDrawerOpen = ref<boolean>(false);
 const navRef = ref<HTMLElement>();
@@ -91,10 +96,18 @@ onMounted(() => {
 // ** Watchers **
 watch(
   () => props.modelValue,
-  () => {
-    isNavDrawerOpen.value = props.modelValue;
+  (value) => {
+    if (value !== isNavDrawerOpen.value) {
+      isNavDrawerOpen.value = props.modelValue;
+    }
   }
 );
+
+watch(isNavDrawerOpen, (value) => {
+  if (value !== props.modelValue) {
+    emit("update:modelValue", value);
+  }
+});
 </script>
 
 <style lang="scss" scoped>
