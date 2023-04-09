@@ -30,35 +30,44 @@
     <transition name="slide-left">
       <div
         v-if="isNavDrawerOpen && $slots.drawer"
-        class="xf-nav-drawer"
-        :class="`xf-bg-${drawerBackgroundColour}`"
-        :style="`--height: ${navbarHeight}px; top: ${navbarHeight}px`"
+        class="xf-nav-drawer-overlay"
       >
-        <slot name="drawer" />
+        <div
+          class="xf-nav-drawer-content"
+          :class="`xf-bg-${drawerBackgroundColour}`"
+          :style="[
+            `--height: ${navbarHeight}px; top: ${navbarHeight}px; width: ${drawerWidth}`,
+          ]"
+        >
+          <slot name="drawer" />
+        </div>
       </div>
     </transition>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 import XfMenu from "@/components/XfMenu/XfMenu.vue";
 
 // ** Props **
-withDefaults(
+const props = withDefaults(
   defineProps<{
+    modelValue?: boolean;
     menuButtonColour?: string;
     menuButton?: boolean;
     menuBackgroundColour?: string;
     backgroundColour?: string;
     drawerBackgroundColour?: string;
+    drawerWidth?: string;
   }>(),
   {
     menuButton: true,
     backgroundColour: "white",
     drawerBackgroundColour: "white",
     menuButtonColour: "grey-darken-2",
+    drawerWidth: "100%",
   }
 );
 
@@ -78,6 +87,14 @@ const menuButtonClick = (isDrawer: boolean): void => {
 onMounted(() => {
   navbarHeight.value = navRef.value.clientHeight;
 });
+
+// ** Watchers **
+watch(
+  () => props.modelValue,
+  () => {
+    isNavDrawerOpen.value = props.modelValue;
+  }
+);
 </script>
 
 <style lang="scss" scoped>
@@ -96,13 +113,25 @@ onMounted(() => {
   }
 
   &-drawer {
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100% - var(--height));
-    z-index: 49;
+    &-content,
+    &-overlay {
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+    }
+
+    &-content {
+      z-index: 50;
+      height: calc(100% - var(--height));
+    }
+
+    &-overlay {
+      z-index: 49;
+      background: rgba(0, 0, 0, 0.4);
+      height: 100%;
+    }
   }
 
   // Menu button
