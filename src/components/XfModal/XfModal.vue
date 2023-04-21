@@ -7,7 +7,7 @@
     >
       <div
         class="xf-modal-content xf-bg-white xf-p-4"
-        :style="`max-width: ${maxWidth}px; max-height: ${minHeight}px`"
+        :style="`max-width: ${maxWidth}px; min-height: ${minHeight}px`"
         @click.stop=""
       >
         <div class="xf-ml-auto xf-w-max-content">
