@@ -20,6 +20,7 @@
         :type="type"
         :disabled="disabled"
         :autocomplete="autocomplete"
+        :placeholder="placeholder"
         data-test-id="xf-text-input-input"
         @input="emitValue"
         @focus="onFocus"
@@ -66,8 +67,8 @@ import XfIcon from "@/components/XfIcon/XfIcon.vue";
 // ** Base **
 withDefaults(
   defineProps<{
-    label: string;
     modelValue: string | number | null;
+    label?: string;
     name?: string;
     type?: string;
     errorMessages?: string[];
@@ -78,6 +79,7 @@ withDefaults(
     outlineBackground?: string;
     autocomplete?: string;
     fontSize?: number;
+    placeholder?: string;
   }>(),
   {
     fontSize: 14,
@@ -115,7 +117,13 @@ const emitValue = (event: Event): void => {
 </script>
 
 <style lang="scss" scoped>
-.xf-input-outlined {
-  height: 45px;
+.xf-input {
+  ::placeholder {
+    color: v-bind(colour);
+  }
+
+  &-outlined {
+    height: 45px;
+  }
 }
 </style>

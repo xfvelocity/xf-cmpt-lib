@@ -1,14 +1,16 @@
 <template>
   <button
     class="xf-button xf-flex-center xf-fw-700 xf-px-6 xf-py-1"
-    :class="buttonClass"
+    :class="[contentClass, buttonClass]"
     @click="$emit('click')"
   >
-    <slot />
+    <span :class="{ 'xf-flex-order-1': iconLeftSide }">
+      <slot />
+    </span>
 
     <xf-icon
       v-if="icon"
-      class="xf-ml-2"
+      :class="iconLeftSide ? 'xf-mr-2' : 'xf-ml-2'"
       :src="icon"
       :fill="textColour"
       :size="iconSize"
@@ -31,6 +33,8 @@ const props = withDefaults(
     fontSize?: number;
     icon?: string;
     iconSize?: number;
+    iconLeftSide?: boolean;
+    contentClass?: string;
   }>(),
   {
     backgroundColour: "black",
@@ -48,8 +52,11 @@ const buttonClass = computed<(string | Record<string, boolean>)[]>(() => {
     props.outlined
       ? `xf-bg-none xf-border-${props.backgroundColour}`
       : `xf-bg-${props.backgroundColour}`,
+
     `xf-text-colour-${props.textColour} xf-text-${props.fontSize || 14}`,
-    { "button-box-shadow": props.boxShadow },
+    {
+      "button-box-shadow": props.boxShadow,
+    },
   ];
 });
 </script>

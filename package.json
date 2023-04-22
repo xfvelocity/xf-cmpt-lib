@@ -1,7 +1,7 @@
 {
   "name": "xf-cmpt-lib",
   "private": false,
-  "version": "0.1.02",
+  "version": "0.1.03",
   "type": "module",
   "files": [
     "dist"
