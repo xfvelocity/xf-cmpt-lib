@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'xf-nav-open': isNavDrawerOpen }">
+  <div :class="{ 'xf-nav-open': isNavDrawerOpen && $slots.drawer }">
     <nav
       ref="navRef"
       class="xf-nav xf-p-3"
