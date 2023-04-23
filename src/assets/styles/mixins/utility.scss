@@ -1,20 +1,19 @@
 // Center Mixin
-// use: @inlcude center; @include center(true, false); @include center(false, true)
 @mixin center($horizontal: true, $vertical: true) {
   position: absolute;
 
   @if ($horizontal and $vertical) {
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    top: 50% !important;
+    left: 50% !important;
+    -webkit-transform: translate(-50%, -50%) !important;
+    transform: translate(-50%, -50%) !important;
   } @else if ($horizontal) {
-    left: 50%;
-    -webkit-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
+    left: 50% !important;
+    -webkit-transform: translate(-50%, 0) !important;
+    transform: translate(-50%, 0) !important;
   } @else if ($vertical) {
-    top: 50%;
-    -webkit-transform: translate(0, -50%);
-    transform: translate(0, -50%);
+    top: 50% !important;
+    -webkit-transform: translate(0, -50%) !important;
+    transform: translate(0, -50%) !important;
   }
 }
