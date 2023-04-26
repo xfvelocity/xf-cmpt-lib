@@ -1,68 +1,70 @@
 <template>
-  <div
-    class="xf-select"
-    :tabindex="autocomplete ? '' : '0'"
-    ref="selectElement"
-    @keydown.tab="toggleSelect(false)"
-    @focus="toggleSelect(true)"
-  >
+  <div>
     <div
-      class="xf-select-toggle xf-input"
-      :class="[
-        `xf-border-colour-${colour} xf-text-colour-${colour}`,
-        {
-          'xf-input-populated': !!modelValue || autocompleteSearch,
-          'xf-input-active': isSelectActive,
-        },
-      ]"
-      @click="toggleSelect(true)"
+      class="xf-select"
+      :tabindex="autocomplete ? '' : '0'"
+      ref="selectElement"
+      @keydown.tab="toggleSelect(false)"
+      @focus="toggleSelect(true)"
     >
-      <label :class="`xf-text-colour-${colour}`">
-        {{ label }}
-      </label>
-      <input
-        v-if="autocomplete"
-        class="xf-select-input xf-text-16"
-        :class="`xf-text-colour-${colour}`"
-        v-model="autocompleteSearch"
-        ref="autocompleteInput"
-        :tabindex="autocomplete ? '0' : ''"
-        @input="autocompleteChange"
-        @focus="toggleSelect(true)"
-      />
-      <span v-else>
-        {{ selected }}
-      </span>
+      <div
+        class="xf-select-toggle xf-input"
+        :class="[
+          `xf-border-colour-${colour} xf-text-colour-${colour}`,
+          {
+            'xf-input-populated': !!modelValue || autocompleteSearch,
+            'xf-input-active': isSelectActive,
+          },
+        ]"
+        @click="toggleSelect(true)"
+      >
+        <label :class="`xf-text-colour-${colour}`">
+          {{ label }}
+        </label>
+        <input
+          v-if="autocomplete"
+          class="xf-select-input xf-text-16"
+          :class="`xf-text-colour-${colour}`"
+          v-model="autocompleteSearch"
+          ref="autocompleteInput"
+          :tabindex="autocomplete ? '0' : ''"
+          @input="autocompleteChange"
+          @focus="toggleSelect(true)"
+        />
+        <span v-else class="xf-pl-2">
+          {{ selected }}
+        </span>
 
-      <div class="xf-flex-grow" />
-      <xf-loading v-if="loading" class="xf-pr-2" :size="16" />
-      <xf-icon
-        class="xf-mb-1 xf-mr-1 xf-select-arrow"
-        :class="{ 'xf-select-arrow-active': isSelectActive }"
-        :size="14"
-        :fill="colour"
-        src="icons/chevron-down.svg"
-        @click.stop="toggleSelect(!isSelectActive)"
-      />
-    </div>
+        <div class="xf-flex-grow" />
+        <xf-loading v-if="loading" class="xf-pr-2" :size="16" />
+        <xf-icon
+          class="xf-mb-1 xf-mr-1 xf-select-arrow"
+          :class="{ 'xf-select-arrow-active': isSelectActive }"
+          :size="14"
+          :fill="colour"
+          src="icons/chevron-down.svg"
+          @click.stop="toggleSelect(!isSelectActive)"
+        />
+      </div>
 
-    <div
-      v-if="isSelectActive && (showOptions.length || noResults)"
-      class="xf-select-items"
-      :class="{ 'xf-select-items-top': position === 'top' }"
-    >
-      <template v-if="showOptions.length">
-        <div
-          v-for="(option, i) in showOptions"
-          :key="i"
-          class="xf-flex xf-flex-align-items-center xf-select-items-item"
-          @click="optionSelected(option)"
-        >
-          {{ option.text }}
-        </div>
-      </template>
+      <div
+        v-if="isSelectActive && (showOptions.length || noResults)"
+        class="xf-select-items"
+        :class="{ 'xf-select-items-top': position === 'top' }"
+      >
+        <template v-if="showOptions.length">
+          <div
+            v-for="(option, i) in showOptions"
+            :key="i"
+            class="xf-flex xf-flex-align-items-center xf-select-items-item"
+            @click="optionSelected(option)"
+          >
+            {{ option.text }}
+          </div>
+        </template>
 
-      <p v-else-if="noResults" class="xf-text-center">No results</p>
+        <p v-else-if="noResults" class="xf-text-center">No results</p>
+      </div>
     </div>
   </div>
 </template>
@@ -235,6 +237,8 @@ watch(
 
 <style lang="scss" scoped>
 .xf-select {
+  position: relative;
+
   &-toggle {
     display: flex;
     align-items: flex-end;
