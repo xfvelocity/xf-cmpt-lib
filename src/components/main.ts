@@ -8,10 +8,11 @@ import {
   XfTextInput,
   XfNav,
   XfSelect,
-  XfLoading,
   XfCheckbox,
   XfMenu,
   XfSnackbar,
+  XfLoadingBar,
+  XfLoadingSpinner,
 } from "./index";
 
 export default {
@@ -24,10 +25,11 @@ export default {
     app.component("XfTextInput", XfTextInput);
     app.component("XfNav", XfNav);
     app.component("XfSelect", XfSelect);
-    app.component("XfLoading", XfLoading);
     app.component("XfCheckbox", XfCheckbox);
     app.component("XfMenu", XfMenu);
     app.component("XfSnackbar", XfSnackbar);
+    app.component("XfLoadingBar", XfLoadingBar);
+    app.component("XfLoadingSpinner", XfLoadingSpinner);
   },
 };
 
@@ -40,8 +42,9 @@ export {
   XfTextInput,
   XfNav,
   XfSelect,
-  XfLoading,
   XfMenu,
   XfCheckbox,
   XfSnackbar,
+  XfLoadingBar,
+  XfLoadingSpinner,
 };

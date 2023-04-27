@@ -36,7 +36,7 @@
         </span>
 
         <div class="xf-flex-grow" />
-        <xf-loading v-if="loading" class="xf-pr-2" :size="16" />
+        <xf-loading-spinner v-if="loading" class="xf-pr-2" :size="16" />
         <xf-icon
           class="xf-mb-1 xf-mr-1 xf-select-arrow"
           :class="{ 'xf-select-arrow-active': isSelectActive }"
@@ -76,7 +76,7 @@ import { debounce } from "@/composables/generic";
 import { onClickOutside } from "@vueuse/core";
 
 import XfIcon from "@/components/XfIcon/XfIcon.vue";
-import XfLoading from "@/components/XfLoading/XfLoading.vue";
+import XfLoadingSpinner from "@/components/loading/XfLoadingSpinner/XfLoadingSpinner.vue";
 
 // ** Props **
 const props = withDefaults(

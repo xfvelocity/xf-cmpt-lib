@@ -210,6 +210,23 @@ textarea {
   }
 }
 
+@each $name, $colour in $xf-colours {
+  .xf-icon {
+    &--#{$name} {
+      path {
+        fill: #{$colour};
+      }
+    }
+
+    &-stroke-#{$name} {
+      path,
+      circle {
+        stroke: #{$colour};
+      }
+    }
+  }
+}
+
 .xf-disabled {
   opacity: 0.5;
   user-select: none;

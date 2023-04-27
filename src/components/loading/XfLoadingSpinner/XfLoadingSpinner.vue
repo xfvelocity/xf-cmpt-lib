@@ -2,7 +2,7 @@
   <div class="xf-loading">
     <span class="xf-text-center">
       <svg
-        :class="`xf-loading-icon xf-icon-colour-stroke-${colour}`"
+        :class="`xf-loading-icon xf-icon-stroke-${colour}`"
         :style="`width: ${size}px; height: ${size}px`"
         viewBox="0 0 50 50"
       >
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-// ** Props **
+// ** Base **
 withDefaults(
   defineProps<{
     colour?: string;
@@ -28,7 +28,7 @@ withDefaults(
   }>(),
   {
     colour: "black",
-    size: 80,
+    size: 32,
   }
 );
 </script>
