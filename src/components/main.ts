@@ -13,6 +13,7 @@ import {
   XfSnackbar,
   XfLoadingBar,
   XfLoadingSpinner,
+  XfExpansionPanel,
 } from "./index";
 
 export default {
@@ -30,6 +31,7 @@ export default {
     app.component("XfSnackbar", XfSnackbar);
     app.component("XfLoadingBar", XfLoadingBar);
     app.component("XfLoadingSpinner", XfLoadingSpinner);
+    app.component("XfExpansionPanel", XfExpansionPanel);
   },
 };
 
@@ -47,4 +49,5 @@ export {
   XfSnackbar,
   XfLoadingBar,
   XfLoadingSpinner,
+  XfExpansionPanel,
 };
