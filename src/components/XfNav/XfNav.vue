@@ -1,4 +1,9 @@
 <template>
+  <div
+    v-if="isNavDrawerOpen && $slots.drawer"
+    :style="`height: ${navbarHeight}px`"
+  />
+
   <div :class="{ 'xf-nav-open': isNavDrawerOpen && $slots.drawer }">
     <nav
       ref="navRef"
@@ -123,6 +128,7 @@ watch(isNavDrawerOpen, (value) => {
     width: 100%;
     height: 100%;
     z-index: 50;
+    top: 0;
   }
 
   &-drawer {
