@@ -158,7 +158,7 @@ watch(isNavDrawerOpen, (value) => {
     }
 
     .xf-nav-drawer-content {
-      background-color: rgba(0, 0, 0, 0.4) !important;
+      background-color: rgba(0, 0, 0, 0.9) !important;
     }
   }
 
