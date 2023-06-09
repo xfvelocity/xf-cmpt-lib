@@ -1,14 +1,24 @@
 <template>
   <div
-    v-if="isNavDrawerOpen && $slots.drawer"
+    v-if="isNavDrawerOpen && $slots.drawer && !(fixed || transparent)"
     :style="`height: ${navbarHeight}px`"
   />
 
-  <div :class="{ 'xf-nav-open': isNavDrawerOpen && $slots.drawer }">
+  <div
+    :class="{
+      'xf-nav-open': isNavDrawerOpen && $slots.drawer,
+      'xf-nav-transparent': transparent,
+    }"
+  >
     <nav
       ref="navRef"
       class="xf-nav xf-p-3"
-      :class="`xf-bg-${backgroundColour}`"
+      :class="[
+        `xf-bg-${backgroundColour}`,
+        {
+          'xf-nav-fixed': fixed || transparent,
+        },
+      ]"
     >
       <slot />
 
@@ -34,8 +44,9 @@
 
     <transition name="fade">
       <div
-        v-if="isNavDrawerOpen && $slots.drawer"
+        v-if="isNavDrawerOpen && $slots.drawer && !transparent"
         class="xf-nav-drawer-overlay"
+        :style="`top: ${navbarHeight}px`"
       />
     </transition>
 
@@ -44,9 +55,13 @@
         v-if="isNavDrawerOpen && $slots.drawer"
         class="xf-nav-drawer-content"
         :class="`xf-bg-${drawerBackgroundColour}`"
-        :style="[
-          `--height: ${navbarHeight}px; top: ${navbarHeight}px; width: ${drawerWidth}`,
-        ]"
+        :style="
+          transparent
+            ? `height: 100%; width: ${drawerWidth}`
+            : [
+                `--height: ${navbarHeight}px; top: ${navbarHeight}px; width: ${drawerWidth}`,
+              ]
+        "
       >
         <slot name="drawer" />
       </div>
@@ -69,6 +84,8 @@ const props = withDefaults(
     backgroundColour?: string;
     drawerBackgroundColour?: string;
     drawerWidth?: string;
+    fixed?: boolean;
+    transparent?: boolean;
   }>(),
   {
     menuButton: true,
@@ -122,6 +139,28 @@ watch(isNavDrawerOpen, (value) => {
   display: flex;
   align-items: center;
   position: relative;
+
+  &-fixed {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 51;
+  }
+
+  &-transparent {
+    .xf-nav {
+      box-shadow: none !important;
+    }
+
+    nav {
+      background-color: transparent !important;
+    }
+
+    .xf-nav-drawer-content {
+      background-color: rgba(0, 0, 0, 0.4) !important;
+    }
+  }
 
   &-open {
     position: fixed;
