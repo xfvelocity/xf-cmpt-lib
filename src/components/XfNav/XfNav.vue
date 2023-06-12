@@ -5,6 +5,7 @@
   />
 
   <div
+    id="navbar"
     :class="{
       'xf-nav-open': isNavDrawerOpen && $slots.drawer,
       'xf-nav-transparent': transparent,
@@ -113,6 +114,19 @@ const menuButtonClick = (isDrawer: boolean): void => {
 // ** Lifecycle **
 onMounted(() => {
   navbarHeight.value = navRef.value.clientHeight;
+
+  if (props.transparent) {
+    window.addEventListener("scroll", () => {
+      const navbar = document.getElementById("navbar");
+      const contentOffset = navbar.offsetTop;
+
+      if (window.scrollY > contentOffset) {
+        navbar.classList.add("xf-nav-scrolled");
+      } else {
+        navbar.classList.remove("xf-nav-scrolled");
+      }
+    });
+  }
 });
 
 // ** Watchers **
@@ -139,6 +153,7 @@ watch(isNavDrawerOpen, (value) => {
   display: flex;
   align-items: center;
   position: relative;
+  transition: background-color 0.5s ease-in-out;
 
   &-fixed {
     position: fixed;
@@ -149,12 +164,14 @@ watch(isNavDrawerOpen, (value) => {
   }
 
   &-transparent {
-    .xf-nav {
-      box-shadow: none !important;
-    }
+    &:not(.xf-nav-scrolled) {
+      .xf-nav {
+        box-shadow: none !important;
+      }
 
-    nav {
-      background-color: transparent !important;
+      nav {
+        background-color: transparent !important;
+      }
     }
 
     .xf-nav-drawer-content {
