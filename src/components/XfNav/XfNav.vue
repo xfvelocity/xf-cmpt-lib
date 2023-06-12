@@ -13,9 +13,9 @@
   >
     <nav
       ref="navRef"
-      class="xf-nav xf-p-3"
+      class="xf-nav"
       :class="[
-        `xf-bg-${backgroundColour}`,
+        `xf-bg-${backgroundColour} xf-p-${innerPadding}`,
         {
           'xf-nav-fixed': fixed || transparent,
         },
@@ -87,6 +87,7 @@ const props = withDefaults(
     drawerWidth?: string;
     fixed?: boolean;
     transparent?: boolean;
+    innerPadding?: number;
   }>(),
   {
     menuButton: true,
@@ -94,6 +95,7 @@ const props = withDefaults(
     drawerBackgroundColour: "white",
     menuButtonColour: "grey-darken-2",
     drawerWidth: "100%",
+    innerPadding: 3,
   }
 );
 
