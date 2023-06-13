@@ -16,6 +16,7 @@ import { default as XfNav } from "./XfNav/XfNav.vue";
 import { default as XfMenu } from "./XfMenu/XfMenu.vue";
 import { default as XfSnackbar } from "./XfSnackbar/XfSnackbar.vue";
 import { default as XfExpansionPanel } from "./XfExpansionPanel/XfExpansionPanel.vue";
+import { default as XfFuzzyImage } from "./XfFuzzyImage/XfFuzzyImage.vue";
 
 export {
   XfBanner,
@@ -32,4 +33,5 @@ export {
   XfLoadingSpinner,
   XfLoadingBar,
   XfExpansionPanel,
+  XfFuzzyImage,
 };
