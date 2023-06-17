@@ -114,7 +114,7 @@ watch(
 .xf-menu-modal {
   &-backdrop {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     transition: visibility 0s linear 0.5s, opacity 0.5s 0s, transform 0.5s;
     visibility: hidden;
     top: 0;
