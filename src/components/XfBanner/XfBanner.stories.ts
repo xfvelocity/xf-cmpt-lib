@@ -19,6 +19,6 @@ export const Primary: StoryObj<typeof XfBanner> = {
   }),
   args: {
     ...buildDefaultProps(XfBanner),
-    default: "About me",
+    // default: "About me",
   },
 };

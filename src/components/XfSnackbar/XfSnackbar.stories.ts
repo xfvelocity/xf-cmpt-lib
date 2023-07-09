@@ -20,6 +20,6 @@ export const Primary: StoryObj<typeof XfSnackbar> = {
   args: {
     ...buildDefaultProps(XfSnackbar),
     modelValue: true,
-    default: "Message sent!",
+    // default: "Message sent!",
   },
 };

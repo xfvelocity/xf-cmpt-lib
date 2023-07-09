@@ -27,3 +27,5 @@ coverage
 *.sln
 *.sw?
 vite.config.ts.timestamp-*.mjs
+
+storybook-static

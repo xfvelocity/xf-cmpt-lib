@@ -19,6 +19,6 @@ export const Primary: StoryObj<typeof XfButton> = {
   }),
   args: {
     ...buildDefaultProps(XfButton),
-    default: "Click me",
+    // default: "Click me",
   },
 };
