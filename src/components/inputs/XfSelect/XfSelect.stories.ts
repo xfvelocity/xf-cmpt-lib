@@ -18,5 +18,12 @@ export const Primary: StoryObj<typeof XfSelect> = {
   }),
   args: {
     ...buildDefaultProps(XfSelect),
+    label: "Countries",
+    options: [
+      {
+        text: "England",
+        value: "england",
+      },
+    ],
   },
 };

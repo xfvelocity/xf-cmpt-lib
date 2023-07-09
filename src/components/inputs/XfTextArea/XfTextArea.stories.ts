@@ -18,5 +18,7 @@ export const Primary: StoryObj<typeof XfTextArea> = {
   }),
   args: {
     ...buildDefaultProps(XfTextArea),
+    label: "Message",
+    name: "message",
   },
 };

@@ -10,17 +10,22 @@
 <script lang="ts" setup>
 import InlineSvg from "vue-inline-svg";
 
-// ** Base **
-withDefaults(
-  defineProps<{
-    src: string;
-    fill?: string;
-    size?: number;
-  }>(),
-  {
-    size: 16,
-  }
-);
+// ** Props **
+defineProps({
+  src: {
+    type: String,
+    default: "",
+    required: true,
+  },
+  fill: {
+    type: String,
+    default: "",
+  },
+  size: {
+    type: Number,
+    default: 16,
+  },
+});
 </script>
 
 <style lang="scss" scoped>

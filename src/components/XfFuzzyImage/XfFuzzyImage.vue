@@ -20,12 +20,26 @@
 import { ref, onMounted } from "vue";
 
 // ** Props **
-const props = defineProps<{
-  img: string;
-  minImg: string;
-  background?: boolean;
-  linearGradient?: string;
-}>();
+const props = defineProps({
+  img: {
+    type: String,
+    default: "",
+    required: true,
+  },
+  minImg: {
+    type: String,
+    default: "",
+    required: true,
+  },
+  background: {
+    type: Boolean,
+    default: false,
+  },
+  linearGradient: {
+    type: String,
+    default: "",
+  },
+});
 
 // ** Data **
 const imgContainer = ref<HTMLDivElement>();

@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, PropType, Prop } from "vue";
 import { SelectOption } from "@/types/app.types";
 import { debounce } from "@/composables/generic";
 import { onClickOutside } from "@vueuse/core";
@@ -79,24 +79,49 @@ import XfIcon from "@/components/XfIcon/XfIcon.vue";
 import XfLoadingSpinner from "@/components/loading/XfLoadingSpinner/XfLoadingSpinner.vue";
 
 // ** Props **
-const props = withDefaults(
-  defineProps<{
-    modelValue: string | number | SelectOption | null;
-    label: string;
-    options: SelectOption[];
-    valueOnly?: boolean;
-    autocomplete?: boolean;
-    freeText?: boolean;
-    outsideRequest?: Function;
-    position?: string;
-    colour?: string;
-  }>(),
-  {
-    valueOnly: true,
-    position: "bottom",
-    colour: "black",
-  }
-);
+const props = defineProps({
+  modelValue: {
+    type: [String, Number, Object, null] as PropType<
+      string | number | SelectOption | null
+    >,
+    default: "",
+    required: true,
+  },
+  label: {
+    type: String,
+    default: "",
+    required: true,
+  },
+  options: {
+    type: Array as PropType<SelectOption[]>,
+    default: () => [],
+    required: true,
+  },
+  valueOnly: {
+    type: Boolean,
+    default: true,
+  },
+  autocomplete: {
+    type: Boolean,
+    default: false,
+  },
+  freeText: {
+    type: Boolean,
+    default: false,
+  },
+  outsideRequest: {
+    type: Function,
+    default: () => {},
+  },
+  position: {
+    type: String,
+    default: "bottom",
+  },
+  colour: {
+    type: String,
+    default: "black",
+  },
+});
 
 // ** Emits **
 const emits = defineEmits(["update:modelValue", "searchTerm", "select:toggle"]);

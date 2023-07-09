@@ -7,7 +7,8 @@ export default { component: XfSnackbar };
 
 export const Primary: StoryObj<typeof XfSnackbar> = {
   render: (args, { argTypes }) => ({
-    template: '<XfSnackbar v-bind="args" v-on="props" />',
+    template:
+      '<XfSnackbar v-bind="args" v-on="props">{{ args.default }}</XfSnackbar>',
     components: {
       XfSnackbar,
     },
@@ -18,5 +19,7 @@ export const Primary: StoryObj<typeof XfSnackbar> = {
   }),
   args: {
     ...buildDefaultProps(XfSnackbar),
+    modelValue: true,
+    default: "Message sent!",
   },
 };

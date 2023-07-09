@@ -20,17 +20,17 @@
 </template>
 
 <script lang="ts" setup>
-// ** Base **
-withDefaults(
-  defineProps<{
-    colour?: string;
-    size?: number;
-  }>(),
-  {
-    colour: "black",
-    size: 32,
-  }
-);
+// ** Props **
+defineProps({
+  colour: {
+    type: String,
+    default: "black",
+  },
+  size: {
+    type: Number,
+    default: 32,
+  },
+});
 </script>
 
 <style lang="scss" scoped>

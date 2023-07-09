@@ -20,12 +20,12 @@ export const Primary: StoryObj<typeof XfExpansionPanel> = {
     ...buildDefaultProps(XfExpansionPanel),
     list: [
       {
-        title: "Test 1",
-        text: "test test",
+        title: "How do you make toast?",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sem sed urna pharetra rutrum. Quisque convallis urna at purus imperdiet, sit amet aliquet mi tincidunt. Sed tristique velit non erat ornare, et sollicitudin tellus facilisis. Aenean malesuada elit semper quam blandit, eget aliquam dui sodales.",
       },
       {
-        title: "Test 2",
-        text: "test test",
+        title: "How to fry an egg?",
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sem sed urna pharetra rutrum. Quisque convallis urna at purus imperdiet, sit amet aliquet mi tincidunt. Sed tristique velit non erat ornare, et sollicitudin tellus facilisis. Aenean malesuada elit semper quam blandit, eget aliquam dui sodales.",
       },
     ],
   },

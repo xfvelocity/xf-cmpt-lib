@@ -18,5 +18,6 @@ export const Primary: StoryObj<typeof XfTextInput> = {
   }),
   args: {
     ...buildDefaultProps(XfTextInput),
+    label: "Name",
   },
 };

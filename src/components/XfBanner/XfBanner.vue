@@ -14,20 +14,27 @@
 </template>
 
 <script lang="ts" setup>
-// ** Base **
-withDefaults(
-  defineProps<{
-    backgroundColour?: string;
-    fontSize?: number;
-    textColour?: string;
-    offsetY?: number;
-    heading?: string;
-  }>(),
-  {
-    fontSize: 24,
-    backgroundColour: "black",
-    textColour: "white",
-    heading: "h2",
-  }
-);
+// ** Props **
+defineProps({
+  backgroundColour: {
+    type: String,
+    default: "black",
+  },
+  fontSize: {
+    type: Number,
+    default: 24,
+  },
+  textColour: {
+    type: String,
+    default: "white",
+  },
+  offsetY: {
+    type: Number,
+    default: "",
+  },
+  heading: {
+    type: String,
+    default: "h2",
+  },
+});
 </script>

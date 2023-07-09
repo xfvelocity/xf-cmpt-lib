@@ -48,32 +48,62 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { PropType, ref } from "vue";
 
-// ** Base **
-withDefaults(
-  defineProps<{
-    label: string;
-    modelValue: string | number | null;
-    rows?: number;
-    name?: string;
-    type?: string;
-    errorMessages?: string[];
-    colour?: string;
-    disabled?: boolean;
-    outlined?: boolean;
-    outlineBackground?: string;
-    autocomplete?: string;
-    fontSize?: number;
-  }>(),
-  {
-    fontSize: 14,
-    rows: 3,
-    type: "text",
-    colour: "black",
-    outlineBackground: "white",
-  }
-);
+// ** Props **
+defineProps({
+  label: {
+    type: String,
+    default: "",
+    required: true,
+  },
+  modelValue: {
+    type: [String, Number, null],
+    default: "",
+    required: true,
+  },
+  name: {
+    type: String,
+    default: "",
+    required: true,
+  },
+  rows: {
+    type: Number,
+    default: 3,
+  },
+  type: {
+    type: String,
+    default: "text",
+  },
+  errorMessages: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
+  colour: {
+    type: String,
+    default: "black",
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  outlined: {
+    type: Boolean,
+    default: false,
+  },
+  outlineBackground: {
+    type: String,
+    default: "white",
+  },
+  autocomplete: {
+    type: String,
+    default: "",
+  },
+  fontSize: {
+    type: Number,
+    default: 14,
+  },
+});
 
 // ** Emits **
 const emit = defineEmits(["update:modelValue", "focus", "blur"]);

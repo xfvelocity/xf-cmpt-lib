@@ -36,21 +36,33 @@
 import XfIcon from "../XfIcon/XfIcon.vue";
 
 // ** Props **
-const props = withDefaults(
-  defineProps<{
-    modelValue: boolean;
-    persistent?: boolean;
-    maxWidth?: number;
-    minHeight?: number;
-    fullscreen?: boolean;
-    backgroundColour?: string;
-  }>(),
-  {
-    maxWidth: 350,
-    minHeight: 300,
-    backgroundColour: "white",
-  }
-);
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
+  persistent: {
+    type: String,
+    default: false,
+  },
+  maxWidth: {
+    type: Number,
+    default: 350,
+  },
+  minHeight: {
+    type: String,
+    default: 300,
+  },
+  fullscreen: {
+    type: Boolean,
+    default: false,
+  },
+  backgroundColour: {
+    type: String,
+    default: "white",
+  },
+});
 
 // ** Emits **
 const emit = defineEmits(["update:modelValue"]);

@@ -76,28 +76,49 @@ import { onMounted, ref, watch } from "vue";
 import XfMenu from "@/components/XfMenu/XfMenu.vue";
 
 // ** Props **
-const props = withDefaults(
-  defineProps<{
-    modelValue?: boolean;
-    menuButtonColour?: string;
-    menuButton?: boolean;
-    menuBackgroundColour?: string;
-    backgroundColour?: string;
-    drawerBackgroundColour?: string;
-    drawerWidth?: string;
-    fixed?: boolean;
-    transparent?: boolean;
-    innerPadding?: number;
-  }>(),
-  {
-    menuButton: true,
-    backgroundColour: "white",
-    drawerBackgroundColour: "white",
-    menuButtonColour: "grey-darken-2",
-    drawerWidth: "100%",
-    innerPadding: 3,
-  }
-);
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
+  menuButtonColour: {
+    type: String,
+    default: "grey-darken-2",
+  },
+  menuButton: {
+    type: Boolean,
+    default: true,
+  },
+  menuBackgroundColour: {
+    type: String,
+    default: "",
+  },
+  backgroundColour: {
+    type: String,
+    default: "white",
+  },
+  drawerBackgroundColour: {
+    type: String,
+    default: "white",
+  },
+  drawerWidth: {
+    type: String,
+    default: "100%",
+  },
+  fixed: {
+    type: Boolean,
+    default: false,
+  },
+  transparent: {
+    type: Boolean,
+    default: false,
+  },
+  innerPadding: {
+    type: Number,
+    default: 3,
+  },
+});
 
 const emit = defineEmits(["update:modelValue"]);
 

@@ -18,5 +18,7 @@ export const Primary: StoryObj<typeof XfCheckbox> = {
   }),
   args: {
     ...buildDefaultProps(XfCheckbox),
+    label: "Do you like chips?",
+    name: "chips_liked",
   },
 };

@@ -47,27 +47,35 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { PropType, ref, watch } from "vue";
 import { ExpansionPanel } from "./types/expansionPanel.types";
 
 import XfIcon from "@/components/XfIcon/XfIcon.vue";
 
-// ** Base **
-const props = withDefaults(
-  defineProps<{
-    list: ExpansionPanel[];
-    backgroundColour?: string;
-    textColour?: string;
-    secondaryBackgroundColour?: string;
-    secondaryTextColour?: string;
-  }>(),
-  {
-    backgroundColour: "white",
-    textColour: "black",
-    secondaryBackgroundColour: "white",
-    secondaryTextColour: "black",
-  }
-);
+// ** Props **
+const props = defineProps({
+  list: {
+    type: Array as PropType<ExpansionPanel[]>,
+    default: () => [],
+    required: true,
+  },
+  backgroundColour: {
+    type: String,
+    default: "white",
+  },
+  textColour: {
+    type: String,
+    default: "black",
+  },
+  secondaryBackgroundColour: {
+    type: String,
+    default: "white",
+  },
+  secondaryTextColour: {
+    type: String,
+    default: "black",
+  },
+});
 
 // ** Data **
 const listRef = ref<ExpansionPanel[]>([]);

@@ -11,19 +11,21 @@
 </template>
 
 <script lang="ts" setup>
-// ** Base **
-withDefaults(
-  defineProps<{
-    backgroundColour?: string;
-    height?: number;
-    progressColour?: string;
-  }>(),
-  {
-    backgroundColour: "grey-lighten-3",
-    height: 5,
-    progressColour: "green",
-  }
-);
+// ** Props **
+defineProps({
+  backgroundColour: {
+    type: String,
+    default: "grey-lighten-3",
+  },
+  height: {
+    type: Number,
+    default: 5,
+  },
+  progressColour: {
+    type: String,
+    default: "green",
+  },
+});
 </script>
 
 <style lang="scss" scoped>

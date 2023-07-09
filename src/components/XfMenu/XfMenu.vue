@@ -33,24 +33,42 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs, watch, onMounted } from "vue";
+import { ref, toRefs, watch, onMounted, PropType } from "vue";
 import { MenuPositions } from "@/types/app.types";
 
 // ** Props **
-const props = withDefaults(
-  defineProps<{
-    modelValue?: boolean;
-    activator?: string;
-    backgroundColour?: string;
-    width?: number;
-    position?: MenuPositions;
-    centerAlign?: boolean;
-  }>(),
-  {
-    backgroundColour: "white",
-    position: () => ({}),
-  }
-);
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
+  activator: {
+    type: String,
+    default: "",
+  },
+  backgroundColour: {
+    type: String,
+    default: "white",
+  },
+  width: {
+    type: String,
+    default: "",
+  },
+  position: {
+    type: Object as PropType<MenuPositions>,
+    default: () => ({
+      top: "0",
+      left: "0",
+      right: "0",
+      bottom: "0",
+    }),
+  },
+  centerAlign: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 // ** Emits **
 const emit = defineEmits(["update:modelValue"]);

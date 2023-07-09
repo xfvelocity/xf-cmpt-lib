@@ -60,34 +60,66 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { PropType, ref } from "vue";
 
 import XfIcon from "@/components/XfIcon/XfIcon.vue";
 
-// ** Base **
-withDefaults(
-  defineProps<{
-    modelValue: string | number | null;
-    label?: string;
-    name?: string;
-    type?: string;
-    errorMessages?: string[];
-    colour?: string;
-    appendIcon?: string;
-    disabled?: boolean;
-    outlined?: boolean;
-    outlineBackground?: string;
-    autocomplete?: string;
-    fontSize?: number;
-    placeholder?: string;
-  }>(),
-  {
-    fontSize: 14,
-    type: "text",
-    colour: "black",
-    outlineBackground: "white",
-  }
-);
+// ** Props **
+defineProps({
+  label: {
+    type: String,
+    default: "",
+  },
+  modelValue: {
+    type: [String, Number, null],
+    default: "",
+    required: true,
+  },
+  name: {
+    type: String,
+    default: "",
+  },
+  type: {
+    type: String,
+    default: "text",
+  },
+  errorMessages: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
+  colour: {
+    type: String,
+    default: "black",
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  outlined: {
+    type: Boolean,
+    default: false,
+  },
+  outlineBackground: {
+    type: String,
+    default: "white",
+  },
+  autocomplete: {
+    type: String,
+    default: "",
+  },
+  fontSize: {
+    type: Number,
+    default: 14,
+  },
+  appendIcon: {
+    type: String,
+    default: "",
+  },
+  placeholder: {
+    type: String,
+    default: "",
+  },
+});
 
 // ** Emits **
 const emit = defineEmits([

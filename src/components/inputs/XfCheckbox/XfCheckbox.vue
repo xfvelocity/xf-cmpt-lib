@@ -14,11 +14,23 @@
 
 <script lang="ts" setup>
 // ** Props **
-defineProps<{
-  modelValue: boolean;
-  name?: string;
-  label: string;
-}>();
+defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
+  name: {
+    type: String,
+    default: "",
+    required: true,
+  },
+  label: {
+    type: String,
+    default: "",
+    required: true,
+  },
+});
 
 // ** Emits **
 defineEmits(["update:modelValue"]);

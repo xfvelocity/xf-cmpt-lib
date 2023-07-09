@@ -26,19 +26,28 @@ import { watch } from "vue";
 import XfIcon from "@/components/XfIcon/XfIcon.vue";
 
 // ** Props **
-const props = withDefaults(
-  defineProps<{
-    modelValue: boolean;
-    backgroundColour?: string;
-    timeout?: number;
-    closeIcon?: boolean;
-    textColour?: string;
-  }>(),
-  {
-    textColour: "white",
-    backgroundColour: "green-darken-3",
-  }
-);
+const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
+  backgroundColour: {
+    type: String,
+    default: "green-darken-3",
+  },
+  timeout: {
+    type: Number,
+  },
+  closeIcon: {
+    type: Boolean,
+    default: "",
+  },
+  textColour: {
+    type: String,
+    default: "white",
+  },
+});
 
 // ** Emits **
 const emit = defineEmits(["update:modelValue"]);
