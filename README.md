@@ -1,6 +1,6 @@
 # xF Component Library
 
-Custom component library for personal use, built with inspiration from vuetify
+Custom component library for personal use
 
 ## Getting started:
 

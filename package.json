@@ -19,6 +19,7 @@
     }
   },
   "types": "./dist/main.d.ts",
+  "homepage": "http://xfvelocity.github.io/xf-cmpt-lib",
   "repository": {
     "type": "git",
     "url": "https://github.com/xfvelocity/xf-cmpt-lib"
@@ -33,6 +34,8 @@
     "cy:open": "cypress open",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "predeploy": "npm run build-storybook",
+    "deploy-storybook": "gh-pages -d storybook-static",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -63,6 +66,7 @@
     "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-storybook": "^0.6.12",
     "eslint-plugin-vue": "^9.15.1",
+    "gh-pages": "^5.0.0",
     "jsdom": "^22.1.0",
     "npm-run-all": "^4.1.5",
     "path": "^0.12.7",
