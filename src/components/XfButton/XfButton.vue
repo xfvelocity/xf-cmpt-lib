@@ -23,27 +23,47 @@ import { computed } from "vue";
 
 import XfIcon from "@/components/XfIcon/XfIcon.vue";
 
-// ** Base **
-const props = withDefaults(
-  defineProps<{
-    backgroundColour?: string;
-    outlined?: boolean;
-    textColour?: string;
-    boxShadow?: boolean;
-    fontSize?: number;
-    icon?: string;
-    iconSize?: number;
-    iconLeftSide?: boolean;
-    contentClass?: string;
-  }>(),
-  {
-    backgroundColour: "black",
-    textColour: "white",
-    boxShadow: true,
-    iconSize: 14,
-  }
-);
+// ** Props **
+const props = defineProps({
+  backgroundColour: {
+    type: String,
+    default: "black",
+  },
+  outlined: {
+    type: Boolean,
+    default: false,
+  },
+  textColour: {
+    type: String,
+    default: "white",
+  },
+  boxShadow: {
+    type: Boolean,
+    default: true,
+  },
+  fontSize: {
+    type: Number,
+    default: 14,
+  },
+  icon: {
+    type: String,
+    default: "",
+  },
+  iconSize: {
+    type: Number,
+    default: 14,
+  },
+  iconLeftSide: {
+    type: Boolean,
+    default: false,
+  },
+  contentClass: {
+    type: String,
+    default: "",
+  },
+});
 
+// ** Emits **
 defineEmits(["click"]);
 
 // ** Computed **
