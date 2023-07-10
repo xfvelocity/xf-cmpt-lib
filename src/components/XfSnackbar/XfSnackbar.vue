@@ -6,7 +6,7 @@
       :class="`xf-bg-${backgroundColour}`"
     >
       <div :class="`xf-text-colour-${textColour}`">
-        <slot />
+        {{ text }}
       </div>
 
       <xf-icon
@@ -27,6 +27,11 @@ import XfIcon from "@/components/XfIcon/XfIcon.vue";
 
 // ** Props **
 const props = defineProps({
+  text: {
+    type: String,
+    default: "",
+    required: true,
+  },
   modelValue: {
     type: Boolean,
     default: false,

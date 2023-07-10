@@ -5,7 +5,7 @@
     @click="$emit('click')"
   >
     <span :class="{ 'xf-flex-order-1': iconLeftSide }">
-      <slot />
+      {{ text }}
     </span>
 
     <xf-icon
@@ -25,6 +25,11 @@ import XfIcon from "@/components/XfIcon/XfIcon.vue";
 
 // ** Props **
 const props = defineProps({
+  text: {
+    type: String,
+    default: "",
+    required: true,
+  },
   backgroundColour: {
     type: String,
     default: "black",

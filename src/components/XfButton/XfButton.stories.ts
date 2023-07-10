@@ -7,8 +7,7 @@ export default { component: XfButton };
 
 export const Primary: StoryObj<typeof XfButton> = {
   render: (args, { argTypes }) => ({
-    template:
-      '<XfButton v-bind="args" v-on="$props">{{ args.default }}</XfButton>',
+    template: '<XfButton v-bind="args" v-on="$props" />',
     components: {
       XfButton,
     },
@@ -19,6 +18,6 @@ export const Primary: StoryObj<typeof XfButton> = {
   }),
   args: {
     ...buildDefaultProps(XfButton),
-    // default: "Click me",
+    text: "Click me",
   },
 };

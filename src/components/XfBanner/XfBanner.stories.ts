@@ -7,8 +7,7 @@ export default { component: XfBanner };
 
 export const Primary: StoryObj<typeof XfBanner> = {
   render: (args, { argTypes }) => ({
-    template:
-      '<XfBanner v-bind="args" v-on="props">{{ args.default }}</XfBanner>',
+    template: '<XfBanner v-bind="args" v-on="props" />',
     components: {
       XfBanner,
     },
@@ -19,6 +18,6 @@ export const Primary: StoryObj<typeof XfBanner> = {
   }),
   args: {
     ...buildDefaultProps(XfBanner),
-    // default: "About me",
+    text: "About me",
   },
 };

@@ -8,7 +8,7 @@
       :class="`xf-bg-${backgroundColour} xf-text-colour-${textColour} `"
       :style="`transform: rotate(-3deg); font-size: ${fontSize}px`"
     >
-      <slot />
+      {{ text }}
     </div>
   </component>
 </template>
@@ -16,6 +16,11 @@
 <script lang="ts" setup>
 // ** Props **
 defineProps({
+  text: {
+    type: String,
+    default: "",
+    required: true,
+  },
   backgroundColour: {
     type: String,
     default: "black",
