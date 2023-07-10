@@ -43,7 +43,7 @@ const props = defineProps({
     required: true,
   },
   persistent: {
-    type: String,
+    type: Boolean,
     default: false,
   },
   maxWidth: {
@@ -51,7 +51,7 @@ const props = defineProps({
     default: 350,
   },
   minHeight: {
-    type: String,
+    type: Number,
     default: 300,
   },
   fullscreen: {

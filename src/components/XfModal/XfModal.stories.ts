@@ -7,7 +7,9 @@ export default { component: XfModal };
 
 export const Primary: StoryObj<typeof XfModal> = {
   render: (args, { argTypes }) => ({
-    template: '<XfModal v-bind="args" v-on="props" />',
+    template: `<XfModal v-bind="args" v-on="props">
+      Im an open modal
+    </XfModal>`,
     components: {
       XfModal,
     },
@@ -18,5 +20,6 @@ export const Primary: StoryObj<typeof XfModal> = {
   }),
   args: {
     ...buildDefaultProps(XfModal),
+    modelValue: true,
   },
 };

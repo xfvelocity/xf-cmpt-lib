@@ -75,6 +75,7 @@ const emit = defineEmits(["update:modelValue"]);
 
 // ** Data **
 const { position } = toRefs(props);
+
 const contentRef = ref<HTMLDivElement>();
 const isOpen = ref<boolean>(false);
 

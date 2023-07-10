@@ -7,7 +7,11 @@ export default { component: XfNav };
 
 export const Primary: StoryObj<typeof XfNav> = {
   render: (args, { argTypes }) => ({
-    template: '<XfNav v-bind="args" v-on="props" />',
+    template: `<XfNav v-bind="args" v-on="props">
+        <template #drawer>
+          Im an open drawer
+        </template>
+      </XfNav>`,
     components: {
       XfNav,
     },
@@ -16,7 +20,11 @@ export const Primary: StoryObj<typeof XfNav> = {
       return { args };
     },
   }),
+  parameters: {
+    layout: "fullscreen",
+  },
   args: {
     ...buildDefaultProps(XfNav),
+    drawerWidth: "50%",
   },
 };

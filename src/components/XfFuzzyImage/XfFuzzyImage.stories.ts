@@ -18,5 +18,8 @@ export const Primary: StoryObj<typeof XfFuzzyImage> = {
   }),
   args: {
     ...buildDefaultProps(XfFuzzyImage),
+    img: "/img/example.jpg",
+    minImg: "/img/example-min.jpg",
+    background: true,
   },
 };

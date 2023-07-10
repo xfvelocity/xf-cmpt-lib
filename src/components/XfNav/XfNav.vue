@@ -120,6 +120,7 @@ const props = defineProps({
   },
 });
 
+// ** Emits **
 const emit = defineEmits(["update:modelValue"]);
 
 // ** Data **
