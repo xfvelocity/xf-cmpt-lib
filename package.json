@@ -19,7 +19,7 @@
     }
   },
   "types": "./dist/main.d.ts",
-  "homepage": "http://xfvelocity.github.io/xf-cmpt-lib",
+  "homepage": "https://xfvelocity.github.io/xf-cmpt-lib",
   "repository": {
     "type": "git",
     "url": "https://github.com/xfvelocity/xf-cmpt-lib"
@@ -50,6 +50,7 @@
     "@storybook/addon-interactions": "^7.0.26",
     "@storybook/addon-links": "^7.0.26",
     "@storybook/blocks": "^7.0.26",
+    "@storybook/builder-vite": "^7.0.26",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@storybook/vue3": "^7.0.26",
     "@storybook/vue3-vite": "^7.0.26",
