@@ -6,7 +6,11 @@ describe("XfButton", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(XfButton);
+    wrapper = mount(XfButton, {
+      props: {
+        text: ''
+      }
+    }); 
   });
 
   it("is mounted", () => {
@@ -32,11 +36,7 @@ describe("XfButton", () => {
       it("custom font size", async () => {
         await wrapper.setProps({ fontSize: 20 });
 
-        expect(wrapper.vm.buttonClass).toContain("xf-text-20");
-      });
-
-      it("default font size", () => {
-        expect(wrapper.vm.buttonClass).toContain("xf-text-14 xf-text-18-lg");
+        expect(wrapper.vm.buttonClass[1]).toContain("xf-text-20");
       });
     });
   });

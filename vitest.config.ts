@@ -7,10 +7,10 @@ const r = (p: string): string => resolve(__dirname, p);
 export default defineConfig({
   resolve: {
     alias: {
-      "~": r("."),
-      "@": r("."),
-      "~/": r("./"),
-      "@/": r("./"),
+      "~": r("./src"),
+      "@": r("./src"),
+      "~/": r("./src"),
+      "@/": r("./src"),
     },
   },
   plugins: [vue()],

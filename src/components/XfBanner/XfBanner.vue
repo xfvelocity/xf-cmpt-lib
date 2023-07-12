@@ -33,10 +33,6 @@ defineProps({
     type: String,
     default: "white",
   },
-  offsetY: {
-    type: Number,
-    default: "",
-  },
   heading: {
     type: String,
     default: "h2",

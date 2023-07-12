@@ -78,7 +78,7 @@ const buttonClass = computed<(string | Record<string, boolean>)[]>(() => {
       ? `xf-bg-none xf-border-${props.backgroundColour}`
       : `xf-bg-${props.backgroundColour}`,
 
-    `xf-text-colour-${props.textColour} xf-text-${props.fontSize || 14}`,
+    `xf-text-colour-${props.textColour} xf-text-${props.fontSize}`,
     {
       "button-box-shadow": props.boxShadow,
     },

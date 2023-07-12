@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, watch, PropType, Prop } from "vue";
+import { ref, onMounted, watch, PropType } from "vue";
 import { SelectOption } from "@/types/app.types";
 import { debounce } from "@/composables/generic";
 import { onClickOutside } from "@vueuse/core";
@@ -111,7 +111,7 @@ const props = defineProps({
   },
   outsideRequest: {
     type: Function,
-    default: () => {},
+    default: undefined,
   },
   position: {
     type: String,

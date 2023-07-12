@@ -6,7 +6,11 @@ describe("XfBanner.vue", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(XfBanner);
+    wrapper = mount(XfBanner, {
+      props: {
+        text: ''
+      }
+    });
   });
 
   it("is mounted", () => {

@@ -9,6 +9,8 @@ describe("XfTextArea.vue", () => {
     wrapper = mount(XfTextArea, {
       props: {
         modelValue: "",
+        label: '',
+        name: ''
       },
     });
   });

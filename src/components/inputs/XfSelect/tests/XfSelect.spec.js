@@ -9,6 +9,8 @@ describe("XfSelect.vue", () => {
   beforeEach(() => {
     wrapper = shallowMount(XfSelect, {
       props: {
+        label: "",
+        modelValue: "",
         options: [
           {
             text: "Test 1",
@@ -48,6 +50,8 @@ describe("XfSelect.vue", () => {
 
   it("optionSelected - emit value", async () => {
     await wrapper.setProps({ autocomplete: true });
+
+    wrapper.vm.isSelectActive = true;
     await wrapper.vm.optionSelected({ text: "Test 1", value: "test1" });
 
     expect(wrapper.emitted("update:modelValue")[0]).toStrictEqual(["test1"]);
@@ -73,6 +77,8 @@ describe("XfSelect - autocomplete mount", () => {
   it("reset showOptions if autocomplete", () => {
     wrapper = shallowMount(XfSelect, {
       props: {
+        modelValue: "",
+        label: "",
         options: [
           {
             text: "Test 1",
