@@ -1,8 +1,8 @@
 {
   "name": "xf-cmpt-lib",
   "private": false,
-  "version": "0.6.0",
-  "_id": "xf-cmpt-lib@0.6.0",
+  "version": "0.6.1",
+  "_id": "xf-cmpt-lib@0.6.1",
   "type": "module",
   "files": [
     "dist"
@@ -21,7 +21,7 @@
     }
   },
   "types": "./dist/main.d.ts",
-  "homepage": "https://64ac1ca86d4d3ba86b52b13b-mkdzxtpgpy.chromatic.com/",
+  "homepage": "https://xf-cmpt-lib.vercel.app",
   "repository": {
     "type": "git",
     "url": "https://github.com/xfvelocity/xf-cmpt-lib"
@@ -33,15 +33,14 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "publish:package": "npm install && npm run build && npm publish && npm run chromatic",
+    "publish:package": "npm install && npm run build && npm publish",
     "test:unit": "vitest",
     "test:unit:coverage": "vitest --coverage",
     "cy:open": "cypress open",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "chromatic": "chromatic --auto-accept-changes"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@vueuse/core": "^10.5.0",
@@ -67,7 +66,6 @@
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/test-utils": "^2.4.1",
     "@vue/tsconfig": "^0.4.0",
-    "chromatic": "^7.5.4",
     "cypress": "^13.3.3",
     "eslint": "^8.52.0",
     "eslint-plugin-cypress": "^2.15.1",
