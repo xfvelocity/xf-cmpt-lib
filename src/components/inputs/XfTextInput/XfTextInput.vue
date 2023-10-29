@@ -127,6 +127,7 @@ const emit = defineEmits([
   "click:append",
   "focus",
   "blur",
+  "keydown.enter",
 ]);
 
 // ** Data **

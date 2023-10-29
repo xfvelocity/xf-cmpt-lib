@@ -106,7 +106,12 @@ defineProps({
 });
 
 // ** Emits **
-const emit = defineEmits(["update:modelValue", "focus", "blur"]);
+const emit = defineEmits([
+  "update:modelValue",
+  "focus",
+  "blur",
+  "keydown.enter",
+]);
 
 // ** Data **
 const isActive = ref<boolean>(false);
