@@ -6,12 +6,13 @@
       class="xf-expansion-panel xf-mb-2"
     >
       <div
-        class="xf-p-2 xf-px-4 xf-expansion-panel-title xf-cursor-pointer"
+        class="xf-p-2 xf-px-4 xf-expansion-panel-title"
         :class="[
           `xf-bg-${backgroundColour}`,
+          item.text.length ? 'xf-cursor-pointer' : 'xf-disabled',
           { 'xf-expansion-panel-title-active': item.active },
         ]"
-        @click="togglePanel(item)"
+        @click="item.text.length ? togglePanel(item) : ''"
       >
         <h3
           class="xf-mr-2 xf-mb-0"
@@ -22,6 +23,7 @@
         </h3>
 
         <xf-icon
+          v-if="item.text.length"
           class="xf-ml-auto xf-expansion-panel-arrow"
           :class="{ 'xf-expansion-panel-arrow-active': item.active }"
           src="chevron-down"
