@@ -15,6 +15,7 @@ import {
   XfLoadingSpinner,
   XfExpansionPanel,
   XfFuzzyImage,
+  XfSidebar,
 } from "./index";
 
 export default {
@@ -34,6 +35,7 @@ export default {
     app.component("XfLoadingSpinner", XfLoadingSpinner);
     app.component("XfExpansionPanel", XfExpansionPanel);
     app.component("XfFuzzyImage", XfFuzzyImage);
+    app.component("XfSidebar", XfSidebar);
   },
 };
 
@@ -53,4 +55,5 @@ export {
   XfLoadingSpinner,
   XfExpansionPanel,
   XfFuzzyImage,
+  XfSidebar,
 };
