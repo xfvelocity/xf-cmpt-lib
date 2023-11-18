@@ -12,7 +12,7 @@
       <xf-icon
         v-if="closeIcon"
         class="xf-cursor-pointer"
-        src="icons/close.svg"
+        src="close"
         :fill="textColour"
         @click="$emit('update:modelValue', false)"
       />
@@ -65,7 +65,7 @@ watch(
       setTimeout(() => emit("update:modelValue", false), props.timeout);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>
 

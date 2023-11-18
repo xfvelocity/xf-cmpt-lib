@@ -13,14 +13,18 @@
         ]"
         @click="togglePanel(item)"
       >
-        <h3 class="xf-mr-2 xf-mb-0" :class="`xf-text-colour-${textColour}`">
+        <h3
+          class="xf-mr-2 xf-mb-0"
+          :class="`xf-text-colour-${textColour}`"
+          :style="`font-size: ${fontSize}px`"
+        >
           {{ item.title }}
         </h3>
 
         <xf-icon
           class="xf-ml-auto xf-expansion-panel-arrow"
           :class="{ 'xf-expansion-panel-arrow-active': item.active }"
-          src="icons/chevron-down.svg"
+          src="chevron-down"
           :fill="textColour"
         />
       </div>
@@ -28,16 +32,21 @@
       <transition name="slide-down">
         <div
           v-show="item.active"
-          class="xf-p-4 xf-expansion-panel-secondary"
+          class="xf-p-3 xf-expansion-panel-secondary"
           :class="`xf-bg-${secondaryBackgroundColour} xf-text-colour-${secondaryTextColour}`"
         >
           <template v-if="Array.isArray(item.text)">
-            <p v-for="(text, ti) in item.text" :key="ti" class="xf-mb-2">
+            <p
+              v-for="(text, ti) in item.text"
+              :key="ti"
+              class="xf-mb-2"
+              :style="`font-size: ${secondaryFontSize}px`"
+            >
               {{ text }}
             </p>
           </template>
 
-          <p v-else>
+          <p v-else :style="`font-size: ${secondaryFontSize}px`">
             {{ item.text }}
           </p>
         </div>
@@ -75,6 +84,14 @@ const props = defineProps({
     type: String,
     default: "black",
   },
+  fontSize: {
+    type: Number,
+    default: 18,
+  },
+  secondaryFontSize: {
+    type: Number,
+    default: 16,
+  },
 });
 
 // ** Data **
@@ -97,7 +114,7 @@ watch(
   (value) => {
     listRef.value = value.map((l) => ({ ...l, active: false }));
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>
 
@@ -108,18 +125,18 @@ watch(
     z-index: 10;
     display: flex;
     align-items: center;
-    border-radius: 3px;
+    border-radius: 5px;
 
     &-active {
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.08);
     }
   }
 
   &-secondary {
     position: relative;
     top: -2px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 
   &-arrow {

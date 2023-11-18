@@ -42,7 +42,7 @@
           :class="{ 'xf-select-arrow-active': isSelectActive }"
           :size="14"
           :fill="colour"
-          src="icons/chevron-down.svg"
+          src="chevron-down"
           @click.stop="toggleSelect(!isSelectActive)"
         />
       </div>
@@ -153,7 +153,7 @@ const setOptions = async (): Promise<void> => {
         .filter((option) =>
           option.text
             .toLowerCase()
-            .includes(autocompleteSearch.value.toLowerCase())
+            .includes(autocompleteSearch.value.toLowerCase()),
         )
         .slice(0, 8);
     }
@@ -240,7 +240,7 @@ watch(
     // If value isn't an object - find its matching option and get the text value
     if (typeof value !== "object") {
       const matchingOption: SelectOption | undefined = showOptions.value.find(
-        (option) => option.value == value
+        (option) => option.value == value,
       );
 
       val = matchingOption ? matchingOption.text : "";
@@ -253,10 +253,10 @@ watch(
     autocompleteSearch.value = val
       ? val
       : props.freeText
-      ? (value as number).toString()
-      : "";
+        ? (value as number).toString()
+        : "";
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>
 

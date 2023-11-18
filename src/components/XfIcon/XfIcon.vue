@@ -1,13 +1,15 @@
 <template>
   <inline-svg
     :class="{ [`xf-icon-colour-${fill}`]: fill }"
-    :src="src"
+    :src="src.endsWith('.svg') ? src : getImageUrl(`icons/${src}.svg`)"
     :height="size"
     :width="size"
   />
 </template>
 
 <script lang="ts" setup>
+import { getImageUrl } from "@/composables/generic";
+
 import InlineSvg from "vue-inline-svg";
 
 // ** Props **
