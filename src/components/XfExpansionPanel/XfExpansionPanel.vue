@@ -39,16 +39,17 @@
             <p
               v-for="(text, ti) in item.text"
               :key="ti"
+              v-html="text"
               class="xf-mb-2"
               :style="`font-size: ${secondaryFontSize}px`"
-            >
-              {{ text }}
-            </p>
+            />
           </template>
 
-          <p v-else :style="`font-size: ${secondaryFontSize}px`">
-            {{ item.text }}
-          </p>
+          <p
+            v-else
+            v-html="item.text"
+            :style="`font-size: ${secondaryFontSize}px`"
+          />
         </div>
       </transition>
     </div>
