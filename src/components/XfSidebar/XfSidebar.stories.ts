@@ -2,7 +2,6 @@ import type { StoryObj } from "@storybook/vue3";
 import { buildDefaultProps } from "@/composables/storybook";
 
 import XfSidebar from "./XfSidebar.vue";
-import { ref } from "vue";
 
 export default { component: XfSidebar };
 
@@ -10,10 +9,10 @@ export const Primary: StoryObj<typeof XfSidebar> = {
   render: (args, { argTypes }) => ({
     template: `
         <div>
-            <button @click="args.modelValue = true">Open Sidebar</button>
+            <button class="xf-m-2" @click="args.modelValue = true">Open Sidebar</button>
 
             <XfSidebar v-bind="args" v-on="props" @update:modelValue="args.modelValue = false">
-                <p>I am a sidebar</p>
+              <p>I am a sidebar</p>
             </XfSidebar>
         </div>`,
     components: {
@@ -29,5 +28,6 @@ export const Primary: StoryObj<typeof XfSidebar> = {
   },
   args: {
     ...buildDefaultProps(XfSidebar),
+    side: "right",
   },
 };

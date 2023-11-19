@@ -3,7 +3,7 @@
     <template v-if="modelValue">
       <transition name="fade">
         <div
-          v-if="!transparent"
+          v-if="backdrop"
           class="xf-drawer-overlay"
           @click="$emit('update:modelValue', false)"
         />
@@ -12,8 +12,8 @@
       <transition :name="`slide-${side === 'left' ? 'right' : 'left'}`">
         <div
           v-if="modelValue"
-          class="xf-drawer-content"
-          :class="`xf-bg-${backgroundColour}`"
+          class="xf-drawer-content xf-p-2"
+          :class="`xf-bg-${backgroundColour} xf-drawer-content-${side}`"
           :style="[
             `width: ${width}`,
             side === 'left' ? 'left: 0;' : 'right: 0;',
@@ -46,9 +46,9 @@ defineProps({
     default: "left",
     validator: (v: string) => ["left", "right"].includes(v),
   },
-  transparent: {
+  backdrop: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 
@@ -71,6 +71,16 @@ defineEmits(["update:modelValue"]);
   &-content {
     z-index: 50;
     height: 100%;
+
+    &-left {
+      border-right: 1px solid map-get($xf-colours, "grey-lighten-2");
+      box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    &-right {
+      border-left: 1px solid map-get($xf-colours, "grey-lighten-2");
+      box-shadow: -2px 0px 4px 0px rgba(0, 0, 0, 0.05);
+    }
   }
 
   &-overlay {

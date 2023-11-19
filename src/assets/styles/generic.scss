@@ -231,6 +231,10 @@ textarea {
   cursor: default;
 }
 
-.xf-hover:hover {
-  opacity: 0.7;
+.xf-hover {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }

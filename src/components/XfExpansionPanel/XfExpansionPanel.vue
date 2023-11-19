@@ -73,7 +73,7 @@ const props = defineProps({
   },
   backgroundColour: {
     type: String,
-    default: "white",
+    default: "grey-lighten-3",
   },
   textColour: {
     type: String,
@@ -81,7 +81,7 @@ const props = defineProps({
   },
   secondaryBackgroundColour: {
     type: String,
-    default: "white",
+    default: "grey-lighten-5",
   },
   secondaryTextColour: {
     type: String,
@@ -89,11 +89,11 @@ const props = defineProps({
   },
   fontSize: {
     type: Number,
-    default: 18,
+    default: 16,
   },
   secondaryFontSize: {
     type: Number,
-    default: 16,
+    default: 14,
   },
 });
 
