@@ -1,8 +1,8 @@
 {
   "name": "xf-cmpt-lib",
   "private": false,
-  "version": "0.7.1",
-  "_id": "xf-cmpt-lib@0.7.1",
+  "version": "0.7.2",
+  "_id": "xf-cmpt-lib@0.7.2",
   "type": "module",
   "files": [
     "dist"
