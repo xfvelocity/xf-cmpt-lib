@@ -19,5 +19,6 @@ export const Primary: StoryObj<typeof XfIcon> = {
   args: {
     ...buildDefaultProps(XfIcon),
     src: "close",
+    internal: true,
   },
 };

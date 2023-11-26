@@ -28,6 +28,7 @@
           :class="{ 'xf-expansion-panel-arrow-active': item.active }"
           src="chevron-down"
           :fill="textColour"
+          internal
         />
       </div>
 

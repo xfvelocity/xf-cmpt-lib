@@ -43,6 +43,7 @@
           :size="14"
           :fill="colour"
           src="chevron-down"
+          internal
           @click.stop="toggleSelect(!isSelectActive)"
         />
       </div>

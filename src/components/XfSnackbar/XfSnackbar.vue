@@ -13,6 +13,7 @@
         v-if="closeIcon"
         class="xf-cursor-pointer"
         src="close"
+        internal
         :fill="textColour"
         @click="$emit('update:modelValue', false)"
       />

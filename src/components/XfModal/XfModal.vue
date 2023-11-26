@@ -19,7 +19,12 @@
         @click.stop=""
       >
         <div class="xf-ml-auto xf-w-max-content">
-          <xf-icon class="xf-cursor-pointer" src="close" @click="closeModal" />
+          <xf-icon
+            class="xf-cursor-pointer"
+            src="close"
+            internal
+            @click="closeModal"
+          />
         </div>
 
         <slot />

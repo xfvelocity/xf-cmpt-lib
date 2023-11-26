@@ -1,7 +1,7 @@
 <template>
   <inline-svg
     :class="{ [`xf-icon-colour-${fill}`]: fill }"
-    :src="src.endsWith('.svg') ? src : getImageUrl(`icons/${src}.svg`)"
+    :src="!internal ? src : getImageUrl(`icons/${src}.svg`)"
     :height="size"
     :width="size"
   />
@@ -26,6 +26,10 @@ defineProps({
   size: {
     type: Number,
     default: 16,
+  },
+  internal: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
