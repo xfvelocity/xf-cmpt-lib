@@ -8,9 +8,9 @@ describe("XfButton", () => {
   beforeEach(() => {
     wrapper = mount(XfButton, {
       props: {
-        text: ''
-      }
-    }); 
+        text: "",
+      },
+    });
   });
 
   it("is mounted", () => {

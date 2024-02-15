@@ -8,8 +8,8 @@ describe("XfFuzzyImage.vue", () => {
   beforeEach(() => {
     wrapper = mount(XfFuzzyImage, {
       props: {
-        img: '',
-        minImg: ''
+        img: "",
+        minImg: "",
       },
     });
   });

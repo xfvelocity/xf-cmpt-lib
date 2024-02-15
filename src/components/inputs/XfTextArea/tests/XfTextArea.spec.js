@@ -9,8 +9,8 @@ describe("XfTextArea.vue", () => {
     wrapper = mount(XfTextArea, {
       props: {
         modelValue: "",
-        label: '',
-        name: ''
+        label: "",
+        name: "",
       },
     });
   });
@@ -31,7 +31,7 @@ describe("XfTextArea.vue", () => {
     await wrapper.setProps({ errorMessages: ["error"] });
 
     expect(wrapper.find('[data-test-id="xf-text-area-error"]').exists()).toBe(
-      true
+      true,
     );
   });
 });

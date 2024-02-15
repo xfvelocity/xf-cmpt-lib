@@ -125,7 +125,7 @@ watch(
   () => props.modelValue,
   (value) => {
     isOpen.value = value;
-  }
+  },
 );
 </script>
 
@@ -134,7 +134,10 @@ watch(
   &-backdrop {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.6);
-    transition: visibility 0s linear 0.5s, opacity 0.5s 0s, transform 0.5s;
+    transition:
+      visibility 0s linear 0.5s,
+      opacity 0.5s 0s,
+      transform 0.5s;
     visibility: hidden;
     top: 0;
     left: 0;
@@ -145,7 +148,10 @@ watch(
   &-show {
     opacity: 1;
     visibility: visible;
-    transition: visibility 0s linear 0s, opacity 0.5s 0s, transform 0.5s;
+    transition:
+      visibility 0s linear 0s,
+      opacity 0.5s 0s,
+      transform 0.5s;
   }
 
   &-content {

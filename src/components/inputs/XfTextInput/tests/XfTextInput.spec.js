@@ -29,7 +29,7 @@ describe("XfTextInput.vue", () => {
     await wrapper.setProps({ errorMessages: ["error"] });
 
     expect(wrapper.find('[data-test-id="xf-text-input-error"]').exists()).toBe(
-      true
+      true,
     );
   });
 });

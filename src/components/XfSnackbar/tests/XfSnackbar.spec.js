@@ -9,7 +9,7 @@ describe("XfSnackbar.vue", () => {
     wrapper = mount(XfSnackbar, {
       props: {
         modelValue: "",
-        text: ''
+        text: "",
       },
     });
   });

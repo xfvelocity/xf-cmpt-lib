@@ -1,5 +1,5 @@
 export const buildDefaultProps = (component: any) => {
-  let obj = {};
+  const obj = {};
 
   Object.keys(component.props).forEach((x) => {
     obj[x] = component.props[x].default;

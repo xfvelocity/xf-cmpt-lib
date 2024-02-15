@@ -9,7 +9,7 @@ describe("XfExpansionPanel.vue", () => {
     wrapper = mount(XfExpansionPanel, {
       props: {
         modelValue: "",
-        list: []
+        list: [],
       },
     });
   });

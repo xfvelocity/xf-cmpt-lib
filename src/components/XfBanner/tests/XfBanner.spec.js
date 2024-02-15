@@ -8,8 +8,8 @@ describe("XfBanner.vue", () => {
   beforeEach(() => {
     wrapper = mount(XfBanner, {
       props: {
-        text: ''
-      }
+        text: "",
+      },
     });
   });
 

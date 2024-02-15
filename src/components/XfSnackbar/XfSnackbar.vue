@@ -47,7 +47,7 @@ const props = defineProps({
   },
   closeIcon: {
     type: Boolean,
-    default: "",
+    default: false,
   },
   textColour: {
     type: String,

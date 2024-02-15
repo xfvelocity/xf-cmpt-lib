@@ -160,7 +160,7 @@ watch(
     if (value !== isNavDrawerOpen.value) {
       isNavDrawerOpen.value = props.modelValue;
     }
-  }
+  },
 );
 
 watch(isNavDrawerOpen, (value) => {
@@ -172,7 +172,9 @@ watch(isNavDrawerOpen, (value) => {
 
 <style lang="scss" scoped>
 .xf-nav {
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.12);
   z-index: 50;
   display: flex;
   align-items: center;

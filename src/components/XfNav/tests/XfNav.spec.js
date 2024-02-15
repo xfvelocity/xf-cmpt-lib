@@ -6,8 +6,8 @@ import XfNav from "../XfNav.vue";
 describe("XfNav.vue", () => {
   const wrapper = shallowMount(XfNav, {
     props: {
-      modelValue: ''
-    }
+      modelValue: "",
+    },
   });
 
   it("Mounted", () => {
