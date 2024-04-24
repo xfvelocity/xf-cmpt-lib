@@ -6,16 +6,20 @@ import typescript2 from "rollup-plugin-typescript2";
 import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  publicDir: command === "build" ? false : "public",
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/assets/styles/variables.scss";`,
+        additionalData(source, fp) {
+          if (fp.endsWith("variables.scss")) return source;
+          return `@import "@/assets/styles/variables.scss"; ${source}`;
+        },
       },
     },
   },
   plugins: [
-    vue({ reactivityTransform: true }),
+    vue(),
     dts({
       insertTypesEntry: true,
     }),
@@ -48,7 +52,7 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, "src/components/main.ts"),
       },
-      external: ["vue"],
+      external: ["vue", "public"],
       output: {
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === "main.css") return "cmpt-lib-ts.css";
@@ -66,4 +70,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
-});
+}));
