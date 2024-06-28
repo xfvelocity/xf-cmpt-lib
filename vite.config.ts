@@ -37,27 +37,21 @@ export default defineConfig(({ command }) => ({
       exclude: ["vite.config.ts"],
     }),
   ],
+
   build: {
     cssCodeSplit: true,
     lib: {
-      // Could also be a dictionary or array of multiple entry points
-      entry: "src/components/main.ts",
-      name: "cmpt-lib",
+      entry: "src/index.ts",
+      name: "index",
       formats: ["es", "cjs", "umd"],
-      fileName: (format) => `cmpt-lib-ts.${format}.js`,
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      // make sure to externalize deps that should not be bundled
-      // into your library
       input: {
-        main: path.resolve(__dirname, "src/components/main.ts"),
+        index: path.resolve(__dirname, "src/index.ts"),
       },
-      external: ["vue", "public"],
+      external: ["vue", "public", "prettier", "storybook"],
       output: {
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === "main.css") return "cmpt-lib-ts.css";
-          return assetInfo.name;
-        },
         exports: "named",
         globals: {
           vue: "Vue",

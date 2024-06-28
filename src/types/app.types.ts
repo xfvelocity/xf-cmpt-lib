@@ -9,3 +9,8 @@ export interface MenuPositions {
   bottom?: string;
   right?: string;
 }
+
+export interface MenuSize {
+  height: number | null;
+  width: number | null;
+}

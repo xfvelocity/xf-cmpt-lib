@@ -22,26 +22,28 @@
           left: position.left,
           right: position.right,
           bottom: position.bottom,
-          width: `${width}px`,
+          width: `${menuSize.width}px`,
+          height: `${menuSize.height}px`,
         }"
         @click.stop=""
       >
-        <slot />
+        <div>
+          <slot />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs, watch, onMounted, PropType } from "vue";
-import { MenuPositions } from "@/types/app.types";
+import { ref, watch, onMounted } from "vue";
+import { MenuPositions, MenuSize } from "@/types/app.types";
 
 // ** Props **
 const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false,
-    required: true,
   },
   activator: {
     type: String,
@@ -50,19 +52,6 @@ const props = defineProps({
   backgroundColour: {
     type: String,
     default: "white",
-  },
-  width: {
-    type: String,
-    default: "",
-  },
-  position: {
-    type: Object as PropType<MenuPositions>,
-    default: () => ({
-      top: "0",
-      left: "0",
-      right: "0",
-      bottom: "0",
-    }),
   },
   centerAlign: {
     type: Boolean,
@@ -74,15 +63,39 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue"]);
 
 // ** Data **
-const { position } = toRefs(props);
-
 const contentRef = ref<HTMLDivElement>();
 const isOpen = ref<boolean>(false);
+const menuSize = ref<MenuSize>({
+  height: null,
+  width: null,
+});
+const position = ref<MenuPositions>({
+  top: "0px",
+  left: "0px",
+  right: "0px",
+  bottom: "0px",
+});
 
 // ** Methods **
+const resetPositonAndHeight = (): void => {
+  position.value = {
+    top: "0px",
+    left: "0px",
+    right: "0px",
+    bottom: "0px",
+  };
+
+  menuSize.value = {
+    height: null,
+    width: null,
+  };
+};
+
 const activateMenu = (event: MouseEvent): void => {
   const navbar: HTMLElement | null =
     document.querySelector(".xf-navigation-bar");
+
+  resetPositonAndHeight();
 
   position.value.top = `${
     (navbar ? event.clientY - navbar.offsetHeight : event.clientY) + 15
@@ -101,6 +114,15 @@ const activateMenu = (event: MouseEvent): void => {
   } else {
     position.value.left = `${event.clientX - 5}px`;
   }
+
+  setTimeout(() => {
+    const childDiv = contentRef.value?.firstChild as HTMLElement;
+
+    menuSize.value = {
+      height: childDiv.clientHeight || 0,
+      width: childDiv.clientWidth || 0,
+    };
+  }, 100);
 
   toggleMenu();
 };
