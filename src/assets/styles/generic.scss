@@ -1,3 +1,7 @@
+@use "sass:map";
+@use "variables/colours";
+@use "mixins";
+
 html,
 body,
 #app,
@@ -11,7 +15,7 @@ body {
   line-height: 1.5;
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
-  color: map-get($xf-colours, "black");
+  color: map.get(colours.$xf-colours, "black");
   font-size: 16px;
   overflow-x: hidden;
 }
@@ -22,14 +26,14 @@ textarea {
 }
 
 .xf-center {
-  @include center(true, true);
+  @include mixins.center(true, true);
 
   &-horizontal {
-    @include center(true, false);
+    @include mixins.center(true, false);
   }
 
   &-vertical {
-    @include center(false, true);
+    @include mixins.center(false, true);
   }
 }
 
@@ -196,8 +200,10 @@ textarea {
   &-none {
     border: none !important;
   }
+}
 
-  @each $name, $colour in $xf-colours {
+@each $name, $colour in colours.$xf-colours {
+  .xf-border {
     &-#{$name} {
       border: 2px solid $colour !important;
     }
@@ -206,9 +212,7 @@ textarea {
       border-color: $colour !important;
     }
   }
-}
 
-@each $name, $colour in $xf-colours {
   .xf-icon {
     &--#{$name} {
       path {

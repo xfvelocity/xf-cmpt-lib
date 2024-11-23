@@ -57,6 +57,9 @@ defineEmits(["update:modelValue"]);
 </script>
 
 <style lang="scss" scoped>
+@use "sass:map";
+@use "@/assets/styles/variables/colours";
+
 .xf-drawer {
   transition: background-color 0.5s ease-in-out;
 
@@ -73,12 +76,12 @@ defineEmits(["update:modelValue"]);
     height: 100%;
 
     &-left {
-      border-right: 1px solid map-get($xf-colours, "grey-lighten-2");
+      border-right: 1px solid map.get(colours.$xf-colours, "grey-lighten-2");
       box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.05);
     }
 
     &-right {
-      border-left: 1px solid map-get($xf-colours, "grey-lighten-2");
+      border-left: 1px solid map.get(colours.$xf-colours, "grey-lighten-2");
       box-shadow: -2px 0px 4px 0px rgba(0, 0, 0, 0.05);
     }
   }

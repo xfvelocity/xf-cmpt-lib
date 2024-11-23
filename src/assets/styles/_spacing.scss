@@ -1,13 +1,16 @@
-@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
-  $min: map-get($breakpoints, $name);
+@use "sass:map";
+@use "variables/sizes";
+
+@function breakpoint-min($name, $breakpoints: sizes.$grid-breakpoints) {
+  $min: map.get($breakpoints, $name);
   @return if($min != 0, $min, null);
 }
 
-@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+@function breakpoint-infix($name, $breakpoints: sizes.$grid-breakpoints) {
   @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
 }
 
-@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+@mixin media-breakpoint-up($name, $breakpoints: sizes.$grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
   @if $min {
     @media (min-width: $min) {
@@ -18,12 +21,12 @@
   }
 }
 
-@each $breakpoint in map-keys($grid-breakpoints) {
+@each $breakpoint in map.keys(sizes.$grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($breakpoint, sizes.$grid-breakpoints);
 
     @each $prop, $abbrev in (margin: xf-m, padding: xf-p) {
-      @each $size, $length in $xf-spacers {
+      @each $size, $length in sizes.$xf-spacers {
         .#{$abbrev}#{$infix}-#{$size} {
           #{$prop}: $length !important;
         }
@@ -51,7 +54,7 @@
     }
 
     @each $prop, $abbrev in (margin: xf-m) {
-      @each $size, $length in $xf-spacers {
+      @each $size, $length in sizes.$xf-spacers {
         .#{$abbrev}#{$infix}-n#{$size} {
           #{$prop}: -$length !important;
         }
@@ -78,7 +81,7 @@
       }
     }
 
-    @each $size, $length in $xf-spacers {
+    @each $size, $length in sizes.$xf-spacers {
       .xf-gap-#{$size} {
         gap: $length !important;
       }

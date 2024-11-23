@@ -1,3 +1,5 @@
+@use "variables/sizes";
+
 /* Flex helper classes */
 .xf-flex {
   display: flex !important;
@@ -137,7 +139,7 @@
   }
 
   &-gap {
-    @each $key, $size in $xf-spacers {
+    @each $key, $size in sizes.$xf-spacers {
       &-#{$key} {
         gap: #{$size};
       }
@@ -168,7 +170,7 @@
 }
 
 /* flex direction at given min-width breakpoints */
-@each $name, $breakpoint in $grid-breakpoints {
+@each $name, $breakpoint in sizes.$grid-breakpoints {
   @media (min-width: $breakpoint) {
     .xf-flex-direction-#{$name}-row {
       flex-direction: row !important;

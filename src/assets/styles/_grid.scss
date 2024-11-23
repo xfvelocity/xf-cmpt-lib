@@ -1,14 +1,18 @@
+@use "sass:map";
+@use "variables/sizes";
+@use "mixins/media-queries";
+
 $columns: 12;
 $xf-grid-alignments: (center, start, end);
 
 .xf {
   @for $i from 1 through 12 {
     &-row-gap-#{$i} {
-      grid-row-gap: map-get($xf-spacers, $i) !important;
+      grid-row-gap: map.get(sizes.$xf-spacers, $i) !important;
     }
 
     &-col-gap-#{$i} {
-      grid-column-gap: map-get($xf-spacers, $i) !important;
+      grid-column-gap: map.get(sizes.$xf-spacers, $i) !important;
     }
   }
 
@@ -53,11 +57,11 @@ $xf-grid-alignments: (center, start, end);
   &-grid {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: map-get($xf-spacers, 1) map-get($xf-spacers, 2);
+    gap: map.get(sizes.$xf-spacers, 1) map.get(sizes.$xf-spacers, 2);
     width: 100%;
 
-    @include md-up {
-      gap: map-get($xf-spacers, 1) map-get($xf-spacers, 6);
+    @include media-queries.md-up {
+      gap: map.get(sizes.$xf-spacers, 1) map.get(sizes.$xf-spacers, 6);
     }
 
     * {
@@ -89,7 +93,7 @@ $xf-grid-alignments: (center, start, end);
 
 @include create-selectors;
 
-@each $breakpoint, $width in $grid-breakpoints {
+@each $breakpoint, $width in sizes.$grid-breakpoints {
   @media (min-width: $width) {
     @include create-selectors($breakpoint);
   }

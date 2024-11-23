@@ -18,4 +18,5 @@ module.exports = {
   env: {
     "vitest-globals/env": true,
   },
+  files: [".vue", ".js", ".ts"],
 };

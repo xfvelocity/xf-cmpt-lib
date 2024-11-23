@@ -35,7 +35,9 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@each $name, $colour in $xf-colours {
+@use "@/assets/styles/variables/colours";
+
+@each $name, $colour in colours.$xf-colours {
   .xf-icon-colour-#{$name} {
     :deep(path),
     :deep(rect) {

@@ -87,8 +87,11 @@ const buttonClass = computed<(string | Record<string, boolean>)[]>(() => {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:map";
+@use "@/assets/styles/variables/sizes";
+
 .xf-button {
-  border-radius: map-get($xf-spacers, 1);
+  border-radius: map.get(sizes.$xf-spacers, 1);
   border: none;
   transition: 0.2s ease-in-out;
   width: max-content;

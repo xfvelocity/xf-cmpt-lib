@@ -262,16 +262,20 @@ watch(
 </script>
 
 <style lang="scss" scoped>
+@use "sass:map";
+@use "@/assets/styles/variables/sizes";
+@use "@/assets/styles/variables/colours";
+
 .xf-select {
   position: relative;
 
   &-toggle {
     display: flex;
     align-items: flex-end;
-    padding: map-get($xf-spacers, 1) 0;
-    border-bottom: 1px solid map-get($xf-colours, "black");
+    padding: map.get(sizes.$xf-spacers, 1) 0;
+    border-bottom: 1px solid map.get(colours.$xf-colours, "black");
     position: relative;
-    color: map-get($xf-colours, "black");
+    color: map.get(colours.$xf-colours, "black");
   }
 
   &:focus {
@@ -279,24 +283,24 @@ watch(
     outline: none;
 
     .xf-select-toggle {
-      border-bottom: 2px solid map-get($xf-colours, "black");
+      border-bottom: 2px solid map.get(colours.$xf-colours, "black");
     }
   }
 
   &-input {
-    margin-right: map-get($xf-spacers, 1);
+    margin-right: map.get(sizes.$xf-spacers, 1);
     margin-left: -2px;
   }
 
   &-items {
     position: absolute;
-    background: map-get($xf-colours, "white");
+    background: map.get(colours.$xf-colours, "white");
     width: 100%;
-    padding: map-get($xf-spacers, 2) 0;
+    padding: map.get(sizes.$xf-spacers, 2) 0;
     box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.4);
     z-index: 10;
     margin-top: 2px;
-    color: map-get($xf-colours, "black");
+    color: map.get(colours.$xf-colours, "black");
     max-height: 200px;
     overflow-y: auto;
 
@@ -306,7 +310,7 @@ watch(
 
     &-item {
       cursor: pointer;
-      padding: map-get($xf-spacers, 1) map-get($xf-spacers, 2);
+      padding: map.get(sizes.$xf-spacers, 1) map.get(sizes.$xf-spacers, 2);
 
       &:hover {
         background: rgb(238, 238, 238);
