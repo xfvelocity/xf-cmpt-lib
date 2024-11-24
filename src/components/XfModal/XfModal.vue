@@ -6,9 +6,9 @@
       @click="closeModal"
     >
       <div
-        class="xf-modal-content xf-p-4"
+        class="xf-modal-content"
         :class="[
-          `xf-bg-${backgroundColour}`,
+          `xf-bg-${backgroundColour} xf-p-${padding}`,
           { 'xf-h-100 xf-w-100': fullscreen },
         ]"
         :style="
@@ -22,6 +22,7 @@
           <xf-icon
             class="xf-cursor-pointer"
             src="close"
+            :fill="closeIconColour"
             internal
             @click="closeModal"
           />
@@ -62,6 +63,14 @@ const props = defineProps({
   backgroundColour: {
     type: String,
     default: "white",
+  },
+  closeIconColour: {
+    type: String,
+    default: "",
+  },
+  padding: {
+    type: Number,
+    default: 4,
   },
 });
 
