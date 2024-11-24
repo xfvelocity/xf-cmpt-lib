@@ -2,7 +2,7 @@
 
 Custom component library for personal use
 
- <a href="https://www.npmjs.com/package/xf-cmpt-lib"><img src="https://img.shields.io/npm/v/xf-cmpt-lib.svg?sanitize=true" alt="Version"></a>
+<a href="https://www.npmjs.com/package/xf-cmpt-lib"><img src="https://img.shields.io/npm/v/xf-cmpt-lib.svg?sanitize=true" alt="Version"></a>
 
 ## Getting started:
 

@@ -1,9 +1,7 @@
-<template>
-  <div />
-</template>
+<template></template>
 
 <script lang="ts" setup></script>
 
 <style lang="scss">
-@import "@/assets/styles/index.scss";
+@use "@/assets/styles/index.scss";
 </style>
