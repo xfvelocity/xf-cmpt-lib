@@ -41,7 +41,6 @@ const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false,
-    required: true,
   },
   activator: {
     type: String,
@@ -157,6 +156,8 @@ watch(
   &-content {
     position: absolute;
     z-index: 51;
+    height: max-content;
+    width: max-content;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
   }
 }

@@ -1,26 +1,26 @@
 {
   "name": "xf-cmpt-lib",
   "private": false,
-  "version": "0.7.17",
-  "_id": "xf-cmpt-lib@0.7.17",
+  "version": "0.7.21",
+  "_id": "xf-cmpt-lib@0.7.21",
   "type": "module",
   "files": [
     "dist"
   ],
   "readme": "ERROR: No README data found!",
-  "main": "./dist/cmpt-lib-ts.umd.js",
-  "module": "./dist/cmpt-lib-ts.es.js",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/cmpt-lib-ts.es.js",
-      "require": "./dist/cmpt-lib-ts.umd.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
-    "./dist/cmpt-lib-ts.css": {
-      "import": "./dist/cmpt-lib-ts.css",
-      "require": "./dist/cmpt-lib-ts.css"
+    "./style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
   },
-  "types": "./dist/main.d.ts",
   "homepage": "https://xf-cmpt-lib.vercel.app",
   "repository": {
     "type": "git",

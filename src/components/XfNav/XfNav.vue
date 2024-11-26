@@ -80,7 +80,6 @@ const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false,
-    required: true,
   },
   menuButtonColour: {
     type: String,
