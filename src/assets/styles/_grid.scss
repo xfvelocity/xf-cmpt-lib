@@ -1,0 +1,100 @@
+@use "sass:map";
+@use "variables/sizes";
+@use "mixins/media-queries";
+
+$columns: 12;
+$xf-grid-alignments: (center, start, end);
+
+.xf {
+  @for $i from 1 through 12 {
+    &-row-gap-#{$i} {
+      grid-row-gap: map.get(sizes.$xf-spacers, $i) !important;
+    }
+
+    &-col-gap-#{$i} {
+      grid-column-gap: map.get(sizes.$xf-spacers, $i) !important;
+    }
+  }
+
+  &-col {
+    &-offset {
+      &-end {
+        grid-column-end: end;
+      }
+    }
+  }
+
+  &-auto-flow {
+    &-dense {
+      grid-auto-flow: dense;
+    }
+  }
+
+  @each $alignment in $xf-grid-alignments {
+    &-align {
+      &-items {
+        &-#{$alignment} {
+          align-items: $alignment;
+        }
+      }
+    }
+
+    &-justify {
+      &-self {
+        &-#{$alignment} {
+          justify-self: $alignment;
+        }
+      }
+    }
+
+    &-self {
+      &-#{$alignment} {
+        align-self: $alignment;
+      }
+    }
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: map.get(sizes.$xf-spacers, 1) map.get(sizes.$xf-spacers, 2);
+    width: 100%;
+
+    @include media-queries.md-up {
+      gap: map.get(sizes.$xf-spacers, 1) map.get(sizes.$xf-spacers, 6);
+    }
+
+    * {
+      max-width: 100%;
+    }
+  }
+}
+
+@mixin create-selectors($breakpoint: null) {
+  $infix: if($breakpoint == null, "", "-#{$breakpoint}");
+
+  @for $i from 1 through $columns {
+    .xf {
+      &-col#{$infix}-#{$i} {
+        grid-column-end: span $i;
+      }
+      &-col-offset#{$infix}-#{$i} {
+        grid-column-start: $i;
+      }
+      &-row#{$infix}-#{$i} {
+        grid-row-end: span $i;
+      }
+      &-row-offset#{$infix}-#{$i} {
+        grid-row-start: $i;
+      }
+    }
+  }
+}
+
+@include create-selectors;
+
+@each $breakpoint, $width in sizes.$grid-breakpoints {
+  @media (min-width: $width) {
+    @include create-selectors($breakpoint);
+  }
+}

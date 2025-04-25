@@ -1,0 +1,244 @@
+@use "sass:map";
+@use "variables/colours";
+@use "mixins";
+
+html,
+body,
+#app,
+#__nuxt,
+#__layout {
+  height: 100%;
+  margin: 0 !important;
+}
+
+body {
+  line-height: 1.5;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  color: map.get(colours.$xf-colours, "black");
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+input,
+textarea {
+  font-family: "Montserrat", sans-serif;
+}
+
+.xf-center {
+  @include mixins.center(true, true);
+
+  &-horizontal {
+    @include mixins.center(true, false);
+  }
+
+  &-vertical {
+    @include mixins.center(false, true);
+  }
+}
+
+.xf-position {
+  &-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  &-absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &-sticky {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+/* Text utility classes */
+.xf-text {
+  &-left {
+    text-align: left;
+  }
+
+  &-center {
+    text-align: center;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-uppercase {
+    text-transform: uppercase;
+  }
+
+  &-capitalize {
+    text-transform: capitalize;
+  }
+
+  &-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    @for $i from 1 through 5 {
+      &-#{$i} {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: $i;
+        line-clamp: $i;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+}
+
+/* Display utility classes */
+.xf-d {
+  &-flex {
+    display: flex;
+  }
+
+  &-inline-block {
+    display: inline-block;
+  }
+
+  &-none {
+    display: none;
+  }
+}
+
+.xf-overflow {
+  &-hidden {
+    overflow: hidden;
+  }
+
+  &-y {
+    &-auto {
+      overflow-y: auto;
+    }
+
+    &-hidden {
+      overflow-y: hidden;
+    }
+  }
+}
+
+/* Sizing utility classes */
+.xf-h {
+  &-100 {
+    height: 100%;
+  }
+
+  &-max-content {
+    height: max-content;
+  }
+}
+
+.xf-min {
+  &-h-100 {
+    min-height: 100%;
+  }
+}
+
+.xf-w {
+  &-100 {
+    width: 100% !important;
+  }
+
+  &-max-content {
+    width: max-content;
+  }
+}
+
+/* Cursor utility classes */
+.xf-cursor {
+  &-pointer {
+    cursor: pointer;
+  }
+
+  &-default {
+    cursor: default;
+  }
+
+  &-not-allowed {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+/* Positioning utility classes */
+.xf-position {
+  &-absolute {
+    position: absolute;
+  }
+
+  &-relative {
+    position: relative;
+  }
+
+  &-static {
+    position: static;
+  }
+}
+
+@for $i from 1 through 10 {
+  .xf-z-#{$i} {
+    z-index: $i;
+  }
+}
+
+/* Border utility classes */
+.xf-border {
+  &-round {
+    border-radius: 50%;
+  }
+
+  &-none {
+    border: none !important;
+  }
+}
+
+@each $name, $colour in colours.$xf-colours {
+  .xf-border {
+    &-#{$name} {
+      border: 2px solid $colour !important;
+    }
+
+    &-colour-#{$name} {
+      border-color: $colour !important;
+    }
+  }
+
+  .xf-icon {
+    &--#{$name} {
+      path {
+        fill: #{$colour};
+      }
+    }
+
+    &-stroke-#{$name} {
+      path,
+      circle {
+        stroke: #{$colour};
+      }
+    }
+  }
+}
+
+.xf-disabled {
+  opacity: 0.5;
+  user-select: none;
+  cursor: default;
+}
+
+.xf-hover {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

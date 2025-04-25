@@ -1,0 +1,183 @@
+@use "variables/sizes";
+
+/* Flex helper classes */
+.xf-flex {
+  display: flex !important;
+
+  &-wrap {
+    flex-wrap: wrap;
+
+    &-reverse {
+      flex-wrap: wrap-reverse;
+    }
+  }
+
+  &-direction {
+    &-row {
+      flex-flow: row !important;
+
+      &-reverse {
+        flex-flow: row-reverse !important;
+      }
+
+      &-wrap {
+        flex-flow: row wrap;
+      }
+
+      &-no-wrap {
+        flex-flow: row nowrap;
+      }
+    }
+
+    &-col {
+      flex-flow: column !important;
+
+      &-reverse {
+        flex-flow: column-reverse !important;
+      }
+    }
+  }
+
+  &-justify {
+    &-self {
+      &-end {
+        justify-self: end !important;
+      }
+
+      &-start {
+        justify-self: start !important;
+      }
+    }
+
+    &-content {
+      &-center {
+        justify-content: center !important;
+      }
+
+      &-end {
+        justify-content: flex-end !important;
+      }
+
+      &-start {
+        justify-content: flex-start !important;
+      }
+
+      &-between {
+        justify-content: space-between !important;
+      }
+
+      &-evenly {
+        justify-content: space-evenly !important;
+      }
+
+      &-around {
+        justify-content: space-around !important;
+      }
+    }
+  }
+
+  &-align {
+    &-items {
+      &-center {
+        align-items: center !important;
+      }
+
+      &-end {
+        align-items: flex-end !important;
+      }
+
+      &-start {
+        align-items: flex-start !important;
+      }
+    }
+
+    &-self {
+      &-start {
+        align-self: flex-start !important;
+      }
+    }
+  }
+
+  &-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-inline-center {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-col {
+    &-center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &-between {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  &-center {
+    &-start {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    &-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &-gap {
+    @each $key, $size in sizes.$xf-spacers {
+      &-#{$key} {
+        gap: #{$size};
+      }
+    }
+  }
+
+  &-grow {
+    flex-grow: 1;
+  }
+
+  &-1 {
+    flex: 1;
+  }
+
+  &-order {
+    &-minus-1 {
+      order: -1;
+    }
+
+    &-1 {
+      order: 1;
+    }
+
+    &-2 {
+      order: 2;
+    }
+  }
+}
+
+/* flex direction at given min-width breakpoints */
+@each $name, $breakpoint in sizes.$grid-breakpoints {
+  @media (min-width: $breakpoint) {
+    .xf-flex-direction-#{$name}-row {
+      flex-direction: row !important;
+    }
+
+    .xf-flex-direction-#{$name}-col {
+      flex-direction: column !important;
+    }
+  }
+}
