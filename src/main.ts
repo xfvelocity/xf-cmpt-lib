@@ -1,4 +1,4 @@
-import type { App } from "vue";
+import type { App as AppType } from "vue";
 import {
   XfBanner,
   XfButton,
@@ -19,7 +19,7 @@ import {
 } from "./index";
 
 export default {
-  install: (app: App) => {
+  install: (app: AppType) => {
     app.component("XfBanner", XfBanner);
     app.component("XfButton", XfButton);
     app.component("XfIcon", XfIcon);
@@ -57,3 +57,9 @@ export {
   XfFuzzyImage,
   XfSidebar,
 };
+
+import { createApp } from "vue";
+
+import App from "./App.vue";
+
+createApp(App).mount("#app");

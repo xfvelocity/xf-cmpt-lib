@@ -1,8 +1,8 @@
 {
   "name": "xf-cmpt-lib",
   "private": false,
-  "version": "1.0.0",
-  "_id": "xf-cmpt-lib@1.0.0",
+  "version": "1.0.1",
+  "_id": "xf-cmpt-lib@1.0.1",
   "type": "module",
   "files": [
     "dist"
@@ -33,8 +33,8 @@
     "dev": "vite",
     "build": "pnpm run lint && vite build",
     "preview": "vite preview",
-    "publish:package": "pnpm install && pnpm run build && pnpm publish",
-    "publish:package:rc": "pnpm install && pnpm run build && pnpm publish --tag rc",
+    "publish:package": "pnpm install && pnpm run build && pnpm publish --no-git-checks",
+    "publish:package:rc": "pnpm install && pnpm run build && pnpm publish --no-git-checks --tag rc",
     "test:unit": "vitest",
     "test:unit:coverage": "vitest --coverage",
     "prettier": "prettier . --write",
