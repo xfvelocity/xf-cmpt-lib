@@ -200,6 +200,16 @@ textarea {
   &-none {
     border: none !important;
   }
+
+  &-radius {
+    &-5 {
+      border-radius: 5px !important;
+    }
+
+    &-10 {
+      border-radius: 10px !important;
+    }
+  }
 }
 
 @each $name, $colour in colours.$xf-colours {

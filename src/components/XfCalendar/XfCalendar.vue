@@ -1,6 +1,6 @@
 <template>
   <div
-    class="xf-calendar xf-my-4 xf-mx-auto xf-bg-white xf-p-3 xf-border-grey-lighten-2"
+    class="xf-calendar xf-mx-auto xf-bg-white xf-p-3 xf-border-grey-lighten-2 xf-border-radius-10"
   >
     <div
       class="xf-flex xf-flex-justify-content-between xf-flex-align-items-center xf-mb-2"
@@ -35,7 +35,7 @@
       <div
         v-for="n in firstDayOfMonth"
         :key="'empty-' + n"
-        class="xf-calendar-day xf-calendar-day__empty xf-text-center xf-py-2 xf-cursor-pointer"
+        class="xf-calendar-day xf-border-radius-5 xf-calendar-day__empty xf-text-center xf-py-2 xf-cursor-pointer"
       />
 
       <!-- Display the days of the current month -->
@@ -43,7 +43,7 @@
         v-for="day in daysInMonth"
         :key="'day-' + day"
         :class="[
-          'xf-calendar-day xf-text-center xf-py-2 xf-cursor-pointer',
+          'xf-calendar-day xf-border-radius-5 xf-text-center xf-py-2 xf-cursor-pointer',
           {
             'xf-fw-700 xf-border-black': isToday(day),
             'xf-text-colour-grey-lighten-2 xf-cursor-not-allowed':
@@ -637,14 +637,10 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .xf-calendar {
-  max-width: 680px;
-  border-radius: 10px;
-
   &-days {
     grid-template-columns: repeat(7, 1fr);
 
     .xf-calendar-day {
-      border-radius: 5px;
       transition:
         background 0.3s,
         color 0.3s;
