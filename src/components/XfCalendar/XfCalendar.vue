@@ -76,10 +76,11 @@
 
         <!-- Slot for custom content, passing the current day, month, year, and full date -->
         <slot
+          v-if="isAvailableDay(day) && !isOutOfBounds(day)"
           :day="day"
           :month="selectedMonth"
           :year="selectedYear"
-          :date="`${day}-${selectedMonth}-${selectedYear}`"
+          :date="`${padStartNumber(day)}-${padStartNumber(selectedMonth)}-${selectedYear}`"
         />
       </div>
     </div>
@@ -89,11 +90,12 @@
 <script setup lang="ts">
 import type { PropType } from "vue";
 import { ref, computed, onMounted, watch } from "vue";
-import { formatDate } from "@/composables/date";
+import { formatDate, padStartNumber } from "@/composables/date";
+
 import XfIcon from "@/components/XfIcon/XfIcon.vue";
 
 // Define types for date range
-type DateRange = {
+export type DateRange = {
   from: string;
   to: string;
 };
@@ -149,8 +151,8 @@ const emit = defineEmits<{
 // ** Data **
 const today: Date = new Date();
 const currentDate = ref<Date>(new Date());
-const selectedMonth = ref<number>(currentDate.value.getMonth());
-const selectedYear = ref<number>(currentDate.value.getFullYear());
+const selectedMonth = ref<number>(0);
+const selectedYear = ref<number>(0);
 
 // Track start and end dates for range selection
 const rangeStart = ref<string | null>(null);
@@ -265,8 +267,8 @@ const initializeCalendarView = () => {
     dateToShow.getMonth(),
     1,
   );
-  selectedMonth.value = currentDate.value.getMonth();
-  selectedYear.value = currentDate.value.getFullYear();
+
+  setSelectedMonthYear();
 };
 
 // Initialize range values from props
@@ -528,7 +530,11 @@ const changeMonth = (forward: boolean): void => {
     1,
   );
 
-  selectedMonth.value = currentDate.value.getMonth();
+  setSelectedMonthYear();
+};
+
+const setSelectedMonthYear = (): void => {
+  selectedMonth.value = currentDate.value.getMonth() + 1;
   selectedYear.value = currentDate.value.getFullYear();
 };
 
@@ -587,8 +593,8 @@ watch(
               fromDate.getMonth(),
               1,
             );
-            selectedMonth.value = currentDate.value.getMonth();
-            selectedYear.value = currentDate.value.getFullYear();
+
+            setSelectedMonthYear();
           }
         } catch (error) {
           console.error("Error parsing date:", error);
@@ -609,8 +615,8 @@ watch(
               date.getMonth(),
               1,
             );
-            selectedMonth.value = currentDate.value.getMonth();
-            selectedYear.value = currentDate.value.getFullYear();
+
+            setSelectedMonthYear();
           }
         } catch (error) {
           console.error("Error parsing date:", error);

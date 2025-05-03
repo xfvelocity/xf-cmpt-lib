@@ -5,3 +5,7 @@ export const formatDate = (date: Date): string => {
 
   return `${day}-${month}-${year}`;
 };
+
+export const padStartNumber = (number: number): string => {
+  return String(number).padStart(2, "0");
+};
