@@ -62,7 +62,12 @@
       >
         {{ day }}
 
-        <slot />
+        <slot
+          :day="day"
+          :month="selectedMonth"
+          :year="selectedYear"
+          :date="`${day}-${selectedMonth}-${selectedYear}`"
+        />
       </div>
     </div>
   </div>
@@ -124,6 +129,8 @@ const props = defineProps({
 // ** Data **
 const today: Date = new Date();
 const currentDate = ref<Date>(new Date());
+const selectedMonth = ref<number>(currentDate.value.getMonth());
+const selectedYear = ref<number>(currentDate.value.getFullYear());
 
 const daysOfWeek: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -243,6 +250,9 @@ const changeMonth = (forward: boolean): void => {
     currentDate.value.getMonth() + (forward ? 1 : -1),
     1,
   );
+
+  selectedMonth.value = currentDate.value.getMonth();
+  selectedYear.value = currentDate.value.getFullYear();
 };
 
 // Highlight today's date
