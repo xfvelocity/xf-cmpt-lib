@@ -9,6 +9,7 @@ import { default as XfLoadingSpinner } from "@/components/loading/XfLoadingSpinn
 import { default as XfLoadingBar } from "@/components/loading/XfLoadingBar/XfLoadingBar.vue";
 
 import { default as XfButton } from "@/components/XfButton/XfButton.vue";
+import { default as XfCalendar } from "@/components/XfCalendar/XfCalendar.vue";
 import { default as XfIcon } from "@/components/XfIcon/XfIcon.vue";
 import { default as XfModal } from "@/components/XfModal/XfModal.vue";
 import { default as XfBanner } from "@/components/XfBanner/XfBanner.vue";
@@ -22,6 +23,7 @@ import { default as XfSidebar } from "@/components/XfSidebar/XfSidebar.vue";
 export {
   XfBanner,
   XfButton,
+  XfCalendar,
   XfIcon,
   XfModal,
   XfTextArea,
