@@ -47,7 +47,11 @@
           {
             'xf-fw-700 xf-border-black': isToday(day),
             'xf-text-colour-grey-lighten-2 xf-cursor-not-allowed':
-              !isAvailableDay(day) || isOutOfBounds(day),
+              !isAvailableDay(day) ||
+              isOutOfBounds(day) ||
+              (props.range &&
+                isActivelySelectingRange() &&
+                isBeforeStartDate(day)),
             [`xf-bg-${unavailableColour} xf-cursor-not-allowed`]:
               !isAvailableDate(day) &&
               isAvailableDay(day) &&
@@ -57,12 +61,16 @@
               isAvailableDay(day) &&
               !isSelectedDate(day) &&
               !isInRange(day) &&
-              !isOutOfBounds(day),
+              !isOutOfBounds(day) &&
+              !isHoveredInRange(day),
             'xf-fw-700 xf-bg-black xf-text-colour-white':
               isSelectedDate(day) || isInRange(day),
+            'xf-bg-blue-lighten-4': isHoveredInRange(day),
           },
         ]"
         @click="daySelected(day)"
+        @mouseenter="handleHover(day)"
+        @mouseleave="clearHover()"
       >
         {{ day }}
 
@@ -148,6 +156,12 @@ const selectedYear = ref<number>(currentDate.value.getFullYear());
 const rangeStart = ref<string | null>(null);
 const rangeEnd = ref<string | null>(null);
 
+// Track hover state for range selection preview
+const hoveredDay = ref<number | null>(null);
+
+// Add a flag to track whether we're in the middle of selecting a range
+const isSelectingRange = ref<boolean>(false);
+
 // Days of the week array
 const daysOfWeek: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -162,28 +176,66 @@ const monthYear = computed<string>(() =>
 
 // Get the index (0-based) of the first weekday in the month
 const firstDayOfMonth = computed<number>(() => {
-  const first = new Date(
-    currentDate.value.getFullYear(),
-    currentDate.value.getMonth(),
-    1,
-  );
-  // Adjust so Monday = 0, Sunday = 6
-  return (first.getDay() + 6) % 7;
+  try {
+    const first = new Date(
+      currentDate.value.getFullYear(),
+      currentDate.value.getMonth(),
+      1,
+    );
+    // Adjust so Monday = 0, Sunday = 6
+    return (first.getDay() + 6) % 7;
+  } catch (error) {
+    console.error("Error calculating first day of month:", error);
+    return 0; // Default to Monday if there's an error
+  }
 });
 
 // Return an array of day numbers for the current month
 const daysInMonth = computed<number[]>(() => {
-  const year = currentDate.value.getFullYear();
-  const month = currentDate.value.getMonth() + 1; // Note: months are 0-based
-  const days = new Date(year, month, 0).getDate(); // 0th day of next month = last day of current month
-  return Array.from({ length: days }, (_, i) => i + 1); // [1, 2, ..., days]
+  try {
+    const year = currentDate.value.getFullYear();
+    const month = currentDate.value.getMonth() + 1; // Note: months are 0-based
+    const days = new Date(year, month, 0).getDate(); // 0th day of next month = last day of current month
+    return Array.from({ length: days }, (_, i) => i + 1); // [1, 2, ..., days]
+  } catch (error) {
+    console.error("Error calculating days in month:", error);
+    return Array.from({ length: 30 }, (_, i) => i + 1); // Default to 30 days if there's an error
+  }
 });
 
 // ** Methods **
 
+// Helper function to check if we're actively selecting a range
+// This is true when we have a start date but no end date yet
+const isActivelySelectingRange = (): boolean => {
+  return props.range && rangeStart.value !== null && rangeEnd.value === null;
+};
+
 // Parse date string in format dd-mm-yyyy to Date object
 const parseDate = (dateStr: string): Date => {
-  const [day, month, year] = dateStr.split("-").map(Number);
+  if (!dateStr || dateStr === "") {
+    return new Date(); // Return current date if no date string is provided
+  }
+
+  const parts = dateStr.split("-").map(Number);
+  // Validate parts before creating date
+  if (parts.length !== 3 || parts.some(isNaN)) {
+    return new Date(); // Return current date if format is invalid
+  }
+
+  const [day, month, year] = parts;
+  // Check if values are in valid ranges
+  if (
+    day < 1 ||
+    day > 31 ||
+    month < 1 ||
+    month > 12 ||
+    year < 1900 ||
+    year > 3000
+  ) {
+    return new Date(); // Return current date if values are out of range
+  }
+
   return new Date(year, month - 1, day);
 };
 
@@ -192,8 +244,17 @@ const initializeCalendarView = () => {
   let dateToShow: Date;
 
   if (typeof props.date === "string") {
-    dateToShow = parseDate(props.date);
-  } else if (props.date && "from" in props.date && props.date.from) {
+    if (props.date && props.date.trim() !== "") {
+      dateToShow = parseDate(props.date);
+    } else {
+      dateToShow = new Date(); // Default to current date if date is empty
+    }
+  } else if (
+    props.date &&
+    "from" in props.date &&
+    props.date.from &&
+    props.date.from.trim() !== ""
+  ) {
     dateToShow = parseDate(props.date.from);
   } else {
     dateToShow = new Date(); // Default to current date
@@ -211,11 +272,19 @@ const initializeCalendarView = () => {
 // Initialize range values from props
 const initializeRangeValues = () => {
   if (typeof props.date === "object" && props.date && "from" in props.date) {
-    rangeStart.value = props.date.from;
-    rangeEnd.value = props.date.to;
+    rangeStart.value = props.date.from || null;
+    rangeEnd.value = props.date.to || null;
+    // Set the selecting flag based on whether we have a start but no end date
+    isSelectingRange.value =
+      rangeStart.value !== null && rangeEnd.value === null;
   } else if (typeof props.date === "string") {
-    rangeStart.value = props.date;
+    rangeStart.value = props.date || null;
     rangeEnd.value = null;
+    isSelectingRange.value = false; // Not in range selection mode for single date
+  } else {
+    rangeStart.value = null;
+    rangeEnd.value = null;
+    isSelectingRange.value = false;
   }
 };
 
@@ -238,6 +307,22 @@ const isOutOfBounds = (day: number): boolean => {
   }
 
   return false;
+};
+
+// Check if a date is before the selected start date
+const isBeforeStartDate = (day: number): boolean => {
+  if (!props.range || !rangeStart.value || rangeStart.value === null)
+    return false;
+
+  const date = new Date(
+    currentDate.value.getFullYear(),
+    currentDate.value.getMonth(),
+    day,
+  );
+  const startDate = parseDate(rangeStart.value);
+
+  // Compare date with startDate, excluding the start date itself
+  return date < startDate && formatDate(date) !== rangeStart.value;
 };
 
 // Check if the day falls on an allowed weekday (Mon-Sun)
@@ -268,6 +353,10 @@ const isAvailableDate = (day: number): boolean => {
 
 // Check if the current day is the selected date or range
 const isSelectedDate = (day: number): boolean => {
+  if (!rangeStart.value && !rangeEnd.value) {
+    return false;
+  }
+
   const date = new Date(
     currentDate.value.getFullYear(),
     currentDate.value.getMonth(),
@@ -310,10 +399,82 @@ const isInRange = (day: number): boolean => {
   return date >= from && date <= to;
 };
 
+// Check if the day is within the hovered range preview
+const isHoveredInRange = (day: number): boolean => {
+  // Only show hover effect when we have a start date but no end date yet
+  if (
+    !props.range ||
+    rangeStart.value === null ||
+    rangeEnd.value !== null ||
+    hoveredDay.value === null
+  ) {
+    return false;
+  }
+
+  const currentDayDate = new Date(
+    currentDate.value.getFullYear(),
+    currentDate.value.getMonth(),
+    day,
+  );
+  const startDate = parseDate(rangeStart.value);
+  const hoverDate = new Date(
+    currentDate.value.getFullYear(),
+    currentDate.value.getMonth(),
+    hoveredDay.value,
+  );
+
+  // Don't show hover effect on the start date itself
+  if (formatDate(currentDayDate) === rangeStart.value) {
+    return false;
+  }
+
+  // Only show hover effect on available dates
+  if (
+    !isAvailableDay(day) ||
+    !isAvailableDate(day) ||
+    isOutOfBounds(day) ||
+    isBeforeStartDate(day)
+  ) {
+    return false;
+  }
+
+  // Only show hover effect for dates after the start date
+  return currentDayDate > startDate && currentDayDate <= hoverDate;
+};
+
+// Handle mouse hover for range selection preview
+const handleHover = (day: number): void => {
+  if (props.range && rangeStart.value !== null && rangeEnd.value === null) {
+    const hoverDate = new Date(
+      currentDate.value.getFullYear(),
+      currentDate.value.getMonth(),
+      day,
+    );
+    const startDate = parseDate(rangeStart.value);
+
+    // Only set hover day if the date is after the start date
+    if (hoverDate > startDate) {
+      hoveredDay.value = day;
+    } else {
+      hoveredDay.value = null;
+    }
+  }
+};
+
+// Clear hover state
+const clearHover = (): void => {
+  hoveredDay.value = null;
+};
+
 // Emit selected date or range to parent component
 const daySelected = (day: number): void => {
   if (!isAvailableDay(day) || !isAvailableDate(day) || isOutOfBounds(day)) {
     return; // Don't allow selection of unavailable days
+  }
+
+  // Only check if date is before start date when we're in the middle of selecting a range
+  if (isActivelySelectingRange() && isBeforeStartDate(day)) {
+    return; // Don't allow selection of dates before the start date when selecting a range
   }
 
   const selectedDate = new Date(
@@ -324,25 +485,37 @@ const daySelected = (day: number): void => {
   const formatted = formatDate(selectedDate);
 
   if (props.range) {
-    if (!rangeStart.value || (rangeStart.value && rangeEnd.value)) {
+    if (
+      rangeStart.value === null ||
+      (rangeStart.value !== null && rangeEnd.value !== null)
+    ) {
+      // First selection or starting a new range selection
       rangeStart.value = formatted;
       rangeEnd.value = null;
+      hoveredDay.value = null; // Reset hover state
+      isSelectingRange.value = true; // Mark that we're in the middle of selecting a range
       emit("update:date", { from: formatted, to: "" });
     } else {
+      // Second selection to complete the range
       const start = parseDate(rangeStart.value);
+
+      // Only allow selecting dates after the start date
       if (selectedDate >= start) {
         rangeEnd.value = formatted;
+        isSelectingRange.value = false; // We've completed the range selection
         emit("update:date", { from: rangeStart.value, to: formatted });
       } else {
-        // If selecting a date before the start date, swap them
-        rangeEnd.value = rangeStart.value;
-        rangeStart.value = formatted;
-        emit("update:date", { from: formatted, to: rangeEnd.value });
+        // Do not allow selecting a date before the start date
+        // Instead, keep the current start date and wait for a valid end date
+        return;
       }
+      hoveredDay.value = null; // Reset hover state after selection
     }
   } else {
+    // Single date selection mode
     rangeStart.value = formatted;
     rangeEnd.value = null;
+    isSelectingRange.value = false; // Not in range selection mode for single date
     emit("update:date", formatted);
   }
 };
@@ -374,34 +547,74 @@ const isToday = (day: number): boolean => {
   );
 };
 
+// Validate date range integrity
+const validateDateRange = () => {
+  if (props.range && rangeStart.value !== null && rangeEnd.value !== null) {
+    const start = parseDate(rangeStart.value);
+    const end = parseDate(rangeEnd.value);
+
+    // If end date is before start date, reset the end date
+    if (end < start) {
+      rangeEnd.value = null;
+      isSelectingRange.value = true; // We're back to selecting a range
+      emit("update:date", { from: rangeStart.value, to: "" });
+    }
+  }
+};
+
 // Watch for changes in the date prop
 watch(
   () => props.date,
   (newValue) => {
     if (typeof newValue === "object" && newValue && "from" in newValue) {
-      rangeStart.value = newValue.from;
-      rangeEnd.value = newValue.to;
+      rangeStart.value = newValue.from || null;
+      rangeEnd.value = newValue.to || null;
 
-      // If from date is provided, update the calendar view to show that month
-      if (newValue.from) {
-        const fromDate = parseDate(newValue.from);
-        currentDate.value = new Date(
-          fromDate.getFullYear(),
-          fromDate.getMonth(),
-          1,
-        );
-        selectedMonth.value = currentDate.value.getMonth();
-        selectedYear.value = currentDate.value.getFullYear();
+      // Update the selecting range flag
+      isSelectingRange.value =
+        rangeStart.value !== null && rangeEnd.value === null;
+
+      // Validate that to date is not earlier than from date
+      validateDateRange();
+
+      // If from date is provided and valid, update the calendar view
+      if (newValue.from && newValue.from.trim() !== "") {
+        try {
+          const fromDate = parseDate(newValue.from);
+          if (!isNaN(fromDate.getTime())) {
+            currentDate.value = new Date(
+              fromDate.getFullYear(),
+              fromDate.getMonth(),
+              1,
+            );
+            selectedMonth.value = currentDate.value.getMonth();
+            selectedYear.value = currentDate.value.getFullYear();
+          }
+        } catch (error) {
+          console.error("Error parsing date:", error);
+        }
       }
     } else if (typeof newValue === "string") {
-      rangeStart.value = newValue;
+      rangeStart.value = newValue || null;
       rangeEnd.value = null;
+      isSelectingRange.value = false; // Not in range selection mode for single date
 
-      if (newValue) {
-        const date = parseDate(newValue);
-        currentDate.value = new Date(date.getFullYear(), date.getMonth(), 1);
-        selectedMonth.value = currentDate.value.getMonth();
-        selectedYear.value = currentDate.value.getFullYear();
+      // If date is provided and valid, update the calendar view
+      if (newValue && newValue.trim() !== "") {
+        try {
+          const date = parseDate(newValue);
+          if (!isNaN(date.getTime())) {
+            currentDate.value = new Date(
+              date.getFullYear(),
+              date.getMonth(),
+              1,
+            );
+            selectedMonth.value = currentDate.value.getMonth();
+            selectedYear.value = currentDate.value.getFullYear();
+          }
+        } catch (error) {
+          console.error("Error parsing date:", error);
+        }
       }
     }
   },
@@ -412,6 +625,7 @@ watch(
 onMounted(() => {
   initializeCalendarView();
   initializeRangeValues();
+  validateDateRange(); // Validate any initially provided date range
 });
 </script>
 
@@ -425,7 +639,9 @@ onMounted(() => {
 
     .xf-calendar-day {
       border-radius: 5px;
-      transition: background 0.3s;
+      transition:
+        background 0.3s,
+        color 0.3s;
 
       &:hover {
         background-color: #eee;
