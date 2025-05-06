@@ -169,6 +169,7 @@ const props = defineProps({
 // ** Emits **
 const emit = defineEmits<{
   (e: "update:date", date: string | DateRange): void;
+  (e: "update:month", month: string): void;
 }>();
 
 // ** Data **
@@ -554,6 +555,11 @@ const changeMonth = (forward: boolean): void => {
   );
 
   setSelectedMonthYear();
+
+  emit(
+    "update:month",
+    `${padStartNumber(selectedMonth.value)}-${selectedYear.value}`,
+  );
 };
 
 const setSelectedMonthYear = (): void => {

@@ -1,3 +1,7 @@
+## 1.1.5 - (06-05-2025)
+
+- :hammer: `XfCalendar` - Added `update:month` emit
+
 ## 1.1.4 - (06-05-2025)
 
 - :hammer: `XfCalendar` - Added loading option
