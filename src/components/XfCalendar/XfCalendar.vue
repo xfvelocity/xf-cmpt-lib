@@ -6,83 +6,101 @@
       class="xf-flex xf-flex-justify-content-between xf-flex-align-items-center xf-mb-2"
     >
       <button
-        class="xf-cursor-pointer xf-bg-none xf-border-none"
+        class="xf-bg-none xf-border-none"
+        :class="loading ? 'xf-cursor-not-allowed' : 'xf-cursor-pointer'"
+        :disabled="loading"
         @click="changeMonth(false)"
       >
-        <xf-icon src="arrow-left" internal />
+        <xf-icon
+          src="arrow-left"
+          :fill="loading ? 'grey-lighten-1' : ''"
+          internal
+        />
       </button>
 
       <h2 class="xf-m-0">{{ monthYear }}</h2>
 
       <button
-        class="xf-cursor-pointer xf-bg-none xf-border-none"
+        class="xf-bg-none xf-border-none"
+        :class="loading ? 'xf-cursor-not-allowed' : 'xf-cursor-pointer'"
+        :disabled="loading"
         @click="changeMonth(true)"
       >
-        <xf-icon src="arrow-right" internal />
+        <xf-icon
+          src="arrow-right"
+          :fill="loading ? 'grey-lighten-1' : ''"
+          internal
+        />
       </button>
     </div>
 
     <div class="xf-calendar-days xf-grid xf-gap-1">
-      <div
-        v-for="day in daysOfWeek"
-        :key="day"
-        class="day-name xf-fw-700 xf-text-center xf-py-2 xf-bg-grey-lighten-5"
-      >
-        {{ day }}
+      <div v-if="loading" class="xf-position-relative xf-pt-8 xf-pb-2 xf-col-7">
+        <xf-loading-spinner class="xf-center" :size="32" />
       </div>
 
-      <!-- Empty slots to align the first day of the month correctly -->
-      <div
-        v-for="n in firstDayOfMonth"
-        :key="'empty-' + n"
-        class="xf-calendar-day xf-border-radius-5 xf-calendar-day__empty xf-text-center xf-py-2 xf-cursor-pointer"
-      />
+      <template v-else>
+        <div
+          v-for="day in daysOfWeek"
+          :key="day"
+          class="day-name xf-fw-700 xf-text-center xf-py-2 xf-bg-grey-lighten-5"
+        >
+          {{ day }}
+        </div>
 
-      <!-- Display the days of the current month -->
-      <div
-        v-for="day in daysInMonth"
-        :key="'day-' + day"
-        :class="[
-          'xf-calendar-day xf-border-radius-5 xf-text-center xf-py-2 xf-cursor-pointer',
-          {
-            'xf-fw-700 xf-border-black': isToday(day),
-            'xf-text-colour-grey-lighten-2 xf-cursor-not-allowed':
-              !isAvailableDay(day) ||
-              isOutOfBounds(day) ||
-              (props.range &&
-                isActivelySelectingRange() &&
-                isBeforeStartDate(day)),
-            [`xf-bg-${unavailableColour} xf-cursor-not-allowed`]:
-              !isAvailableDate(day) &&
-              isAvailableDay(day) &&
-              !isOutOfBounds(day),
-            [`xf-bg-${availableColour}`]:
-              isAvailableDate(day) &&
-              isAvailableDay(day) &&
-              !isSelectedDate(day) &&
-              !isInRange(day) &&
-              !isOutOfBounds(day) &&
-              !isHoveredInRange(day),
-            'xf-fw-700 xf-bg-black xf-text-colour-white':
-              isSelectedDate(day) || isInRange(day),
-            'xf-bg-blue-lighten-4': isHoveredInRange(day),
-          },
-        ]"
-        @click="daySelected(day)"
-        @mouseenter="handleHover(day)"
-        @mouseleave="clearHover()"
-      >
-        {{ day }}
-
-        <!-- Slot for custom content, passing the current day, month, year, and full date -->
-        <slot
-          v-if="isAvailableDay(day) && !isOutOfBounds(day)"
-          :day="day"
-          :month="selectedMonth"
-          :year="selectedYear"
-          :date="`${padStartNumber(day)}-${padStartNumber(selectedMonth)}-${selectedYear}`"
+        <!-- Empty slots to align the first day of the month correctly -->
+        <div
+          v-for="n in firstDayOfMonth"
+          :key="'empty-' + n"
+          class="xf-calendar-day xf-border-radius-5 xf-calendar-day__empty xf-text-center xf-py-2 xf-cursor-pointer"
         />
-      </div>
+
+        <!-- Display the days of the current month -->
+        <div
+          v-for="day in daysInMonth"
+          :key="'day-' + day"
+          :class="[
+            'xf-calendar-day xf-border-radius-5 xf-text-center xf-py-2 xf-cursor-pointer',
+            {
+              'xf-fw-700 xf-border-black': isToday(day),
+              'xf-text-colour-grey-lighten-2 xf-cursor-not-allowed':
+                !isAvailableDay(day) ||
+                isOutOfBounds(day) ||
+                (props.range &&
+                  isActivelySelectingRange() &&
+                  isBeforeStartDate(day)),
+              [`xf-bg-${unavailableColour} xf-cursor-not-allowed`]:
+                !isAvailableDate(day) &&
+                isAvailableDay(day) &&
+                !isOutOfBounds(day),
+              [`xf-bg-${availableColour}`]:
+                isAvailableDate(day) &&
+                isAvailableDay(day) &&
+                !isSelectedDate(day) &&
+                !isInRange(day) &&
+                !isOutOfBounds(day) &&
+                !isHoveredInRange(day),
+              'xf-fw-700 xf-bg-black xf-text-colour-white':
+                isSelectedDate(day) || isInRange(day),
+              'xf-bg-blue-lighten-4': isHoveredInRange(day),
+            },
+          ]"
+          @click="daySelected(day)"
+          @mouseenter="handleHover(day)"
+          @mouseleave="clearHover()"
+        >
+          {{ day }}
+
+          <!-- Slot for custom content, passing the current day, month, year, and full date -->
+          <slot
+            v-if="isAvailableDay(day) && !isOutOfBounds(day)"
+            :day="day"
+            :month="selectedMonth"
+            :year="selectedYear"
+            :date="`${padStartNumber(day)}-${padStartNumber(selectedMonth)}-${selectedYear}`"
+          />
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -93,6 +111,7 @@ import { ref, computed, onMounted, watch } from "vue";
 import { formatDate, padStartNumber } from "@/composables/date";
 
 import XfIcon from "@/components/XfIcon/XfIcon.vue";
+import XfLoadingSpinner from "@/components/loading/XfLoadingSpinner/XfLoadingSpinner.vue";
 
 // Define types for date range
 export type DateRange = {
@@ -138,6 +157,10 @@ const props = defineProps({
     default: "",
   },
   range: {
+    type: Boolean,
+    default: false,
+  },
+  loading: {
     type: Boolean,
     default: false,
   },

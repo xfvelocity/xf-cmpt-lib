@@ -1,3 +1,7 @@
+## 1.1.4 - (06-05-2025)
+
+- :hammer: `XfCalendar` - Added loading option
+
 ## 1.1.3 - (03-05-2025)
 
 - :hammer: `XfCalendar` - Removed max width

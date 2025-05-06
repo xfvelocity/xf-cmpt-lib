@@ -16,7 +16,7 @@ Importing the styling into app.vue
 
 ```
 <style>
-  @import 'xf-cmpt-lib/style.css';
+  @import 'xf-cmpt-lib/index.css';
 </style>
 ```
 
