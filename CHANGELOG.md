@@ -1,3 +1,7 @@
+## 1.1.6 - (06-05-2025)
+
+- :hammer: `XfCalendar` - Updated `update:month` emit to emit on mount
+
 ## 1.1.5 - (06-05-2025)
 
 - :hammer: `XfCalendar` - Added `update:month` emit

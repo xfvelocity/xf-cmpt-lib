@@ -555,16 +555,16 @@ const changeMonth = (forward: boolean): void => {
   );
 
   setSelectedMonthYear();
-
-  emit(
-    "update:month",
-    `${padStartNumber(selectedMonth.value)}-${selectedYear.value}`,
-  );
 };
 
 const setSelectedMonthYear = (): void => {
   selectedMonth.value = currentDate.value.getMonth() + 1;
   selectedYear.value = currentDate.value.getFullYear();
+
+  emit(
+    "update:month",
+    `${padStartNumber(selectedMonth.value)}-${selectedYear.value}`,
+  );
 };
 
 // Highlight today's date
