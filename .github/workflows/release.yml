@@ -7,12 +7,12 @@ on:
 
 jobs:
   release:
-    name: Version Tag, Publish & Release
+    name: Tag, Publish with pnpm & Create Release
     runs-on: ubuntu-latest
 
     permissions:
       contents: write
-      id-token: write
+      id-token: write # for npm provenance
       packages: write
 
     steps:
@@ -25,11 +25,14 @@ jobs:
           node-version: "18"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Install dependencies
-        run: pnpm ci
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies with pnpm
+        run: pnpm install
 
       - name: Build project
-        run: pnpm run build # Optional
+        run: pnpm build # Skip or modify if not applicable
 
       - name: Get version from package.json
         id: version
@@ -42,8 +45,8 @@ jobs:
           git tag $VERSION
           git push origin $VERSION
 
-      - name: Publish to npm
-        run: npm publish --access public
+      - name: Publish to npm using pnpm
+        run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
