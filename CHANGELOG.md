@@ -1,3 +1,7 @@
+## 1.2.0 - (08-05-2025)
+
+- :sparkles: Added `XfTooltip` component
+
 ## 1.1.6 - (06-05-2025)
 
 - :hammer: `XfCalendar` - Updated `update:month` emit to emit on mount
