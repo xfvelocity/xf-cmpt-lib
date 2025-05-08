@@ -12,7 +12,7 @@
         class="xf-tooltip-content xf-p-1 xf-border-radius-5"
         :class="`xf-tooltip-${position} xf-bg-${backgroundColour} xf-text-colour-${textColour}`"
       >
-        {{ text }}
+        <span class="xf-tooltip-text">{{ text }}</span>
       </div>
     </transition>
   </div>
@@ -57,12 +57,20 @@ const isTooltipShowing = ref<boolean>(false);
 
   &-content {
     font-size: 14px;
-    white-space: nowrap;
     z-index: 10;
-    display: inline-block;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    text-align: center;
+    min-width: max-content;
+    max-width: 250px;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  &-text {
+    display: inline-block;
+    width: 100%;
   }
 
   &-top {
