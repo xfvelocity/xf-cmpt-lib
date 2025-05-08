@@ -26,10 +26,10 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm ci
 
       - name: Build project
-        run: npm run build # Optional
+        run: pnpm run build # Optional
 
       - name: Get version from package.json
         id: version
