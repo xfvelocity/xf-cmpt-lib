@@ -2,6 +2,8 @@ import type { App as AppType } from "vue";
 import {
   XfBanner,
   XfButton,
+  XfCalendar,
+  XfTooltip,
   XfIcon,
   XfModal,
   XfTextArea,
@@ -36,6 +38,8 @@ export default {
     app.component("XfExpansionPanel", XfExpansionPanel);
     app.component("XfFuzzyImage", XfFuzzyImage);
     app.component("XfSidebar", XfSidebar);
+    app.component("XfTooltip", XfTooltip);
+    app.component("XfCalendar", XfCalendar);
   },
 };
 
