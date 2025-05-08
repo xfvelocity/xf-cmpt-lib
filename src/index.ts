@@ -10,6 +10,7 @@ import { default as XfLoadingBar } from "@/components/loading/XfLoadingBar/XfLoa
 
 import { default as XfButton } from "@/components/XfButton/XfButton.vue";
 import { default as XfCalendar } from "@/components/XfCalendar/XfCalendar.vue";
+import { default as XfTooltip } from "@/components/XfTooltip/XfTooltip.vue";
 import { default as XfIcon } from "@/components/XfIcon/XfIcon.vue";
 import { default as XfModal } from "@/components/XfModal/XfModal.vue";
 import { default as XfBanner } from "@/components/XfBanner/XfBanner.vue";
@@ -26,6 +27,7 @@ export {
   XfCalendar,
   XfIcon,
   XfModal,
+  XfTooltip,
   XfTextArea,
   XfTextInput,
   XfNav,
