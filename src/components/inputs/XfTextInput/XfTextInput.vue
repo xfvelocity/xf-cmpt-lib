@@ -13,6 +13,7 @@
       ]"
     >
       <input
+        :id="inputId"
         :value="modelValue"
         class="xf-px-2 xf-py-1"
         :class="[` xf-text-colour-${colour} xf-text-${fontSize}`]"
@@ -22,6 +23,8 @@
         :autocomplete="autocomplete"
         :placeholder="placeholder"
         :pattern="pattern"
+        :maxlength="maxlength"
+        :minlength="minlength"
         :inputmode="inputmode"
         data-test-id="xf-text-input-input"
         @input="emitValue"
@@ -137,6 +140,18 @@ defineProps({
       | "decimal"
     >,
     default: "text",
+  },
+  maxlength: {
+    type: String,
+    default: "",
+  },
+  minlength: {
+    type: String,
+    default: "",
+  },
+  inputId: {
+    type: String,
+    default: "",
   },
 });
 
