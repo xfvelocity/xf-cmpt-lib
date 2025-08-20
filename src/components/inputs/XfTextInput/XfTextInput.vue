@@ -6,7 +6,7 @@
         `xf-border-colour-${colour}`,
         outlined ? 'xf-input-outlined' : 'xf-input-border',
         {
-          'xf-input-populated': !!modelValue || modelValue === 0,
+          'xf-input-populated': !!modelValue || modelValue === 0 || placeholder,
           'xf-input-active': isActive,
           'xf-disabled': disabled,
         },
