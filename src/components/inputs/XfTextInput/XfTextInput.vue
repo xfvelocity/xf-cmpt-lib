@@ -21,6 +21,8 @@
         :disabled="disabled"
         :autocomplete="autocomplete"
         :placeholder="placeholder"
+        :pattern="pattern"
+        :inputmode="inputmode"
         data-test-id="xf-text-input-input"
         @input="emitValue"
         @focus="onFocus"
@@ -105,7 +107,7 @@ defineProps({
   },
   autocomplete: {
     type: String,
-    default: "",
+    default: "on",
   },
   fontSize: {
     type: Number,
@@ -118,6 +120,23 @@ defineProps({
   placeholder: {
     type: String,
     default: "",
+  },
+  pattern: {
+    type: String,
+    default: "",
+  },
+  inputmode: {
+    type: String as PropType<
+      | "text"
+      | "search"
+      | "email"
+      | "tel"
+      | "url"
+      | "none"
+      | "numeric"
+      | "decimal"
+    >,
+    default: "text",
   },
 });
 
