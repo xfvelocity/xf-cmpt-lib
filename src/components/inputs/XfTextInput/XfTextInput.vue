@@ -13,7 +13,6 @@
       ]"
     >
       <input
-        :id="inputId"
         :value="modelValue"
         class="xf-px-2 xf-py-1"
         :class="[` xf-text-colour-${colour} xf-text-${fontSize}`]"
@@ -27,6 +26,7 @@
         :minlength="minlength"
         :inputmode="inputmode"
         data-test-id="xf-text-input-input"
+        v-bind="inputId ? { id: inputId } : {}"
         @input="emitValue"
         @focus="onFocus"
         @blur="onBlur"

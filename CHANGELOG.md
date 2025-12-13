@@ -1,3 +1,7 @@
+## 1.5.1 - (13-12-2025)
+
+- :bug: `XfTextInput` - Fixed id issues
+
 ## 1.5.0 - (13-12-2025)
 
 - :sparkles: Added more icons
