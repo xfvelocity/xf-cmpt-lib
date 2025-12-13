@@ -1,3 +1,7 @@
+## 1.5.0 - (13-12-2025)
+
+- :sparkles: Added more icons
+
 ## 1.4.0 - (20-08-2025)
 
 - :sparkles: `XfTextInput` - Added `maxlength`, `minlength`, `inputId` props
