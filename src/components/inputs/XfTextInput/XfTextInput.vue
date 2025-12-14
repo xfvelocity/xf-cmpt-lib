@@ -21,12 +21,14 @@
         :disabled="disabled"
         :autocomplete="autocomplete"
         :placeholder="placeholder"
-        :pattern="pattern"
         :maxlength="maxlength"
         :minlength="minlength"
         :inputmode="inputmode"
         data-test-id="xf-text-input-input"
-        v-bind="inputId ? { id: inputId } : {}"
+        v-bind="[
+          inputId ? { id: inputId } : {},
+          pattern ? { pattern: pattern } : {},
+        ]"
         @input="emitValue"
         @focus="onFocus"
         @blur="onBlur"

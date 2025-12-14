@@ -1,3 +1,7 @@
+## 1.5.2 - (14-12-2025)
+
+- :bug: `XfTextInput` - Fixed pattern issues
+
 ## 1.5.1 - (13-12-2025)
 
 - :bug: `XfTextInput` - Fixed id issues
