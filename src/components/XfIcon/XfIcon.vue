@@ -1,7 +1,7 @@
 <template>
   <inline-svg
     :class="{ [`xf-icon-colour-${fill}`]: fill }"
-    :src="!internal ? src : getImageUrl(`icons/${src}.svg`)"
+    :src="internal ? getImageUrl(`icons/${src}.svg`) : src"
     :height="size"
     :width="size"
   />

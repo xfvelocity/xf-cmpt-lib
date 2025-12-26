@@ -50,7 +50,7 @@
         v-if="appendIcon || disabled"
         class="xf-mt-2 xf-mr-1"
         :class="disabled ? 'xf-cursor-default' : 'xf-cursor-pointer'"
-        :src="appendIcon || 'disabled'"
+        :src="appendIcon || 'lock'"
         :fill="colour"
         :internal="!appendIcon && disabled"
         @click="disabled ? '' : $emit('click:append')"

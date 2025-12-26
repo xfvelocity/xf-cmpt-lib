@@ -1,3 +1,7 @@
+## 1.5.4 - (26-12-2025)
+
+- :sparkles: `XfTextInput` - Add lock to disabled states
+
 ## 1.5.2 - (14-12-2025)
 
 - :bug: `XfTextInput` - Fixed pattern issues
