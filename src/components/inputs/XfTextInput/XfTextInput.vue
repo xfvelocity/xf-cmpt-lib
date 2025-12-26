@@ -47,11 +47,12 @@
       </label>
 
       <xf-icon
-        v-if="appendIcon"
+        v-if="appendIcon || disabled"
         class="xf-mt-2 xf-mr-1"
         :class="disabled ? 'xf-cursor-default' : 'xf-cursor-pointer'"
-        :src="appendIcon"
+        :src="appendIcon || 'disabled'"
         :fill="colour"
+        :internal="!appendIcon && disabled"
         @click="disabled ? '' : $emit('click:append')"
       />
     </div>
